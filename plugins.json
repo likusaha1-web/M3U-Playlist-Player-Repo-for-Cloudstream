@@ -1,10 +1,10 @@
 [
   {
     "iconUrl": "https://raw.githubusercontent.com/xr3ed/Auto-IPTV/main/logo/fifa.png",
-    "fileHash": "sha256-1a9b13ae061e6fd02b3d75762a2acb2dd5b4ea3cb7b5e940cae3524b3312ffd9",
+    "fileHash": "sha256-8911e5f09af741f1739aa57926a1cd204974fe53455748c7ce40163fb51b911c",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 13055,
+    "fileSize": 13082,
     "status": 1,
     "language": "id",
     "authors": [
@@ -13,7 +13,7 @@
     "tvTypes": [
       "Live"
     ],
-    "version": 3,
+    "version": 4,
     "internalName": "Event",
     "description": "Plugin untuk live stream Event Piala Dunia 2026",
     "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/Event.cs3",
