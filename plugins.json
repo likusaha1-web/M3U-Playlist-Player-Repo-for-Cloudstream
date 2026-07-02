@@ -20,10 +20,10 @@
     "name": "M3UPlaylistPlayer"
   },
   {
-    "fileHash": "sha256-571553686fd543c9ea50f17ef197bd13554ba19f24298b97c391d8bcdb94ed75",
+    "fileHash": "sha256-32c8239146ec9746d09d05a5160d09c47c488ada26b30cc607a0d78dee5f6b2c",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 38623,
+    "fileSize": 38526,
     "status": 1,
     "language": "id",
     "authors": [
