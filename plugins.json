@@ -57,5 +57,26 @@
     "description": "Plugin untuk live stream Event Piala Dunia 2026",
     "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/Xr3edEvent.cs3",
     "name": "Xr3edEvent"
+  },
+  {
+    "iconUrl": "https://xtream.rip/favicon.ico",
+    "fileHash": "sha256-9cc30ac363f7c67684d5c0b5227a28d0bb4749e6a50990c9602751a1ecfa82bd",
+    "apiVersion": 1,
+    "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
+    "fileSize": 15664,
+    "status": 1,
+    "language": "id",
+    "authors": [
+      "xr3ed"
+    ],
+    "tvTypes": [
+      "Movie",
+      "TvSeries"
+    ],
+    "version": 1,
+    "internalName": "xr3edXstream",
+    "description": "Streaming Film & Serial TV dari xtream.rip — 5 server: VidSrc, Videasy, VidRock, VidZee, VidFast",
+    "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/xr3edXstream.cs3",
+    "name": "xr3edXstream"
   }
 ]
