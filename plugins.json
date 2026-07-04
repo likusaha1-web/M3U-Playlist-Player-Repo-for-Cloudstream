@@ -60,10 +60,10 @@
   },
   {
     "iconUrl": "https://xtream.rip/favicon.ico",
-    "fileHash": "sha256-eff83fbd6837eaada01b6e918a0bb940459b4483f8dba315d98d45aab5f9575e",
+    "fileHash": "sha256-ad250e438bc46c06e593dc339e33cc4055ecf9b877b779f5e05df67159a485f7",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 20537,
+    "fileSize": 17248,
     "status": 1,
     "language": "id",
     "authors": [
@@ -73,7 +73,7 @@
       "Movie",
       "TvSeries"
     ],
-    "version": 1,
+    "version": 2,
     "internalName": "xr3edXstream",
     "description": "Streaming Film & Serial TV dari xtream.rip — 5 server: VidSrc, Videasy, VidRock, VidZee, VidFast",
     "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/xr3edXstream.cs3",
