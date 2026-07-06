@@ -76,13 +76,29 @@ private fun getResumedActivity(): Activity? {
             if (activityRecord == null) continue
             val pausedField = activityRecord.javaClass.getDeclaredField("paused")
             pausedField.isAccessible = true
-            val paused = pausedField.get(activityRecord) as? Boolean ?: true
-            if (!paused) {
-                val activityField = activityRecord.javaClass.getDeclaredField("activity")
-                activityField.isAccessible = true
-                val activity = activityField.get(activityRecord) as? Activity
-                if (activity != null && !activity.isFinishing) {
-                    return activity
+            val paused = activityRecord.javaClass.getDeclaredField("paused")
+            if (paused.type == Boolean::class.javaPrimitiveType || paused.type == Boolean::class.java) {
+                val pausedVal = paused.get(activityRecord) as? Boolean ?: true
+                if (!pausedVal) {
+                    val activityField = activityRecord.javaClass.getDeclaredField("activity")
+                    activityField.isAccessible = true
+                    val activity = activityField.get(activityRecord) as? Activity
+                    if (activity != null && !activity.isFinishing) {
+                        return activity
+                    }
+                }
+            } else {
+                val pausedObj = paused.get(activityRecord)
+                if (pausedObj != null) {
+                    val pausedVal = pausedObj.toString().toBoolean()
+                    if (!pausedVal) {
+                        val activityField = activityRecord.javaClass.getDeclaredField("activity")
+                        activityField.isAccessible = true
+                        val activity = activityField.get(activityRecord) as? Activity
+                        if (activity != null && !activity.isFinishing) {
+                            return activity
+                        }
+                    }
                 }
             }
         }
@@ -302,28 +318,7 @@ private fun showUpdateDialog(activity: Activity) {
             leftMargin = dp(activity, 4)
         }
         setOnClickListener {
-            // Fetch JSON in background
-            Thread {
-                var apkUrl = BuildConfig.FALLBACK_RELEASE_URL
-                try {
-                    val conn = URL(BuildConfig.UPDATE_JSON_URL).openConnection() as HttpURLConnection
-                    conn.connectTimeout = 8000
-                    conn.readTimeout = 8000
-                    if (conn.responseCode == 200) {
-                        val json = conn.inputStream.bufferedReader().use { it.readText() }
-                        val jsonObj = JSONObject(json)
-                        if (jsonObj.has("apkUrl")) {
-                            apkUrl = jsonObj.getString("apkUrl")
-                        }
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-
-                activity.runOnUiThread {
-                    switchToDownloadLayout(activity, dialog, root, apkUrl)
-                }
-            }.start()
+            switchToDownloadLayout(activity, dialog, root)
         }
     }
     buttonContainer.addView(posBtn)
@@ -386,36 +381,7 @@ private fun removeRepoAndPlugins(context: Context) {
     }
 }
 
-private fun getDirectUrl(urlString: String): String {
-    var url = urlString
-    var connection = URL(url).openConnection() as HttpURLConnection
-    connection.instanceFollowRedirects = false
-    connection.connectTimeout = 8000
-    connection.readTimeout = 8000
-    var status = connection.responseCode
-    var count = 0
-    while ((status == HttpURLConnection.HTTP_MOVED_TEMP || 
-            status == HttpURLConnection.HTTP_MOVED_PERM || 
-            status == 307 || status == 308) && count < 10) {
-        val newUrl = connection.getHeaderField("Location") ?: break
-        connection.disconnect()
-        url = if (newUrl.startsWith("http")) newUrl else {
-            val base = URL(url)
-            val portStr = if (base.port != -1) ":${base.port}" else ""
-            "${base.protocol}://${base.host}$portStr$newUrl"
-        }
-        connection = URL(url).openConnection() as HttpURLConnection
-        connection.instanceFollowRedirects = false
-        connection.connectTimeout = 8000
-        connection.readTimeout = 8000
-        status = connection.responseCode
-        count++
-    }
-    connection.disconnect()
-    return url
-}
-
-private fun switchToDownloadLayout(activity: Activity, dialog: Dialog, root: LinearLayout, apkUrl: String) {
+private fun switchToDownloadLayout(activity: Activity, dialog: Dialog, root: LinearLayout) {
     root.removeAllViews()
 
     val cardWidth = dp(activity, 300)
@@ -475,13 +441,30 @@ private fun switchToDownloadLayout(activity: Activity, dialog: Dialog, root: Lin
 
     Thread {
         try {
-            val directUrl = getDirectUrl(apkUrl)
-            val conn = URL(directUrl).openConnection() as HttpURLConnection
-            conn.connectTimeout = 15000
-            conn.readTimeout = 15000
+            // 1. Ambil URL rilis terbaru dari update.json di background
+            var apkUrl = BuildConfig.FALLBACK_RELEASE_URL
+            try {
+                val conn = URL(BuildConfig.UPDATE_JSON_URL).openConnection() as HttpURLConnection
+                conn.connectTimeout = 8000
+                conn.readTimeout = 8000
+                if (conn.responseCode == 200) {
+                    val json = conn.inputStream.bufferedReader().use { it.readText() }
+                    val jsonObj = JSONObject(json)
+                    if (jsonObj.has("apkUrl")) {
+                        apkUrl = jsonObj.getString("apkUrl")
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            // 2. Gunakan logic persis seperti di repo app-cloner untuk mengambil fileLength & stream
+            val url = URL(apkUrl)
+            val conn = url.openConnection() as HttpURLConnection
             conn.connect()
             val fileLength = conn.contentLength
-            val input = BufferedInputStream(conn.inputStream, 8192)
+            val input = BufferedInputStream(url.openStream(), 8192)
+
             val apkFile = File(activity.externalCacheDir, "update.apk")
             if (apkFile.exists()) apkFile.delete()
 
@@ -509,7 +492,7 @@ private fun switchToDownloadLayout(activity: Activity, dialog: Dialog, root: Lin
             output.close()
             input.close()
 
-            // Proteksi unduhan tidak lengkap
+            // Verifikasi integritas unduhan (opsional jika fileLength valid)
             if (fileLength > 0 && total < fileLength) {
                 throw Exception("Koneksi terputus. Unduhan tidak lengkap ($total / $fileLength byte)")
             }
