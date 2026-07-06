@@ -1,10 +1,10 @@
 [
   {
     "iconUrl": "https://play-lh.googleusercontent.com/V4t4JeQV2Cu9u72hKuqOW5c0IfwcZuuVS1d9PF2uJsW3rlIq-aOMTrT5bABVGaAFTcM=w480-h960-rw",
-    "fileHash": "sha256-191157a8e40ef40c03973f4dc7d0ec66c1fb3e1d9f31338625da227168fc66f0",
+    "fileHash": "sha256-b8d05d3fdd9035318e088dc15352ef46428606cfe78a4c729679b3db3fdbecd7",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 83589,
+    "fileSize": 84016,
     "status": 1,
     "language": "en",
     "authors": [
@@ -20,10 +20,10 @@
     "name": "M3UPlaylistPlayer"
   },
   {
-    "fileHash": "sha256-231362c0af88799432a38e6832ae4d94343f188128e7b115256f230d9736b787",
+    "fileHash": "sha256-267b48861751e2de5b3d3a3f8602d92844d75e343f30b9e5e99f8b29c6237252",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 54443,
+    "fileSize": 54863,
     "status": 1,
     "language": "id",
     "authors": [
@@ -40,10 +40,10 @@
   },
   {
     "iconUrl": "https://raw.githubusercontent.com/xr3ed/Auto-IPTV/main/logo/fifa.png",
-    "fileHash": "sha256-c4f848ded5df24e3a6eb3b4fca102550acc991c73f9fb71340054646a82fbb83",
+    "fileHash": "sha256-55b6cc32d6a657fb59ac1f83ea539fc67d8e658e127f5c08ecbedcf030d68e20",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 90736,
+    "fileSize": 91096,
     "status": 1,
     "language": "id",
     "authors": [
