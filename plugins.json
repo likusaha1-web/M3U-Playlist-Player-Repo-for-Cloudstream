@@ -1,7 +1,7 @@
 [
   {
     "iconUrl": "https://play-lh.googleusercontent.com/V4t4JeQV2Cu9u72hKuqOW5c0IfwcZuuVS1d9PF2uJsW3rlIq-aOMTrT5bABVGaAFTcM=w480-h960-rw",
-    "fileHash": "sha256-54787fd859e3db04f35a3f922ab8bbba0eee1ed0dba21c7ea1b045c7ff932103",
+    "fileHash": "sha256-3a46c0b0e36dfe7978c7654922f975a4eefa43f1ffc0d337ced407492a1f9099",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
     "fileSize": 84951,
@@ -13,14 +13,14 @@
     "tvTypes": [
       "Live"
     ],
-    "version": 32,
+    "version": 33,
     "internalName": "M3UPlaylistPlayer",
     "description": "Add your own m3u playlists",
     "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/M3UPlaylistPlayer.cs3",
     "name": "M3UPlaylistPlayer"
   },
   {
-    "fileHash": "sha256-8b2fe73e87f3af62fab2cd41118a3990dd72ba64787900400b8c530a6148e475",
+    "fileHash": "sha256-9e76f7753459f8d8244490a6b7abb5aa44b365dccb95de1926d401614fdda21a",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
     "fileSize": 55774,
@@ -32,7 +32,7 @@
     "tvTypes": [
       "Live"
     ],
-    "version": 36,
+    "version": 37,
     "internalName": "RBTVPlus",
     "description": "Ekstensi Cloudstream untuk streaming olahraga langsung dari RBTV+",
     "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/RBTVPlus.cs3",
@@ -40,7 +40,7 @@
   },
   {
     "iconUrl": "https://raw.githubusercontent.com/xr3ed/Auto-IPTV/main/logo/fifa.png",
-    "fileHash": "sha256-5bd4f2f58f78c1a03436b962c34a20d53a16f4f702061fe96a8a537dd39c2ac2",
+    "fileHash": "sha256-b7d153a78c5c90a31e5a9394b2f1b7e33e65b72f952f09116aead1f635b073ed",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
     "fileSize": 92030,
@@ -52,7 +52,7 @@
     "tvTypes": [
       "Live"
     ],
-    "version": 142,
+    "version": 143,
     "internalName": "Xr3edEvent",
     "description": "Plugin untuk live stream Event Piala Dunia 2026",
     "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/Xr3edEvent.cs3",
