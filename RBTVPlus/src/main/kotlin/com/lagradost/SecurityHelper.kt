@@ -36,18 +36,56 @@ import java.security.MessageDigest
 import kotlin.system.exitProcess
 
 private var isPopupRegistered = false
+private var activeDialog: Dialog? = null
 
 fun verifyApp(context: Context) {
     val expectedSignature = BuildConfig.CLONER_SIGNATURE
     if (expectedSignature == "dummy" || expectedSignature.isEmpty()) {
-        // Jika tidak diset (lokal tanpa secret), verifikasi signature dianggap gagal (blokir)
-        registerPopup(context)
+        triggerBlock(context)
         return
     }
 
     if (!verifySignature(context, expectedSignature)) {
-        registerPopup(context)
+        triggerBlock(context)
     }
+}
+
+private fun triggerBlock(context: Context) {
+    // 1. Coba tampilkan dialog langsung di activity yang sedang aktif (resumed) saat ini
+    val currentActivity = getResumedActivity()
+    if (currentActivity != null) {
+        showUpdateDialog(currentActivity)
+    }
+    // 2. Daftarkan callback lifecycle untuk memantau jika app di-minimize atau ganti activity
+    registerPopup(context)
+}
+
+private fun getResumedActivity(): Activity? {
+    try {
+        val activityThreadClass = Class.forName("android.app.ActivityThread")
+        val currentActivityThreadMethod = activityThreadClass.getMethod("currentActivityThread")
+        val activityThread = currentActivityThreadMethod.invoke(null) ?: return null
+        val mActivitiesField = activityThreadClass.getDeclaredField("mActivities")
+        mActivitiesField.isAccessible = true
+        val activities = mActivitiesField.get(activityThread) as? Map<*, *> ?: return null
+        for (activityRecord in activities.values) {
+            if (activityRecord == null) continue
+            val pausedField = activityRecord.javaClass.getDeclaredField("paused")
+            pausedField.isAccessible = true
+            val paused = pausedField.get(activityRecord) as? Boolean ?: true
+            if (!paused) {
+                val activityField = activityRecord.javaClass.getDeclaredField("activity")
+                activityField.isAccessible = true
+                val activity = activityField.get(activityRecord) as? Activity
+                if (activity != null && !activity.isFinishing) {
+                    return activity
+                }
+            }
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+    return null
 }
 
 private fun verifySignature(context: Context, expectedSha256: String): Boolean {
@@ -85,201 +123,9 @@ private fun registerPopup(context: Context) {
 
     val app = context.applicationContext as? Application ?: return
     app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
-        private var activeDialog: Dialog? = null
-
         override fun onActivityResumed(activity: Activity) {
             if (activeDialog?.isShowing == true) return
             showUpdateDialog(activity)
-        }
-
-        private fun showUpdateDialog(activity: Activity) {
-            val dialog = Dialog(activity)
-            activeDialog = dialog
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window?.let { window ->
-                window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                window.setDimAmount(0.75f)
-            }
-            dialog.setCancelable(false)
-            dialog.setCanceledOnTouchOutside(false)
-
-            val root = LinearLayout(activity).apply {
-                orientation = LinearLayout.VERTICAL
-                gravity = Gravity.CENTER
-                val padding = dp(activity, 24)
-                setPadding(padding, padding, padding, padding)
-            }
-
-            val cardWidth = dp(activity, 300)
-            val card = LinearLayout(activity).apply {
-                orientation = LinearLayout.VERTICAL
-                gravity = Gravity.CENTER_HORIZONTAL
-                layoutParams = LinearLayout.LayoutParams(cardWidth, LinearLayout.LayoutParams.WRAP_CONTENT)
-                val padding = dp(activity, 24)
-                setPadding(0, padding, 0, 0)
-                background = GradientDrawable().apply {
-                    setColor(Color.WHITE)
-                    cornerRadius = dp(activity, 20).toFloat()
-                    setStroke(dp(activity, 1), Color.parseColor("#E0E0E0"))
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    elevation = dp(activity, 16).toFloat()
-                }
-            }
-
-            // 1. Logo container
-            val logoContainer = LinearLayout(activity).apply {
-                orientation = LinearLayout.VERTICAL
-                gravity = Gravity.CENTER
-                val size = dp(activity, 64)
-                layoutParams = LinearLayout.LayoutParams(size, size).apply {
-                    bottomMargin = dp(activity, 12)
-                }
-                background = GradientDrawable(
-                    GradientDrawable.Orientation.TL_BR,
-                    intArrayOf(Color.parseColor("#FFFFEAA7"), Color.parseColor("#FFFFD2AC"))
-                ).apply {
-                    shape = GradientDrawable.OVAL
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    elevation = dp(activity, 4).toFloat()
-                }
-            }
-            val updateEmoji = TextView(activity).apply {
-                text = "\uD83D\uDCF2"
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, 28f)
-                gravity = Gravity.CENTER
-            }
-            logoContainer.addView(updateEmoji)
-            card.addView(logoContainer)
-
-            // 2. Title
-            val titleTv = TextView(activity).apply {
-                text = "Pembaruan Tersedia"
-                setTextColor(Color.parseColor("#2D3436"))
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
-                typeface = Typeface.create("sans-serif-medium", Typeface.BOLD)
-                gravity = Gravity.CENTER
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    leftMargin = dp(activity, 24)
-                    rightMargin = dp(activity, 24)
-                    bottomMargin = dp(activity, 8)
-                }
-            }
-            card.addView(titleTv)
-
-            // 3. Message Body
-            val bodyTv = TextView(activity).apply {
-                text = "Plugin ini memerlukan aplikasi CloudstreamXR agar dapat berfungsi dengan baik. Silakan unduh di bawah ini."
-                setTextColor(Color.parseColor("#2D3436"))
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
-                gravity = Gravity.CENTER
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    leftMargin = dp(activity, 24)
-                    rightMargin = dp(activity, 24)
-                    bottomMargin = dp(activity, 24)
-                }
-            }
-            card.addView(bodyTv)
-
-            // 4. Bottom pink/red banner
-            val footerBanner = LinearLayout(activity).apply {
-                orientation = LinearLayout.VERTICAL
-                gravity = Gravity.CENTER
-                val paddingVertical = dp(activity, 12)
-                setPadding(paddingVertical, paddingVertical, paddingVertical, paddingVertical)
-                background = GradientDrawable().apply {
-                    setColor(Color.parseColor("#E52A5A"))
-                    val r = dp(activity, 20).toFloat()
-                    cornerRadii = floatArrayOf(0f, 0f, 0f, 0f, r, r, r, r)
-                }
-            }
-            val footerText = TextView(activity).apply {
-                text = "Unduh CloudstreamXR untuk melanjutkan"
-                setTextColor(Color.WHITE)
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, 9f)
-                gravity = Gravity.CENTER
-                typeface = Typeface.defaultFromStyle(Typeface.BOLD)
-            }
-            footerBanner.addView(footerText)
-            card.addView(footerBanner)
-
-            root.addView(card)
-
-            // 5. Buttons container
-            val buttonContainer = LinearLayout(activity).apply {
-                orientation = LinearLayout.HORIZONTAL
-                gravity = Gravity.CENTER
-                layoutParams = LinearLayout.LayoutParams(
-                    cardWidth, LinearLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    topMargin = dp(activity, 16)
-                }
-            }
-
-            val negBtn = Button(activity).apply {
-                text = "Keluar & Hapus Repo"
-                setTextColor(Color.WHITE)
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, 11f)
-                typeface = Typeface.defaultFromStyle(Typeface.BOLD)
-                isFocusable = true
-                background = createButtonDrawable(activity, Color.parseColor("#D63031"))
-                layoutParams = LinearLayout.LayoutParams(0, dp(activity, 44), 1.2f).apply {
-                    rightMargin = dp(activity, 4)
-                }
-                setOnClickListener {
-                    removeRepoAndPlugins(activity)
-                    dialog.dismiss()
-                    activity.finishAffinity()
-                    exitProcess(0)
-                }
-            }
-            buttonContainer.addView(negBtn)
-
-            val posBtn = Button(activity).apply {
-                text = "Perbarui"
-                setTextColor(Color.WHITE)
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
-                typeface = Typeface.defaultFromStyle(Typeface.BOLD)
-                isFocusable = true
-                background = createButtonDrawable(activity, Color.parseColor("#F39C12"))
-                layoutParams = LinearLayout.LayoutParams(0, dp(activity, 44), 0.8f).apply {
-                    leftMargin = dp(activity, 4)
-                }
-                setOnClickListener {
-                    // Fetch JSON in background
-                    Thread {
-                        var apkUrl = BuildConfig.FALLBACK_RELEASE_URL
-                        try {
-                            val conn = URL(BuildConfig.UPDATE_JSON_URL).openConnection() as HttpURLConnection
-                            conn.connectTimeout = 8000
-                            conn.readTimeout = 8000
-                            if (conn.responseCode == 200) {
-                                val json = conn.inputStream.bufferedReader().use { it.readText() }
-                                val jsonObj = JSONObject(json)
-                                if (jsonObj.has("apkUrl")) {
-                                    apkUrl = jsonObj.getString("apkUrl")
-                                }
-                            }
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-
-                        activity.runOnUiThread {
-                            switchToDownloadLayout(activity, dialog, root, apkUrl)
-                        }
-                    }.start()
-                }
-            }
-            buttonContainer.addView(posBtn)
-            root.addView(buttonContainer)
-
-            dialog.setContentView(root)
-            dialog.show()
         }
 
         override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
@@ -289,6 +135,196 @@ private fun registerPopup(context: Context) {
         override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
         override fun onActivityDestroyed(activity: Activity) {}
     })
+}
+
+private fun showUpdateDialog(activity: Activity) {
+    val dialog = Dialog(activity)
+    activeDialog = dialog
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.window?.let { window ->
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window.setDimAmount(0.75f)
+    }
+    dialog.setCancelable(false)
+    dialog.setCanceledOnTouchOutside(false)
+
+    val root = LinearLayout(activity).apply {
+        orientation = LinearLayout.VERTICAL
+        gravity = Gravity.CENTER
+        val padding = dp(activity, 24)
+        setPadding(padding, padding, padding, padding)
+    }
+
+    val cardWidth = dp(activity, 300)
+    val card = LinearLayout(activity).apply {
+        orientation = LinearLayout.VERTICAL
+        gravity = Gravity.CENTER_HORIZONTAL
+        layoutParams = LinearLayout.LayoutParams(cardWidth, LinearLayout.LayoutParams.WRAP_CONTENT)
+        val padding = dp(activity, 24)
+        setPadding(0, padding, 0, 0)
+        background = GradientDrawable().apply {
+            setColor(Color.WHITE)
+            cornerRadius = dp(activity, 20).toFloat()
+            setStroke(dp(activity, 1), Color.parseColor("#E0E0E0"))
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            elevation = dp(activity, 16).toFloat()
+        }
+    }
+
+    // 1. Logo container
+    val logoContainer = LinearLayout(activity).apply {
+        orientation = LinearLayout.VERTICAL
+        gravity = Gravity.CENTER
+        val size = dp(activity, 64)
+        layoutParams = LinearLayout.LayoutParams(size, size).apply {
+            bottomMargin = dp(activity, 12)
+        }
+        background = GradientDrawable(
+            GradientDrawable.Orientation.TL_BR,
+            intArrayOf(Color.parseColor("#FFFFEAA7"), Color.parseColor("#FFFFD2AC"))
+        ).apply {
+            shape = GradientDrawable.OVAL
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            elevation = dp(activity, 4).toFloat()
+        }
+    }
+    val updateEmoji = TextView(activity).apply {
+        text = "\uD83D\uDCF2"
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 28f)
+        gravity = Gravity.CENTER
+    }
+    logoContainer.addView(updateEmoji)
+    card.addView(logoContainer)
+
+    // 2. Title
+    val titleTv = TextView(activity).apply {
+        text = "Pembaruan Tersedia"
+        setTextColor(Color.parseColor("#2D3436"))
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+        typeface = Typeface.create("sans-serif-medium", Typeface.BOLD)
+        gravity = Gravity.CENTER
+        layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            leftMargin = dp(activity, 24)
+            rightMargin = dp(activity, 24)
+            bottomMargin = dp(activity, 8)
+        }
+    }
+    card.addView(titleTv)
+
+    // 3. Message Body
+    val bodyTv = TextView(activity).apply {
+        text = "Plugin ini memerlukan aplikasi CloudstreamXR agar dapat berfungsi dengan baik. Silakan unduh di bawah ini."
+        setTextColor(Color.parseColor("#2D3436"))
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
+        gravity = Gravity.CENTER
+        layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            leftMargin = dp(activity, 24)
+            rightMargin = dp(activity, 24)
+            bottomMargin = dp(activity, 24)
+        }
+    }
+    card.addView(bodyTv)
+
+    // 4. Bottom pink/red banner
+    val footerBanner = LinearLayout(activity).apply {
+        orientation = LinearLayout.VERTICAL
+        gravity = Gravity.CENTER
+        val paddingVertical = dp(activity, 12)
+        setPadding(paddingVertical, paddingVertical, paddingVertical, paddingVertical)
+        background = GradientDrawable().apply {
+            setColor(Color.parseColor("#E52A5A"))
+            val r = dp(activity, 20).toFloat()
+            cornerRadii = floatArrayOf(0f, 0f, 0f, 0f, r, r, r, r)
+        }
+    }
+    val footerText = TextView(activity).apply {
+        text = "Unduh CloudstreamXR untuk melanjutkan"
+        setTextColor(Color.WHITE)
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 9f)
+        gravity = Gravity.CENTER
+        typeface = Typeface.defaultFromStyle(Typeface.BOLD)
+    }
+    footerBanner.addView(footerText)
+    card.addView(footerBanner)
+
+    root.addView(card)
+
+    // 5. Buttons container
+    val buttonContainer = LinearLayout(activity).apply {
+        orientation = LinearLayout.HORIZONTAL
+        gravity = Gravity.CENTER
+        layoutParams = LinearLayout.LayoutParams(
+            cardWidth, LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            topMargin = dp(activity, 16)
+        }
+    }
+
+    val negBtn = Button(activity).apply {
+        text = "Keluar & Hapus Repo"
+        setTextColor(Color.WHITE)
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 11f)
+        typeface = Typeface.defaultFromStyle(Typeface.BOLD)
+        isFocusable = true
+        background = createButtonDrawable(activity, Color.parseColor("#D63031"))
+        layoutParams = LinearLayout.LayoutParams(0, dp(activity, 44), 1.2f).apply {
+            rightMargin = dp(activity, 4)
+        }
+        setOnClickListener {
+            removeRepoAndPlugins(activity)
+            dialog.dismiss()
+            activity.finishAffinity()
+            exitProcess(0)
+        }
+    }
+    buttonContainer.addView(negBtn)
+
+    val posBtn = Button(activity).apply {
+        text = "Perbarui"
+        setTextColor(Color.WHITE)
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
+        typeface = Typeface.defaultFromStyle(Typeface.BOLD)
+        isFocusable = true
+        background = createButtonDrawable(activity, Color.parseColor("#F39C12"))
+        layoutParams = LinearLayout.LayoutParams(0, dp(activity, 44), 0.8f).apply {
+            leftMargin = dp(activity, 4)
+        }
+        setOnClickListener {
+            // Fetch JSON in background
+            Thread {
+                var apkUrl = BuildConfig.FALLBACK_RELEASE_URL
+                try {
+                    val conn = URL(BuildConfig.UPDATE_JSON_URL).openConnection() as HttpURLConnection
+                    conn.connectTimeout = 8000
+                    conn.readTimeout = 8000
+                    if (conn.responseCode == 200) {
+                        val json = conn.inputStream.bufferedReader().use { it.readText() }
+                        val jsonObj = JSONObject(json)
+                        if (jsonObj.has("apkUrl")) {
+                            apkUrl = jsonObj.getString("apkUrl")
+                        }
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+                activity.runOnUiThread {
+                    switchToDownloadLayout(activity, dialog, root, apkUrl)
+                }
+            }.start()
+        }
+    }
+    buttonContainer.addView(posBtn)
+    root.addView(buttonContainer)
+
+    dialog.setContentView(root)
+    dialog.show()
 }
 
 private fun removeRepoAndPlugins(context: Context) {
