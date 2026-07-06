@@ -46,11 +46,11 @@ object LocalManifestServer {
         0xe0.toByte(), 0x88.toByte(), 0x5f.toByte(), 0x95.toByte()
     )
 
-    private val clearkeyUuid = byteArrayOf(
-        0xe2.toByte(), 0x71.toByte(), 0x9d.toByte(), 0x58.toByte(),
-        0xa9.toByte(), 0x85.toByte(), 0xb3.toByte(), 0xc9.toByte(),
-        0x78.toByte(), 0x1a.toByte(), 0xb0.toByte(), 0x30.toByte(),
-        0xaf.toByte(), 0x78.toByte(), 0xd3.toByte(), 0x0e.toByte()
+    private val officialClearkeyUuid = byteArrayOf(
+        0x10.toByte(), 0x77.toByte(), 0xef.toByte(), 0xec.toByte(),
+        0xc0.toByte(), 0xb2.toByte(), 0x4d.toByte(), 0x02.toByte(),
+        0xac.toByte(), 0xe3.toByte(), 0x3c.toByte(), 0x1e.toByte(),
+        0x52.toByte(), 0xe2.toByte(), 0xfb.toByte(), 0x4b.toByte()
     )
 
     private fun stripAllPssh(bytes: ByteArray): ByteArray {
@@ -84,18 +84,17 @@ object LocalManifestServer {
                     }
                     
                     if (isWidevine || isPlayready) {
-                        // Ubah type dari 'pssh' menjadi 'free'
-                        modified[i] = 0x66.toByte()     // 'f'
-                        modified[i+1] = 0x72.toByte()   // 'r'
-                        modified[i+2] = 0x65.toByte()   // 'e'
-                        modified[i+3] = 0x65.toByte()   // 'e'
+                        // Ubah System ID dari Widevine/PlayReady menjadi ClearKey resmi
+                        for (j in 0 until 16) {
+                            modified[i + 8 + j] = officialClearkeyUuid[j]
+                        }
                         psshCount++
                     }
                 }
             }
         }
         if (psshCount > 0) {
-            android.util.Log.d("EventProvider", "LocalManifestServer stripped $psshCount DRM pssh box(es).")
+            android.util.Log.d("EventProvider", "LocalManifestServer modified $psshCount DRM pssh box(es) to ClearKey.")
         }
         return modified
     }
@@ -223,6 +222,9 @@ object LocalManifestServer {
                                            val headerString = "HTTP/1.1 200 OK\r\n" +
                                                               "Content-Type: video/mp4\r\n" +
                                                               "Content-Length: ${modifiedBytes.size}\r\n" +
+                                                              "Cache-Control: no-cache, no-store, must-revalidate\r\n" +
+                                                              "Pragma: no-cache\r\n" +
+                                                              "Expires: 0\r\n" +
                                                               "Access-Control-Allow-Origin: *\r\n" +
                                                               "Connection: close\r\n" +
                                                               "\r\n"
@@ -245,7 +247,7 @@ object LocalManifestServer {
                                       
                                       val clientOs = client.getOutputStream()
                                       if (meta != null) {
-                                          val keyPairs = meta.drmLicenseParam.split(",")
+                                          val keyPairs = if (meta.drmLicenseParam.contains(";")) meta.drmLicenseParam.split(";") else meta.drmLicenseParam.split(",")
                                           val keysJsonList = ArrayList<String>()
                                           for (pair in keyPairs) {
                                               val colonIdx = pair.indexOf(':')
@@ -264,6 +266,9 @@ object LocalManifestServer {
                                           val headerString = "HTTP/1.1 200 OK\r\n" +
                                                              "Content-Type: application/json\r\n" +
                                                              "Content-Length: ${bodyBytes.size}\r\n" +
+                                                              "Cache-Control: no-cache, no-store, must-revalidate\r\n" +
+                                                              "Pragma: no-cache\r\n" +
+                                                              "Expires: 0\r\n" +
                                                              "Access-Control-Allow-Origin: *\r\n" +
                                                              "Access-Control-Allow-Methods: POST, GET, OPTIONS\r\n" +
                                                              "Access-Control-Allow-Headers: *\r\n" +
@@ -382,6 +387,8 @@ object LocalManifestServer {
                                                    }
                                                }
                                                
+                                               
+                                               
                                                     // Tulis ulang SegmentTemplate media agar menggunakan URL absolut ke CDN aslinya (Sesuai Aturan 2)
                                                     modifiedXml = modifiedXml.replace(Regex("""media=["']([^"']+)["']""", RegexOption.IGNORE_CASE)) { matchResult ->
                                                         val p1 = matchResult.groupValues[1]
@@ -409,7 +416,7 @@ object LocalManifestServer {
                                                 }
                                                
                                                  // Tambahkan ClearKey DRM block dan inject cenc:default_KID yang sesuai untuk tiap AdaptationSet
-                                                 val keyPairs = meta.drmLicenseParam.split(",")
+                                                 val keyPairs = if (meta.drmLicenseParam.contains(";")) meta.drmLicenseParam.split(";") else meta.drmLicenseParam.split(",")
                                                  
                                                   // Hapus/strip ContentProtection Widevine & PlayReady asli agar tidak konflik dengan ClearKey
                                                   modifiedXml = modifiedXml.replace(
@@ -426,8 +433,7 @@ object LocalManifestServer {
                                                       val attrs = matchResult.groups[2]?.value ?: ""
                                                       var body = matchResult.groups[3]?.value ?: ""
                                                       
-                                                      val pairIndex = if (adaptationIndex < keyPairs.size) adaptationIndex else 0
-                                                      val targetPair = keyPairs.getOrNull(pairIndex) ?: ""
+                                                      val targetPair = keyPairs.firstOrNull() ?: ""
                                                       val targetKidHex = targetPair.substringBefore(":").trim()
                                                       val targetKidUuid = if (targetKidHex.length == 32) {
                                                           "${targetKidHex.substring(0, 8)}-${targetKidHex.substring(8, 12)}-${targetKidHex.substring(12, 16)}-${targetKidHex.substring(16, 20)}-${targetKidHex.substring(20)}"
@@ -446,10 +452,28 @@ object LocalManifestServer {
                                                               } else {
                                                                   kId
                                                               }
-                                                              contentProtectionXmlBuilder.append("""
-                                                                  <ContentProtection schemeIdUri="urn:uuid:e2513a00-7bfb-11e9-9130-0242ac110002" cenc:default_KID="$uuidKid" xmlns:cenc="urn:mpeg:cenc:2013"/>
-                                                                  <ContentProtection schemeIdUri="urn:uuid:e2719d58-a985-b3c9-781a-b030af78d30e" cenc:default_KID="$uuidKid" xmlns:cenc="urn:mpeg:cenc:2013"/>
-                                                              """.trimIndent()).append("\n")
+                                                               contentProtectionXmlBuilder.append("""
+                                                                   <ContentProtection schemeIdUri="urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b" cenc:default_KID="$uuidKid" xmlns:cenc="urn:mpeg:cenc:2013" xmlns:clearkey="http://dashif.org/guidelines/clearKey" xmlns:dashif="https://dashif.org/CPS">
+                                                                       <clearkey:Laurl>http://127.0.0.1:$serverPort/license_$id</clearkey:Laurl>
+                                                                       <dashif:Laurl>http://127.0.0.1:$serverPort/license_$id</dashif:Laurl>
+                                                                       <cenc:laurl>http://127.0.0.1:$serverPort/license_$id</cenc:laurl>
+                                                                   </ContentProtection>
+                                                                   <ContentProtection schemeIdUri="urn:uuid:107a22c9-c7cd-47d8-a6e1-2a95f747d1a0" cenc:default_KID="$uuidKid" xmlns:cenc="urn:mpeg:cenc:2013" xmlns:clearkey="http://dashif.org/guidelines/clearKey" xmlns:dashif="https://dashif.org/CPS">
+                                                                       <clearkey:Laurl>http://127.0.0.1:$serverPort/license_$id</clearkey:Laurl>
+                                                                       <dashif:Laurl>http://127.0.0.1:$serverPort/license_$id</dashif:Laurl>
+                                                                       <cenc:laurl>http://127.0.0.1:$serverPort/license_$id</cenc:laurl>
+                                                                   </ContentProtection>
+                                                                   <ContentProtection schemeIdUri="urn:uuid:e2513a00-7bfb-11e9-9130-0242ac110002" cenc:default_KID="$uuidKid" xmlns:cenc="urn:mpeg:cenc:2013" xmlns:clearkey="http://dashif.org/guidelines/clearKey" xmlns:dashif="https://dashif.org/CPS">
+                                                                       <clearkey:Laurl>http://127.0.0.1:$serverPort/license_$id</clearkey:Laurl>
+                                                                       <dashif:Laurl>http://127.0.0.1:$serverPort/license_$id</dashif:Laurl>
+                                                                       <cenc:laurl>http://127.0.0.1:$serverPort/license_$id</cenc:laurl>
+                                                                   </ContentProtection>
+                                                                   <ContentProtection schemeIdUri="urn:uuid:e2719d58-a985-b3c9-781a-b030af78d30e" cenc:default_KID="$uuidKid" xmlns:cenc="urn:mpeg:cenc:2013" xmlns:clearkey="http://dashif.org/guidelines/clearKey" xmlns:dashif="https://dashif.org/CPS">
+                                                                       <clearkey:Laurl>http://127.0.0.1:$serverPort/license_$id</clearkey:Laurl>
+                                                                       <dashif:Laurl>http://127.0.0.1:$serverPort/license_$id</dashif:Laurl>
+                                                                       <cenc:laurl>http://127.0.0.1:$serverPort/license_$id</cenc:laurl>
+                                                                   </ContentProtection>
+                                                               """.trimIndent()).append("\n")
                                                           }
                                                       }
                                                       val contentProtectionXml = contentProtectionXmlBuilder.toString()
@@ -480,6 +504,9 @@ object LocalManifestServer {
                                                val headerString = "HTTP/1.1 200 OK\r\n" +
                                                                   "Content-Type: application/dash+xml; charset=utf-8\r\n" +
                                                                   "Content-Length: ${bytes.size}\r\n" +
+                                                                   "Cache-Control: no-cache, no-store, must-revalidate\r\n" +
+                                                                   "Pragma: no-cache\r\n" +
+                                                                   "Expires: 0\r\n" +
                                                                   "Access-Control-Allow-Origin: *\r\n" +
                                                                   "Connection: close\r\n" +
                                                                   "\r\n"
@@ -538,7 +565,7 @@ fun hexToBase64Url(str: String): String {
 }
 
 fun buildClearKeyInjection(licenseParam: String): Pair<String, String> {
-    val pairs = licenseParam.split(",")
+    val pairs = if (licenseParam.contains(";")) licenseParam.split(";") else licenseParam.split(",")
     if (pairs.isEmpty()) return Pair("", "")
     
     val firstPair = pairs[0].split(":")
@@ -1521,7 +1548,6 @@ class Xr3edEventProvider(val context: Context) : MainAPI() {
                                         }
                                          
                                         android.util.Log.d("EventProvider", "Invoking CallSite 1: URL=$finalStreamUrl, DRM_PAIRS=$finalDrmParam, HEADERS=$headers")
-                                        
                                         callback.invoke(
                                             newDrmExtractorLink(
                                                 "$serverName (Bitmovin)",
@@ -1536,8 +1562,6 @@ class Xr3edEventProvider(val context: Context) : MainAPI() {
                                                 kty = "oct"
                                                 kid = clearkeyPair.first
                                                 this.key = clearkeyPair.second
-                                                val cleanId = finalDrmParam.replace("-", "").replace(":", "").replace(",", "").trim()
-                                                this.licenseUrl = "http://127.0.0.1:${LocalManifestServer.start()}/license_$cleanId"
                                             }
                                         )
                                         successDrm = true
@@ -1682,14 +1706,13 @@ class Xr3edEventProvider(val context: Context) : MainAPI() {
                                        }
                                        
                                        val streamUrl = if (isDash) {
-                                           getDrmDashManifestUrl(cleanUrl, finalDrmParam, headers)
+                                            getDrmDashManifestUrl(cleanUrl, finalDrmParam, headers)
                                        } else {
-                                           cleanUrl
+                                            cleanUrl
                                        }
                                        
                                        android.util.Log.d("EventProvider", "Invoking CallSite 2: URL=$streamUrl, ALL_PAIRS=$finalDrmParam, HEADERS=$headers")
-                                       
-                                        callback.invoke(
+                                       callback.invoke(
                                             newDrmExtractorLink(
                                                 "$serverName (NS Player)",
                                                 "$serverName (NS Player)",
@@ -1703,10 +1726,6 @@ class Xr3edEventProvider(val context: Context) : MainAPI() {
                                                 kty = "oct"
                                                 kid = clearkeyPair.first
                                                 this.key = clearkeyPair.second
-                                                if (isDash) {
-                                                    val cleanId = finalDrmParam.replace("-", "").replace(":", "").replace(",", "").trim()
-                                                    this.licenseUrl = "http://127.0.0.1:${LocalManifestServer.start()}/license_$cleanId"
-                                                }
                                             }
                                         )
                                         successDrm = true

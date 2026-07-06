@@ -425,10 +425,23 @@ private fun switchToDownloadLayout(activity: Activity, dialog: Dialog, root: Lin
 
     Thread {
         try {
-            // 1. Ambil URL rilis terbaru dari update.json di background
+            // 1. Ambil URL rilis terbaru dari update.json di background (Gunakan jsDelivr CDN)
             var apkUrl = BuildConfig.FALLBACK_RELEASE_URL
+            var updateUrl = BuildConfig.UPDATE_JSON_URL
+            if (updateUrl.contains("raw.githubusercontent.com")) {
+                try {
+                    val temp = updateUrl.replace("https://raw.githubusercontent.com/", "")
+                    val parts = temp.split("/", limit = 4)
+                    if (parts.size >= 4) {
+                        updateUrl = "https://cdn.jsdelivr.net/gh/${parts[0]}/${parts[1]}@${parts[2]}/${parts[3]}"
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
             try {
-                val conn = URL(BuildConfig.UPDATE_JSON_URL).openConnection() as HttpURLConnection
+                val conn = URL(updateUrl).openConnection() as HttpURLConnection
                 conn.connectTimeout = 8000
                 conn.readTimeout = 8000
                 if (conn.responseCode == 200) {
