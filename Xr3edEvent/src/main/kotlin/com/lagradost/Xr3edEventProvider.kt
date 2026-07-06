@@ -84,10 +84,10 @@ object LocalManifestServer {
                     }
                     
                     if (isWidevine || isPlayready) {
-                        // Ubah System ID dari Widevine/PlayReady menjadi ClearKey resmi
-                        for (j in 0 until 16) {
-                            modified[i + 8 + j] = officialClearkeyUuid[j]
-                        }
+                        modified[i] = 0x66.toByte()     // 'f'
+                        modified[i+1] = 0x72.toByte()   // 'r'
+                        modified[i+2] = 0x65.toByte()   // 'e'
+                        modified[i+3] = 0x65.toByte()   // 'e'
                         psshCount++
                     }
                 }
@@ -433,49 +433,20 @@ object LocalManifestServer {
                                                       val attrs = matchResult.groups[2]?.value ?: ""
                                                       var body = matchResult.groups[3]?.value ?: ""
                                                       
-                                                      val targetPair = keyPairs.firstOrNull() ?: ""
-                                                      val targetKidHex = targetPair.substringBefore(":").trim()
-                                                      val targetKidUuid = if (targetKidHex.length == 32) {
-                                                          "${targetKidHex.substring(0, 8)}-${targetKidHex.substring(8, 12)}-${targetKidHex.substring(12, 16)}-${targetKidHex.substring(16, 20)}-${targetKidHex.substring(20)}"
-                                                      } else {
-                                                          targetKidHex
-                                                      }
-                                                      adaptationIndex++
-                                                      
-                                                      val contentProtectionXmlBuilder = StringBuilder()
-                                                      for (pair in keyPairs) {
-                                                          val colonIdx = pair.indexOf(':')
-                                                          if (colonIdx > 0) {
-                                                              val kId = pair.substring(0, colonIdx).trim()
-                                                              val uuidKid = if (kId.length == 32) {
-                                                                  "${kId.substring(0, 8)}-${kId.substring(8, 12)}-${kId.substring(12, 16)}-${kId.substring(16, 20)}-${kId.substring(20)}"
-                                                              } else {
-                                                                  kId
-                                                              }
-                                                               contentProtectionXmlBuilder.append("""
-                                                                   <ContentProtection schemeIdUri="urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b" cenc:default_KID="$uuidKid" xmlns:cenc="urn:mpeg:cenc:2013" xmlns:clearkey="http://dashif.org/guidelines/clearKey" xmlns:dashif="https://dashif.org/CPS">
-                                                                       <clearkey:Laurl>http://127.0.0.1:$serverPort/license_$id</clearkey:Laurl>
-                                                                       <dashif:Laurl>http://127.0.0.1:$serverPort/license_$id</dashif:Laurl>
-                                                                       <cenc:laurl>http://127.0.0.1:$serverPort/license_$id</cenc:laurl>
-                                                                   </ContentProtection>
-                                                                   <ContentProtection schemeIdUri="urn:uuid:107a22c9-c7cd-47d8-a6e1-2a95f747d1a0" cenc:default_KID="$uuidKid" xmlns:cenc="urn:mpeg:cenc:2013" xmlns:clearkey="http://dashif.org/guidelines/clearKey" xmlns:dashif="https://dashif.org/CPS">
-                                                                       <clearkey:Laurl>http://127.0.0.1:$serverPort/license_$id</clearkey:Laurl>
-                                                                       <dashif:Laurl>http://127.0.0.1:$serverPort/license_$id</dashif:Laurl>
-                                                                       <cenc:laurl>http://127.0.0.1:$serverPort/license_$id</cenc:laurl>
-                                                                   </ContentProtection>
-                                                                   <ContentProtection schemeIdUri="urn:uuid:e2513a00-7bfb-11e9-9130-0242ac110002" cenc:default_KID="$uuidKid" xmlns:cenc="urn:mpeg:cenc:2013" xmlns:clearkey="http://dashif.org/guidelines/clearKey" xmlns:dashif="https://dashif.org/CPS">
-                                                                       <clearkey:Laurl>http://127.0.0.1:$serverPort/license_$id</clearkey:Laurl>
-                                                                       <dashif:Laurl>http://127.0.0.1:$serverPort/license_$id</dashif:Laurl>
-                                                                       <cenc:laurl>http://127.0.0.1:$serverPort/license_$id</cenc:laurl>
-                                                                   </ContentProtection>
-                                                                   <ContentProtection schemeIdUri="urn:uuid:e2719d58-a985-b3c9-781a-b030af78d30e" cenc:default_KID="$uuidKid" xmlns:cenc="urn:mpeg:cenc:2013" xmlns:clearkey="http://dashif.org/guidelines/clearKey" xmlns:dashif="https://dashif.org/CPS">
-                                                                       <clearkey:Laurl>http://127.0.0.1:$serverPort/license_$id</clearkey:Laurl>
-                                                                       <dashif:Laurl>http://127.0.0.1:$serverPort/license_$id</dashif:Laurl>
-                                                                       <cenc:laurl>http://127.0.0.1:$serverPort/license_$id</cenc:laurl>
-                                                                   </ContentProtection>
-                                                               """.trimIndent()).append("\n")
-                                                          }
-                                                      }
+                                                       val targetPair = keyPairs.firstOrNull() ?: ""
+                                                       val targetKidHex = targetPair.substringBefore(":").trim()
+                                                       val targetKidUuid = if (targetKidHex.length == 32) {
+                                                           "${targetKidHex.substring(0, 8)}-${targetKidHex.substring(8, 12)}-${targetKidHex.substring(12, 16)}-${targetKidHex.substring(16, 20)}-${targetKidHex.substring(20)}"
+                                                       } else {
+                                                           targetKidHex
+                                                       }
+                                                       adaptationIndex++
+
+                                                       val contentProtectionXmlBuilder = StringBuilder()
+                                                       contentProtectionXmlBuilder.append("""
+                                                           <ContentProtection schemeIdUri="urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b" cenc:default_KID="$targetKidUuid" xmlns:cenc="urn:mpeg:cenc:2013"/>
+                                                           <ContentProtection schemeIdUri="urn:uuid:e2513a00-7bfb-11e9-9130-0242ac110002" cenc:default_KID="$targetKidUuid" xmlns:cenc="urn:mpeg:cenc:2013"/>
+                                                       """)
                                                       val contentProtectionXml = contentProtectionXmlBuilder.toString()
                                                       
                                                       if (targetKidUuid.isNotEmpty()) {
@@ -573,20 +544,7 @@ fun buildClearKeyInjection(licenseParam: String): Pair<String, String> {
     val firstKid = hexToBase64Url(firstPair[0].trim())
     val firstKey = hexToBase64Url(firstPair[1].trim())
     
-    if (pairs.size == 1) {
-        return Pair(firstKid, firstKey)
-    }
-    
-    val sb = StringBuilder(firstKey)
-    for (i in 1 until pairs.size) {
-        val parts = pairs[i].split(":")
-        if (parts.size == 2) {
-            val kid = hexToBase64Url(parts[0].trim())
-            val key = hexToBase64Url(parts[1].trim())
-            sb.append(""""},{"kty":"oct","kid":"$kid","k":"$key""")
-        }
-    }
-    return Pair(firstKid, sb.toString())
+    return Pair(firstKid, firstKey)
 }
 
 class Xr3edEventProvider(val context: Context) : MainAPI() {
