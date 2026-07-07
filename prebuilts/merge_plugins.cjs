@@ -37,12 +37,7 @@ try {
 
 // 2. Merge without duplication by name
 const pluginMap = new Map();
-plugins.forEach(p => {
-  if (p.url && p.url.includes('raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/')) {
-    p.url = p.url.replace('https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/', 'https://cdn.jsdelivr.net/gh/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream@builds/');
-  }
-  pluginMap.set(p.name, p);
-});
+plugins.forEach(p => pluginMap.set(p.name, p));
 
 prebuilts.forEach(p => {
   // Also copy the .cs3 file to build-out
@@ -71,9 +66,6 @@ prebuilts.forEach(p => {
     console.warn(`Warning: prebuilt file ${srcCs3} not found!`);
   }
   
-  if (p.url && p.url.includes('raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/')) {
-    p.url = p.url.replace('https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/', 'https://cdn.jsdelivr.net/gh/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream@builds/');
-  }
   pluginMap.set(p.name, p);
 });
 
