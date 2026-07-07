@@ -503,12 +503,17 @@ class DramaBoxProvider : MainAPI() {
             val chapterList = JSONArray(episodesRes)
 
             val episodes = ArrayList<Episode>()
+            var firstEpisodeCover: String? = null
             for (i in 0 until chapterList.length()) {
                 val ch = chapterList.optJSONObject(i) ?: continue
                 val chapterIndex = ch.optInt("chapterIndex")
                 val chapterName = ch.optString("chapterName").ifEmpty { "EP ${chapterIndex + 1}" }
                 val coverUrl = ch.optString("chapterImg").ifEmpty { ch.optString("chapterImgMap") }
                 
+                if (firstEpisodeCover == null && coverUrl.isNotEmpty()) {
+                    firstEpisodeCover = coverUrl
+                }
+
                 // Simpan hanya bookId dan chapterIndex (tanpa videoPath untuk menghemat jatah limit dan menghindari link kedaluwarsa)
                 episodes.add(
                     newEpisode(
@@ -530,6 +535,9 @@ class DramaBoxProvider : MainAPI() {
             ) {
                 this.posterUrl = cover
                 this.plot = introduction
+                if (firstEpisodeCover != null) {
+                    this.backgroundUrl = firstEpisodeCover
+                }
             }
             detailCache[bookId] = response
             return response
