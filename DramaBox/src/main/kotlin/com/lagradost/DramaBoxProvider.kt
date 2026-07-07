@@ -559,10 +559,20 @@ class DramaBoxProvider : MainAPI() {
             println("DramaBox: parts size too small: ${parts.size}")
             return false
         }
-        val bookId = parts[0]
+        var bookId = parts[0]
+        if (bookId.startsWith("http://") || bookId.startsWith("https://")) {
+            val parsedId = when {
+                bookId.contains("/play/") -> bookId.substringAfter("/play/").substringBefore("?").substringBefore("/")
+                bookId.contains("/detail/") -> bookId.substringAfter("/detail/").substringBefore("?").substringBefore("/")
+                else -> bookId.substringAfterLast("/").substringBefore("?")
+            }
+            if (parsedId.isNotEmpty()) {
+                bookId = parsedId
+            }
+        }
         val episodeIndex = parts[1].toIntOrNull() ?: 0
         val cachedVideoPath = parts.getOrNull(2)
-        println("DramaBox: bookId=$bookId, episodeIndex=$episodeIndex, cachedVideoPath=$cachedVideoPath")
+        println("DramaBox: parsed bookId=$bookId, episodeIndex=$episodeIndex, cachedVideoPath=$cachedVideoPath")
 
         // 1. Jika URL video sudah tersimpan langsung dan belum kedaluwarsa, langsung putar
         var useCached = false
