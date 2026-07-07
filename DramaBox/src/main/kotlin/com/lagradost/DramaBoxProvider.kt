@@ -478,8 +478,8 @@ class DramaBoxProvider : MainAPI() {
         try {
             // Fetch metadata detail dan daftar episode secara paralel
             val (detailRes, episodesRes) = kotlinx.coroutines.coroutineScope {
-                val detailDeferred = kotlinx.coroutines.async { getWithRetry("https://nax1.cc/api/dramabox/detail", mapOf("bookId" to bookId)) }
-                val episodesDeferred = kotlinx.coroutines.async { getWithRetry("https://nax1.cc/api/dramabox/allepisode", mapOf("bookId" to bookId)) }
+                val detailDeferred = this.async { getWithRetry("https://nax1.cc/api/dramabox/detail", mapOf("bookId" to bookId)) }
+                val episodesDeferred = this.async { getWithRetry("https://nax1.cc/api/dramabox/allepisode", mapOf("bookId" to bookId)) }
                 detailDeferred.await() to episodesDeferred.await()
             }
             val detailJson = JSONObject(detailRes)
