@@ -248,13 +248,16 @@ class DramaBoxProvider : MainAPI() {
         }
 
         val githubBaseUrl = "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/main/database/dramabox"
+        println("DramaBox: Loading page $page of homepage")
 
         try {
             if (page > 1) {
                 // Hanya muat Kategori Lainnya saat scroll halaman berikutnya (dengan filter duplikat)
                 val forYouRes = try {
+                    println("DramaBox: Fetching Lainnya page $page from GitHub")
                     getWithRetry("$githubBaseUrl/foryou_$page.json")
                 } catch (e: Exception) {
+                    println("DramaBox: Fallback Fetching Lainnya page $page from nax1.cc")
                     getWithRetry("https://nax1.cc/api/dramabox/foryou", mapOf("page" to page.toString()))
                 }
                 val forYouList = parseSekaiDramaList(forYouRes, filterDuplicates = true)
@@ -271,74 +274,88 @@ class DramaBoxProvider : MainAPI() {
             // Halaman Pertama (page == 1): Muat semua kategori
             // 1. Pilihan VIP
             val vipRes = try {
+                println("DramaBox: Fetching VIP from GitHub")
                 getWithRetry("$githubBaseUrl/vip.json")
             } catch (e: Exception) {
+                println("DramaBox: Fallback Fetching VIP from nax1.cc")
                 getWithRetry("https://nax1.cc/api/dramabox/vip")
             }
-            val vipList = parseVipDramaList(vipRes, filterDuplicates = true)
+            val vipList = parseVipDramaList(vipRes, filterDuplicates = false)
             if (vipList.isNotEmpty()) {
                 homePages.add(HomePageList("Pilihan VIP", vipList))
             }
 
             // 2. Trending
             val trendingRes = try {
+                println("DramaBox: Fetching Trending from GitHub")
                 getWithRetry("$githubBaseUrl/trending.json")
             } catch (e: Exception) {
+                println("DramaBox: Fallback Fetching Trending from nax1.cc")
                 getWithRetry("https://nax1.cc/api/dramabox/trending")
             }
-            val trendingList = parseSekaiDramaList(trendingRes, filterDuplicates = true)
+            val trendingList = parseSekaiDramaList(trendingRes, filterDuplicates = false)
             if (trendingList.isNotEmpty()) {
                 homePages.add(HomePageList("Trending", trendingList))
             }
 
             // 3. Terbaru
             val latestRes = try {
+                println("DramaBox: Fetching Terbaru from GitHub")
                 getWithRetry("$githubBaseUrl/latest.json")
             } catch (e: Exception) {
+                println("DramaBox: Fallback Fetching Terbaru from nax1.cc")
                 getWithRetry("https://nax1.cc/api/dramabox/latest")
             }
-            val latestList = parseSekaiDramaList(latestRes, filterDuplicates = true)
+            val latestList = parseSekaiDramaList(latestRes, filterDuplicates = false)
             if (latestList.isNotEmpty()) {
                 homePages.add(HomePageList("Terbaru", latestList))
             }
 
             // 4. Pencarian Populer
             val popSearchRes = try {
+                println("DramaBox: Fetching Pencarian Populer from GitHub")
                 getWithRetry("$githubBaseUrl/populersearch.json")
             } catch (e: Exception) {
+                println("DramaBox: Fallback Fetching Pencarian Populer from nax1.cc")
                 getWithRetry("https://nax1.cc/api/dramabox/populersearch")
             }
-            val popSearchList = parseSekaiDramaList(popSearchRes, filterDuplicates = true)
+            val popSearchList = parseSekaiDramaList(popSearchRes, filterDuplicates = false)
             if (popSearchList.isNotEmpty()) {
                 homePages.add(HomePageList("Pencarian Populer", popSearchList))
             }
 
             // 5. Sulih Suara Populer
             val voicePopRes = try {
+                println("DramaBox: Fetching Sulih Suara Populer from GitHub")
                 getWithRetry("$githubBaseUrl/dubindo_terpopuler.json")
             } catch (e: Exception) {
+                println("DramaBox: Fallback Fetching Sulih Suara Populer from nax1.cc")
                 getWithRetry("https://nax1.cc/api/dramabox/dubindo", mapOf("classify" to "terpopuler"))
             }
-            val voicePopList = parseSekaiDramaList(voicePopRes, filterDuplicates = true)
+            val voicePopList = parseSekaiDramaList(voicePopRes, filterDuplicates = false)
             if (voicePopList.isNotEmpty()) {
                 homePages.add(HomePageList("Sulih Suara Populer", voicePopList))
             }
 
             // 6. Sulih Suara Terbaru
             val voiceNewRes = try {
+                println("DramaBox: Fetching Sulih Suara Terbaru from GitHub")
                 getWithRetry("$githubBaseUrl/dubindo_terbaru.json")
             } catch (e: Exception) {
+                println("DramaBox: Fallback Fetching Sulih Suara Terbaru from nax1.cc")
                 getWithRetry("https://nax1.cc/api/dramabox/dubindo", mapOf("classify" to "terbaru"))
             }
-            val voiceNewList = parseSekaiDramaList(voiceNewRes, filterDuplicates = true)
+            val voiceNewList = parseSekaiDramaList(voiceNewRes, filterDuplicates = false)
             if (voiceNewList.isNotEmpty()) {
                 homePages.add(HomePageList("Sulih Suara Terbaru", voiceNewList))
             }
 
             // 7. Lainnya (Halaman 1)
             val forYouRes = try {
+                println("DramaBox: Fetching Lainnya page 1 from GitHub")
                 getWithRetry("$githubBaseUrl/foryou_1.json")
             } catch (e: Exception) {
+                println("DramaBox: Fallback Fetching Lainnya page 1 from nax1.cc")
                 getWithRetry("https://nax1.cc/api/dramabox/foryou", mapOf("page" to "1"))
             }
             val forYouList = parseSekaiDramaList(forYouRes, filterDuplicates = true)
@@ -459,15 +476,16 @@ class DramaBoxProvider : MainAPI() {
         if (cached != null) return cached
 
         try {
-            // 1. Fetch metadata dari SekaiDrama API dengan retry
-            val detailRes = getWithRetry("https://nax1.cc/api/dramabox/detail", mapOf("bookId" to bookId))
+            // Fetch metadata detail dan daftar episode secara paralel
+            val (detailRes, episodesRes) = kotlinx.coroutines.coroutineScope {
+                val detailDeferred = kotlinx.coroutines.async { getWithRetry("https://nax1.cc/api/dramabox/detail", mapOf("bookId" to bookId)) }
+                val episodesDeferred = kotlinx.coroutines.async { getWithRetry("https://nax1.cc/api/dramabox/allepisode", mapOf("bookId" to bookId)) }
+                detailDeferred.await() to episodesDeferred.await()
+            }
             val detailJson = JSONObject(detailRes)
             val bookName = detailJson.optString("bookName").ifEmpty { "DramaBox" }
             val cover = detailJson.optString("coverWap").ifEmpty { detailJson.optString("cover") }
             val introduction = detailJson.optString("introduction").ifEmpty { "Saksikan drama pendek menarik di DramaBox." }
-
-            // 2. Fetch seluruh episode dari SekaiDrama API dengan retry
-            val episodesRes = getWithRetry("https://nax1.cc/api/dramabox/allepisode", mapOf("bookId" to bookId))
             val chapterList = JSONArray(episodesRes)
 
             val episodes = ArrayList<Episode>()
