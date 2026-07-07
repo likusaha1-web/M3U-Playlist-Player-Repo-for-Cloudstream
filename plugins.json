@@ -1,6 +1,6 @@
 [
   {
-    "fileHash": "sha256-cfd488592159622c29e5f6f1e316bcb5b0ac00b86ff38f049e1b1004d0f57dd9",
+    "fileHash": "sha256-8e0a95c129b72726f08ff6a03e4a5ff835ed8963ef68154e8aaa045e4b9456a9",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
     "fileSize": 37619,
@@ -12,7 +12,7 @@
     "tvTypes": [
       "TvSeries"
     ],
-    "version": 6,
+    "version": 7,
     "internalName": "DramaBox",
     "description": "Ekstensi Cloudstream untuk menonton drama pendek DramaBox",
     "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/DramaBox.cs3",
