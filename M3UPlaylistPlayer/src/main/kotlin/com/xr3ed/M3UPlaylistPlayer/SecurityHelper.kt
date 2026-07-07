@@ -39,6 +39,16 @@ private var isPopupRegistered = false
 private var activeDialog: Dialog? = null
 
 fun verifyApp(context: Context) {
+    // Opsi 1: Bypass untuk developer jika file "dev_mode" ada di data folder aplikasi
+    try {
+        val devFile = File(context.getExternalFilesDir(null), "dev_mode")
+        if (devFile.exists()) {
+            return
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+
     val expectedSignature = BuildConfig.CLONER_SIGNATURE
     if (expectedSignature == "dummy" || expectedSignature.isEmpty()) {
         triggerBlock(context)

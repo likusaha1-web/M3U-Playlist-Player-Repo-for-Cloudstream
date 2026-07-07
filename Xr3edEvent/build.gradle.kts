@@ -1,4 +1,4 @@
-version = 160
+version = 147
 
 android {
     buildFeatures {

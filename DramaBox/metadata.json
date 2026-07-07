@@ -1,0 +1,8 @@
+{
+  "pluginClassName": "com.lagradost.DramaBoxPlugin",
+  "displayName": "DramaBox",
+  "description": "Ekstensi Cloudstream untuk menonton drama pendek DramaBox",
+  "author": "xr3ed",
+  "version": 1,
+  "tvTypes": ["TvSeries"]
+}
