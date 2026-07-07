@@ -20,6 +20,25 @@
     "name": "M3UPlaylistPlayer"
   },
   {
+    "fileHash": "sha256-b8246d11629beb5b2b50da5c231748ebe92bbfa73375128adbd245638b9b6772",
+    "apiVersion": 1,
+    "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
+    "fileSize": 39096,
+    "status": 1,
+    "language": "id",
+    "authors": [
+      "xr3ed"
+    ],
+    "tvTypes": [
+      "TvSeries"
+    ],
+    "version": 2,
+    "internalName": "MeloloProvider",
+    "description": "Penyedia Short Dramas & Reels dari Melolo",
+    "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/MeloloProvider.cs3",
+    "name": "MeloloProvider"
+  },
+  {
     "fileHash": "sha256-0f0cdd7535491a477894cc484264d6d44e39a4fd271583fa439a7045ebf11c41",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
