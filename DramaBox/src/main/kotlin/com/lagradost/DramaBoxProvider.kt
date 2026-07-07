@@ -15,6 +15,8 @@ import java.security.spec.PKCS8EncodedKeySpec
 import java.util.*
 import org.json.JSONObject
 import org.json.JSONArray
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 
 class DramaBoxProvider : MainAPI() {
     companion object {
@@ -477,9 +479,9 @@ class DramaBoxProvider : MainAPI() {
 
         try {
             // Fetch metadata detail dan daftar episode secara paralel
-            val (detailRes, episodesRes) = kotlinx.coroutines.coroutineScope {
-                val detailDeferred = this.async { getWithRetry("https://nax1.cc/api/dramabox/detail", mapOf("bookId" to bookId)) }
-                val episodesDeferred = this.async { getWithRetry("https://nax1.cc/api/dramabox/allepisode", mapOf("bookId" to bookId)) }
+            val (detailRes, episodesRes) = coroutineScope {
+                val detailDeferred = async { getWithRetry("https://nax1.cc/api/dramabox/detail", mapOf("bookId" to bookId)) }
+                val episodesDeferred = async { getWithRetry("https://nax1.cc/api/dramabox/allepisode", mapOf("bookId" to bookId)) }
                 detailDeferred.await() to episodesDeferred.await()
             }
             val detailJson = JSONObject(detailRes)
