@@ -536,7 +536,7 @@ class DramaBoxProvider : MainAPI() {
                 this.posterUrl = cover
                 this.plot = introduction
                 if (firstEpisodeCover != null) {
-                    this.backgroundUrl = firstEpisodeCover
+                    this.backgroundPosterUrl = firstEpisodeCover
                 }
             }
             detailCache[bookId] = response
