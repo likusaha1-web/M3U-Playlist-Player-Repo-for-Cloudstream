@@ -138,8 +138,9 @@ class DramaBoxProvider : MainAPI() {
             json = mapOf("distinctId" to null)
         ).text
 
+        println("DramaBoxBootstrapRaw: $resText")
         val json = JSONObject(resText)
-        val dataObj = json.optJSONObject("data") ?: throw Exception("Invalid bootstrap response")
+        val dataObj = json.optJSONObject("data") ?: throw Exception("Invalid bootstrap response: $resText")
         val userObj = dataObj.optJSONObject("user") ?: throw Exception("No user data in bootstrap")
         
         val tokenData = TokenData(
