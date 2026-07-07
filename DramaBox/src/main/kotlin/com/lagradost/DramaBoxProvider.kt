@@ -559,8 +559,18 @@ class DramaBoxProvider : MainAPI() {
         val episodeIndex = parts[1].toIntOrNull() ?: 0
         val cachedVideoPath = parts.getOrNull(2)
 
-        // 1. Jika URL video sudah tersimpan langsung, langsung putar
+        // 1. Jika URL video sudah tersimpan langsung dan belum kedaluwarsa, langsung putar
+        var useCached = false
         if (!cachedVideoPath.isNullOrEmpty() && (cachedVideoPath.startsWith("http://") || cachedVideoPath.startsWith("https://"))) {
+            val expiresStr = cachedVideoPath.substringAfter("Expires=", "").substringBefore("&")
+            val expires = expiresStr.toLongOrNull()
+            val currentTime = System.currentTimeMillis() / 1000
+            if (expires == null || currentTime < expires) {
+                useCached = true
+            }
+        }
+
+        if (useCached && !cachedVideoPath.isNullOrEmpty()) {
             val isM3u8 = cachedVideoPath.contains(".m3u8", ignoreCase = true)
             val linkType = if (isM3u8) ExtractorLinkType.M3U8 else ExtractorLinkType.VIDEO
             callback.invoke(
