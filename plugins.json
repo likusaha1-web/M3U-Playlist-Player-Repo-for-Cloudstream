@@ -1,9 +1,9 @@
 [
   {
-    "fileHash": "sha256-ddb97619c181e4170a563e6472a0c8d8a4798d8c37aa6d396ff0ef995ccee29f",
+    "fileHash": "sha256-a37041118f53749e2926768fe077c8e16f5503bf63fea47b06bc395458fbeb83",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 36302,
+    "fileSize": 36813,
     "status": 1,
     "language": "id",
     "authors": [
@@ -12,7 +12,7 @@
     "tvTypes": [
       "TvSeries"
     ],
-    "version": 3,
+    "version": 4,
     "internalName": "DramaBox",
     "description": "Ekstensi Cloudstream untuk menonton drama pendek DramaBox",
     "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/DramaBox.cs3",
@@ -20,10 +20,10 @@
   },
   {
     "iconUrl": "https://play-lh.googleusercontent.com/V4t4JeQV2Cu9u72hKuqOW5c0IfwcZuuVS1d9PF2uJsW3rlIq-aOMTrT5bABVGaAFTcM=w480-h960-rw",
-    "fileHash": "sha256-426283ed8fbe0e098d30f0be94a4126acf800b5f4980cf055fc755b731078c8e",
+    "fileHash": "sha256-2dbd3c1c458ac42e360bf65a3be75aae55adda73a3b5276332ab83ec323bbc98",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 84336,
+    "fileSize": 84180,
     "status": 1,
     "language": "en",
     "authors": [
@@ -39,10 +39,10 @@
     "name": "M3UPlaylistPlayer"
   },
   {
-    "fileHash": "sha256-90a589345461c8fbb662a0ae68b1216c4dae08e2622bb12e4161e879aae590a3",
+    "fileHash": "sha256-796db5b88a9facb167b06db0e2b39629aa9110529aa4d1dbb1ecff02f5ef3f98",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 55175,
+    "fileSize": 55049,
     "status": 1,
     "language": "id",
     "authors": [
@@ -59,10 +59,10 @@
   },
   {
     "iconUrl": "https://raw.githubusercontent.com/xr3ed/Auto-IPTV/main/logo/fifa.png",
-    "fileHash": "sha256-4d0056733427c943e64dde281ae819032aa3b4407d45bdf0144b3ff43e218e4e",
+    "fileHash": "sha256-e2afc52b8374f6bc6dae708a17ea4dd08091768c26b40afb96d8a86a6d288417",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 90901,
+    "fileSize": 90763,
     "status": 1,
     "language": "id",
     "authors": [
