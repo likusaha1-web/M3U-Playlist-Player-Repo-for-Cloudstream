@@ -16,3 +16,4 @@ kotlin.zip
 test.jar
 test.kt
 .agents/
+/dev_mode_scripts/
