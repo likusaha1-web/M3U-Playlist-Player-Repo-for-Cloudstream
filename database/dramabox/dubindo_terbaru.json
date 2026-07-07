@@ -50,7 +50,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -62,8 +62,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925415\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "63.8K",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588363\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "66.2K",
     "bookShelfTime": 1783051200000,
     "shelfTime": "2026-07-03 12:00:00",
     "inLibrary": false
@@ -119,7 +119,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -131,8 +131,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925415\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "81.2K",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588364\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "82.9K",
     "bookShelfTime": 1782957600000,
     "shelfTime": "2026-07-02 10:00:00",
     "inLibrary": false
@@ -188,7 +188,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -200,8 +200,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925415\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "244K",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588364\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "252K",
     "bookShelfTime": 1782871200000,
     "shelfTime": "2026-07-01 10:00:00",
     "inLibrary": false
@@ -256,7 +256,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -268,8 +268,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925415\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "334K",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588364\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "337K",
     "bookShelfTime": 1782439200000,
     "shelfTime": "2026-06-26 10:00:00",
     "inLibrary": false
@@ -325,7 +325,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -337,8 +337,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925415\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "1M",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588364\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "1.1M",
     "bookShelfTime": 1782360000000,
     "shelfTime": "2026-06-25 12:00:00",
     "inLibrary": false
@@ -394,7 +394,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -406,8 +406,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925415\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "270K",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588364\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "272K",
     "bookShelfTime": 1782273600000,
     "shelfTime": "2026-06-24 12:00:00",
     "inLibrary": false
@@ -457,7 +457,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -469,7 +469,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925416\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588365\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "3.4M",
     "bookShelfTime": 1781798400000,
     "shelfTime": "2026-06-19 00:00:00",
@@ -526,7 +526,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -538,7 +538,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925416\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588365\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "1.3M",
     "bookShelfTime": 1781755200000,
     "shelfTime": "2026-06-18 12:00:00",
@@ -595,7 +595,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -607,8 +607,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925416\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "206K",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588365\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "207K",
     "bookShelfTime": 1781668800000,
     "shelfTime": "2026-06-17 12:00:00",
     "inLibrary": false
@@ -658,7 +658,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -670,7 +670,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925416\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588365\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "338K",
     "bookShelfTime": 1781575200000,
     "shelfTime": "2026-06-16 10:00:00",
@@ -727,7 +727,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -739,7 +739,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925416\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588365\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "1.3M",
     "bookShelfTime": 1781247015000,
     "shelfTime": "2026-06-12 14:50:15",
@@ -796,7 +796,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -808,7 +808,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925416\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588365\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "5.4M",
     "bookShelfTime": 1781164800000,
     "shelfTime": "2026-06-11 16:00:00",
@@ -865,7 +865,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -877,8 +877,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925416\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "905K",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588365\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "906K",
     "bookShelfTime": 1781084703000,
     "shelfTime": "2026-06-10 17:45:03",
     "inLibrary": false
@@ -934,7 +934,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -946,56 +946,56 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925416\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "427K",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588365\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "428K",
     "bookShelfTime": 1780977600000,
     "shelfTime": "2026-06-09 12:00:00",
     "inLibrary": false
   },
   {
-    "bookId": "42000015383",
-    "bookName": "Mendengar Isi Hatimu (Sulih Suara)",
-    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000015383/42000015383.jpg?t=1780646587778",
-    "chapterCount": 66,
-    "introduction": "Erika Sabdi telah lama mencintai Daniel Trion, hingga pernikahan politik membuat cintanya menjadi nyata. Namun, malam pertama yang dingin dan tiga tahun pernikahan tanpa kehangatan membuat Erika ingin bercerai. Saat mereka bersama untuk terakhir kalinya, Erika tiba-tiba bisa mendengar isi hati Daniel dan mengetahui bahwa selama ini Daniel juga mencintainya. Ternyata, pernikahan mereka hanya terhalang oleh salah paham yang tak pernah terucap.",
+    "bookId": "42000015226",
+    "bookName": "Setelah Bercerai, Aku Kaya Raya (Sulih Suara) ",
+    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000015226/42000015226.jpg?t=1780569341867",
+    "chapterCount": 70,
+    "introduction": "Marco Candra, menantu keluarga Suwandi, diremehkan tiga tahun. Menjelang perceraian, dia baru tahu dirinya adalah pewaris Grup Angkasa. Bersama Selly Gunawan, dia bangkit mendirikan Paragon Kapital. Sementara keluarga Suwandi terjerat tipu daya hingga nyaris bangkrut. Saat identitas Marco terbongkar, Wanda Suwandi menyesal, mantan suami kini tak lagi terjangkau.",
     "tags": [
-      "Cinta Rahasia",
-      "Mengejar Istri",
-      "Cinta Segitiga",
+      "Pembalikan Identitas",
+      "Serangan Balik",
+      "Menantu Pria",
+      "Tokoh Legendaris",
       "Modern",
-      "Romansa",
-      "BG"
+      "Pria Dominan"
     ],
     "tagV3s": [
       {
-        "tagId": 1386,
-        "tagName": "Cinta Rahasia",
-        "tagEnName": "Secret Crush"
+        "tagId": 1338,
+        "tagName": "Pembalikan Identitas",
+        "tagEnName": "Hidden Identity"
       },
       {
-        "tagId": 1401,
-        "tagName": "Mengejar Istri",
-        "tagEnName": "Winning Her Back"
+        "tagId": 1340,
+        "tagName": "Serangan Balik",
+        "tagEnName": "Counterattack"
       },
       {
-        "tagId": 1380,
-        "tagName": "Cinta Segitiga",
-        "tagEnName": "Love Triangle"
+        "tagId": 1329,
+        "tagName": "Menantu Pria",
+        "tagEnName": "Son-in-Law"
       },
       {
-        "tagId": 1352,
+        "tagId": 1332,
+        "tagName": "Tokoh Legendaris",
+        "tagEnName": "Divine Tycoon"
+      },
+      {
+        "tagId": 1318,
         "tagName": "Modern",
         "tagEnName": "Modern"
       },
       {
-        "tagId": 1357,
-        "tagName": "Romansa",
-        "tagEnName": "Romance"
-      },
-      {
-        "tagId": 1358,
-        "tagName": "BG",
-        "tagEnName": "BG"
+        "tagId": 1323,
+        "tagName": "Pria Dominan",
+        "tagEnName": "Powerful Male Lead"
       }
     ],
     "bookSource": {
@@ -1003,7 +1003,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "8f618d9e3082e207e732f750f785ad35"
+      "log_id": "fe24548d5df562b270c78963afe893fd"
     },
     "isEntry": 0,
     "index": 0,
@@ -1015,10 +1015,10 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"8f618d9e3082e207e732f750f785ad35\",\"ret_time\":\"1783432925416\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "896K",
-    "bookShelfTime": 1780652267000,
-    "shelfTime": "2026-06-05 17:37:47",
+    "algorithmRecomDot": "{\"log_id\":\"fe24548d5df562b270c78963afe893fd\",\"ret_time\":\"1783453588365\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "1.6M",
+    "bookShelfTime": 1780643942000,
+    "shelfTime": "2026-06-05 15:19:02",
     "inLibrary": false
   }
 ]
