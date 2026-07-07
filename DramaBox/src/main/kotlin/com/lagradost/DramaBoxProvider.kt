@@ -263,35 +263,49 @@ class DramaBoxProvider : MainAPI() {
             }
 
             // Halaman Pertama (page == 1): Muat semua kategori
-            // Trending
+            // 1. Pilihan VIP dari SekaiDrama
+            val vipRes = getWithRetry("https://nax1.cc/api/dramabox/vip")
+            val vipList = parseVipDramaList(vipRes, filterDuplicates = true)
+            if (vipList.isNotEmpty()) {
+                homePages.add(HomePageList("Pilihan VIP", vipList))
+            }
+
+            // 2. Trending dari SekaiDrama
             val trendingRes = getWithRetry("https://nax1.cc/api/dramabox/trending")
             val trendingList = parseSekaiDramaList(trendingRes, filterDuplicates = true)
             if (trendingList.isNotEmpty()) {
                 homePages.add(HomePageList("Trending", trendingList))
             }
 
-            // Terbaru
+            // 3. Terbaru dari SekaiDrama
             val latestRes = getWithRetry("https://nax1.cc/api/dramabox/latest")
             val latestList = parseSekaiDramaList(latestRes, filterDuplicates = true)
             if (latestList.isNotEmpty()) {
                 homePages.add(HomePageList("Terbaru", latestList))
             }
 
-            // Sulih Suara Populer
+            // 4. Pencarian Populer dari SekaiDrama
+            val popSearchRes = getWithRetry("https://nax1.cc/api/dramabox/populersearch")
+            val popSearchList = parseSekaiDramaList(popSearchRes, filterDuplicates = true)
+            if (popSearchList.isNotEmpty()) {
+                homePages.add(HomePageList("Pencarian Populer", popSearchList))
+            }
+
+            // 5. Sulih Suara Populer dari SekaiDrama
             val voicePopRes = getWithRetry("https://nax1.cc/api/dramabox/dubindo", mapOf("classify" to "terpopuler"))
             val voicePopList = parseSekaiDramaList(voicePopRes, filterDuplicates = true)
             if (voicePopList.isNotEmpty()) {
                 homePages.add(HomePageList("Sulih Suara Populer", voicePopList))
             }
 
-            // Sulih Suara Terbaru
+            // 6. Sulih Suara Terbaru dari SekaiDrama
             val voiceNewRes = getWithRetry("https://nax1.cc/api/dramabox/dubindo", mapOf("classify" to "terbaru"))
             val voiceNewList = parseSekaiDramaList(voiceNewRes, filterDuplicates = true)
             if (voiceNewList.isNotEmpty()) {
                 homePages.add(HomePageList("Sulih Suara Terbaru", voiceNewList))
             }
 
-            // Lainnya (Halaman 1)
+            // 7. Lainnya (Halaman 1) dari SekaiDrama
             val forYouRes = getWithRetry("https://nax1.cc/api/dramabox/foryou", mapOf("page" to "1"))
             val forYouList = parseSekaiDramaList(forYouRes, filterDuplicates = true)
             if (forYouList.isNotEmpty()) {
@@ -335,6 +349,47 @@ class DramaBoxProvider : MainAPI() {
                         this.posterUrl = cover
                     }
                 )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return results.distinctBy { it.url }
+    }
+
+    private fun parseVipDramaList(jsonStr: String, filterDuplicates: Boolean = false): List<SearchResponse> {
+        val results = ArrayList<SearchResponse>()
+        try {
+            val json = JSONObject(jsonStr)
+            val columnVoList = json.optJSONArray("columnVoList")
+            if (columnVoList != null) {
+                for (i in 0 until columnVoList.length()) {
+                    val col = columnVoList.optJSONObject(i) ?: continue
+                    val bookList = col.optJSONArray("bookList") ?: continue
+                    for (j in 0 until bookList.length()) {
+                        val book = bookList.optJSONObject(j) ?: continue
+                        val bookId = book.optString("bookId")
+                        val bookName = book.optString("bookName")
+                        val cover = book.optString("coverWap").ifEmpty { book.optString("cover") }
+                        val url = "$mainUrl/play/$bookId"
+                        
+                        if (filterDuplicates) {
+                            if (seenHomepageUrls.contains(url)) {
+                                continue
+                            }
+                            seenHomepageUrls.add(url)
+                        }
+
+                        results.add(
+                            newTvSeriesSearchResponse(
+                                name = bookName,
+                                url = url,
+                                type = TvType.TvSeries
+                            ) {
+                                this.posterUrl = cover
+                            }
+                        )
+                    }
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
