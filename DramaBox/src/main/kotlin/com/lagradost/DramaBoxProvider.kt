@@ -228,7 +228,9 @@ class DramaBoxProvider : MainAPI() {
                 "index" to 0,
                 "channelId" to 175
             ))
+            println("DramaBoxTrendingRaw: $trendingRes")
             val trendingList = parseDramaList(trendingRes)
+            println("DramaBoxTrendingParsed: ${trendingList.size} items")
             if (trendingList.isNotEmpty()) {
                 homePages.add(HomePageList("Trending", trendingList))
             }
@@ -241,7 +243,9 @@ class DramaBoxProvider : MainAPI() {
                 "index" to 1,
                 "channelId" to 48
             ))
+            println("DramaBoxLatestRaw: $latestRes")
             val latestList = parseDramaList(latestRes)
+            println("DramaBoxLatestParsed: ${latestList.size} items")
             if (latestList.isNotEmpty()) {
                 homePages.add(HomePageList("Terbaru", latestList))
             }
@@ -254,11 +258,14 @@ class DramaBoxProvider : MainAPI() {
                 "pageNo" to 1,
                 "channelId" to 43
             ))
+            println("DramaBoxRecRaw: $recRes")
             val recList = parseDramaList(recRes)
+            println("DramaBoxRecParsed: ${recList.size} items")
             if (recList.isNotEmpty()) {
                 homePages.add(HomePageList("Rekomendasi", recList))
             }
         } catch (e: Exception) {
+            println("DramaBoxGetMainPageError: ${e.message}")
             e.printStackTrace()
         }
 
@@ -338,9 +345,12 @@ class DramaBoxProvider : MainAPI() {
         }
         return results
     }
-
     override suspend fun load(url: String): LoadResponse? {
-        val bookId = url.substringAfter("/play/").substringBefore("?").substringBefore("/")
+        val bookId = when {
+            url.contains("/play/") -> url.substringAfter("/play/").substringBefore("?").substringBefore("/")
+            url.contains("/detail/") -> url.substringAfter("/detail/").substringBefore("?").substringBefore("/")
+            else -> url.substringAfterLast("/").substringBefore("?")
+        }
         if (bookId.isEmpty()) return null
 
         try {
