@@ -20,6 +20,7 @@ class DramaBoxProvider : MainAPI() {
     companion object {
         private val detailCache = java.util.concurrent.ConcurrentHashMap<String, LoadResponse>()
         private val searchCache = java.util.concurrent.ConcurrentHashMap<String, List<SearchResponse>>()
+        private val seenHomepageUrls = java.util.concurrent.ConcurrentSkipListSet<String>()
     }
 
     override var mainUrl = "https://www.dramabox.com"
@@ -242,11 +243,15 @@ class DramaBoxProvider : MainAPI() {
     ): HomePageResponse? {
         val homePages = ArrayList<HomePageList>()
 
+        if (page == 1) {
+            seenHomepageUrls.clear()
+        }
+
         try {
             if (page > 1) {
-                // Hanya muat Kategori Lainnya saat scroll halaman berikutnya
+                // Hanya muat Kategori Lainnya saat scroll halaman berikutnya (dengan filter duplikat)
                 val forYouRes = getWithRetry("https://nax1.cc/api/dramabox/foryou", mapOf("page" to page.toString()))
-                val forYouList = parseSekaiDramaList(forYouRes)
+                val forYouList = parseSekaiDramaList(forYouRes, filterDuplicates = true)
                 if (forYouList.isNotEmpty()) {
                     homePages.add(HomePageList("Lainnya", forYouList))
                 }
@@ -260,35 +265,35 @@ class DramaBoxProvider : MainAPI() {
             // Halaman Pertama (page == 1): Muat semua kategori
             // Trending
             val trendingRes = getWithRetry("https://nax1.cc/api/dramabox/trending")
-            val trendingList = parseSekaiDramaList(trendingRes)
+            val trendingList = parseSekaiDramaList(trendingRes, filterDuplicates = true)
             if (trendingList.isNotEmpty()) {
                 homePages.add(HomePageList("Trending", trendingList))
             }
 
             // Terbaru
             val latestRes = getWithRetry("https://nax1.cc/api/dramabox/latest")
-            val latestList = parseSekaiDramaList(latestRes)
+            val latestList = parseSekaiDramaList(latestRes, filterDuplicates = true)
             if (latestList.isNotEmpty()) {
                 homePages.add(HomePageList("Terbaru", latestList))
             }
 
             // Sulih Suara Populer
             val voicePopRes = getWithRetry("https://nax1.cc/api/dramabox/dubindo", mapOf("classify" to "terpopuler"))
-            val voicePopList = parseSekaiDramaList(voicePopRes)
+            val voicePopList = parseSekaiDramaList(voicePopRes, filterDuplicates = true)
             if (voicePopList.isNotEmpty()) {
                 homePages.add(HomePageList("Sulih Suara Populer", voicePopList))
             }
 
             // Sulih Suara Terbaru
             val voiceNewRes = getWithRetry("https://nax1.cc/api/dramabox/dubindo", mapOf("classify" to "terbaru"))
-            val voiceNewList = parseSekaiDramaList(voiceNewRes)
+            val voiceNewList = parseSekaiDramaList(voiceNewRes, filterDuplicates = true)
             if (voiceNewList.isNotEmpty()) {
                 homePages.add(HomePageList("Sulih Suara Terbaru", voiceNewList))
             }
 
             // Lainnya (Halaman 1)
             val forYouRes = getWithRetry("https://nax1.cc/api/dramabox/foryou", mapOf("page" to "1"))
-            val forYouList = parseSekaiDramaList(forYouRes)
+            val forYouList = parseSekaiDramaList(forYouRes, filterDuplicates = true)
             if (forYouList.isNotEmpty()) {
                 homePages.add(HomePageList("Lainnya", forYouList))
             }
@@ -303,7 +308,7 @@ class DramaBoxProvider : MainAPI() {
         }
     }
 
-    private fun parseSekaiDramaList(jsonStr: String): List<SearchResponse> {
+    private fun parseSekaiDramaList(jsonStr: String, filterDuplicates: Boolean = false): List<SearchResponse> {
         val results = ArrayList<SearchResponse>()
         try {
             val jsonArray = JSONArray(jsonStr)
@@ -312,11 +317,19 @@ class DramaBoxProvider : MainAPI() {
                 val bookId = book.optString("bookId")
                 val bookName = book.optString("bookName")
                 val cover = book.optString("coverWap").ifEmpty { book.optString("cover") }
+                val url = "$mainUrl/play/$bookId"
                 
+                if (filterDuplicates) {
+                    if (seenHomepageUrls.contains(url)) {
+                        continue
+                    }
+                    seenHomepageUrls.add(url)
+                }
+
                 results.add(
                     newTvSeriesSearchResponse(
                         name = bookName,
-                        url = "$mainUrl/play/$bookId",
+                        url = url,
                         type = TvType.TvSeries
                     ) {
                         this.posterUrl = cover
