@@ -50,7 +50,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -62,10 +62,73 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484564\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849344\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "1M",
     "bookShelfTime": 1782360000000,
     "shelfTime": "2026-06-25 12:00:00",
+    "inLibrary": false
+  },
+  {
+    "bookId": "42000017520",
+    "bookName": "Diantar oleh Takdir (Sulih Suara)",
+    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000017520/42000017520.jpg?t=1781754973740",
+    "chapterCount": 66,
+    "introduction": "Yun-joo, yang dikhianati teman masa kecilnya Jun-ho, impulsif melamar Do-yoon, pria asing berseragam kurir. Tak disangka, Do-yoon adalah CEO Hawon Holdings. Saat bekerja di perusahaan yang sama, Yun-joo menghadapi hinaan, penculikan, dan tekanan dari Ye-na. Dengan dukungan Do-yoon dan keberaniannya, ia bangkit. Ye-na dihukum, Jun-ho hancur, dan Yun-joo kembali lebih percaya diri untuk membangun masa depan penuh cinta.",
+    "tags": [
+      "Balas Dendam",
+      "Pembalikan Identitas",
+      "Ilmuwan",
+      "Modern",
+      "Wanita Kuat"
+    ],
+    "tagV3s": [
+      {
+        "tagId": 1394,
+        "tagName": "Balas Dendam",
+        "tagEnName": "Revenge"
+      },
+      {
+        "tagId": 1395,
+        "tagName": "Pembalikan Identitas",
+        "tagEnName": "Hidden Identity"
+      },
+      {
+        "tagId": 10033,
+        "tagName": "Ilmuwan",
+        "tagEnName": "Researcher"
+      },
+      {
+        "tagId": 1352,
+        "tagName": "Modern",
+        "tagEnName": "Modern"
+      },
+      {
+        "tagId": 1361,
+        "tagName": "Wanita Kuat",
+        "tagEnName": "Strong Heroine"
+      }
+    ],
+    "bookSource": {
+      "sceneId": "ovs_vd_cat_video_rec",
+      "expId": "bigdata_rec",
+      "strategyId": "ghygip88",
+      "strategyName": "EXP_3",
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
+    },
+    "isEntry": 0,
+    "index": 0,
+    "corner": {
+      "cornerType": 6,
+      "name": "Terpopuler",
+      "color": "#F54E96"
+    },
+    "dataFrom": "算法_分类筛选",
+    "cardType": 1,
+    "markNamesConnectKey": ", ",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849345\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "3.4M",
+    "bookShelfTime": 1781798400000,
+    "shelfTime": "2026-06-19 00:00:00",
     "inLibrary": false
   },
   {
@@ -119,7 +182,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -131,73 +194,10 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484565\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849345\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "145M",
     "bookShelfTime": 1764052944000,
     "shelfTime": "2025-11-25 14:42:24",
-    "inLibrary": false
-  },
-  {
-    "bookId": "42000017520",
-    "bookName": "Diantar oleh Takdir (Sulih Suara)",
-    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000017520/42000017520.jpg?t=1781754973740",
-    "chapterCount": 66,
-    "introduction": "Yun-joo, yang dikhianati teman masa kecilnya Jun-ho, impulsif melamar Do-yoon, pria asing berseragam kurir. Tak disangka, Do-yoon adalah CEO Hawon Holdings. Saat bekerja di perusahaan yang sama, Yun-joo menghadapi hinaan, penculikan, dan tekanan dari Ye-na. Dengan dukungan Do-yoon dan keberaniannya, ia bangkit. Ye-na dihukum, Jun-ho hancur, dan Yun-joo kembali lebih percaya diri untuk membangun masa depan penuh cinta.",
-    "tags": [
-      "Balas Dendam",
-      "Pembalikan Identitas",
-      "Ilmuwan",
-      "Modern",
-      "Wanita Kuat"
-    ],
-    "tagV3s": [
-      {
-        "tagId": 1394,
-        "tagName": "Balas Dendam",
-        "tagEnName": "Revenge"
-      },
-      {
-        "tagId": 1395,
-        "tagName": "Pembalikan Identitas",
-        "tagEnName": "Hidden Identity"
-      },
-      {
-        "tagId": 10033,
-        "tagName": "Ilmuwan",
-        "tagEnName": "Researcher"
-      },
-      {
-        "tagId": 1352,
-        "tagName": "Modern",
-        "tagEnName": "Modern"
-      },
-      {
-        "tagId": 1361,
-        "tagName": "Wanita Kuat",
-        "tagEnName": "Strong Heroine"
-      }
-    ],
-    "bookSource": {
-      "sceneId": "ovs_vd_cat_video_rec",
-      "expId": "bigdata_rec",
-      "strategyId": "ghygip88",
-      "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
-    },
-    "isEntry": 0,
-    "index": 0,
-    "corner": {
-      "cornerType": 6,
-      "name": "Terpopuler",
-      "color": "#F54E96"
-    },
-    "dataFrom": "算法_分类筛选",
-    "cardType": 1,
-    "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484565\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "3.4M",
-    "bookShelfTime": 1781798400000,
-    "shelfTime": "2026-06-19 00:00:00",
     "inLibrary": false
   },
   {
@@ -251,7 +251,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -263,79 +263,10 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484565\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849345\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "10.7M",
     "bookShelfTime": 1778750374000,
     "shelfTime": "2026-05-14 17:19:34",
-    "inLibrary": false
-  },
-  {
-    "bookId": "42000016017",
-    "bookName": "Ibuku Triliuner Rahasia (Sulih Suara)",
-    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000016017/42000016017.jpg?t=1781071314892",
-    "chapterCount": 52,
-    "introduction": "Setelah para ibu komite sekolah menjebak putranya, seorang ibu sederhana dipermalukan dan disingkirkan. Namun, mereka tak tahu wanita yang dianggap bukan siapa-siapa itu sebenarnya triliuner rahasia di balik sekolah tersebut. Kini, nasib mereka ada di tangannya.",
-    "tags": [
-      "Balas Dendam",
-      "Pembalikan Identitas",
-      "Wanita Kuat",
-      "Modern",
-      "Serangan Balik",
-      "CEO"
-    ],
-    "tagV3s": [
-      {
-        "tagId": 1394,
-        "tagName": "Balas Dendam",
-        "tagEnName": "Revenge"
-      },
-      {
-        "tagId": 1395,
-        "tagName": "Pembalikan Identitas",
-        "tagEnName": "Hidden Identity"
-      },
-      {
-        "tagId": 1361,
-        "tagName": "Wanita Kuat",
-        "tagEnName": "Strong Heroine"
-      },
-      {
-        "tagId": 1352,
-        "tagName": "Modern",
-        "tagEnName": "Modern"
-      },
-      {
-        "tagId": 1399,
-        "tagName": "Serangan Balik",
-        "tagEnName": "Counterattack"
-      },
-      {
-        "tagId": 1362,
-        "tagName": "CEO",
-        "tagEnName": "Billionaire"
-      }
-    ],
-    "bookSource": {
-      "sceneId": "ovs_vd_cat_video_rec",
-      "expId": "bigdata_rec",
-      "strategyId": "ghygip88",
-      "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
-    },
-    "isEntry": 0,
-    "index": 0,
-    "corner": {
-      "cornerType": 6,
-      "name": "Terpopuler",
-      "color": "#F54E96"
-    },
-    "dataFrom": "算法_分类筛选",
-    "cardType": 1,
-    "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484565\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "5.4M",
-    "bookShelfTime": 1781164800000,
-    "shelfTime": "2026-06-11 16:00:00",
     "inLibrary": false
   },
   {
@@ -389,7 +320,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -401,10 +332,79 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484565\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849345\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "171M",
     "bookShelfTime": 1761537600000,
     "shelfTime": "2025-10-27 12:00:00",
+    "inLibrary": false
+  },
+  {
+    "bookId": "42000016017",
+    "bookName": "Ibuku Triliuner Rahasia (Sulih Suara)",
+    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000016017/42000016017.jpg?t=1781071314892",
+    "chapterCount": 52,
+    "introduction": "Setelah para ibu komite sekolah menjebak putranya, seorang ibu sederhana dipermalukan dan disingkirkan. Namun, mereka tak tahu wanita yang dianggap bukan siapa-siapa itu sebenarnya triliuner rahasia di balik sekolah tersebut. Kini, nasib mereka ada di tangannya.",
+    "tags": [
+      "Balas Dendam",
+      "Pembalikan Identitas",
+      "Wanita Kuat",
+      "Modern",
+      "Serangan Balik",
+      "CEO"
+    ],
+    "tagV3s": [
+      {
+        "tagId": 1394,
+        "tagName": "Balas Dendam",
+        "tagEnName": "Revenge"
+      },
+      {
+        "tagId": 1395,
+        "tagName": "Pembalikan Identitas",
+        "tagEnName": "Hidden Identity"
+      },
+      {
+        "tagId": 1361,
+        "tagName": "Wanita Kuat",
+        "tagEnName": "Strong Heroine"
+      },
+      {
+        "tagId": 1352,
+        "tagName": "Modern",
+        "tagEnName": "Modern"
+      },
+      {
+        "tagId": 1399,
+        "tagName": "Serangan Balik",
+        "tagEnName": "Counterattack"
+      },
+      {
+        "tagId": 1362,
+        "tagName": "CEO",
+        "tagEnName": "Billionaire"
+      }
+    ],
+    "bookSource": {
+      "sceneId": "ovs_vd_cat_video_rec",
+      "expId": "bigdata_rec",
+      "strategyId": "ghygip88",
+      "strategyName": "EXP_3",
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
+    },
+    "isEntry": 0,
+    "index": 0,
+    "corner": {
+      "cornerType": 6,
+      "name": "Terpopuler",
+      "color": "#F54E96"
+    },
+    "dataFrom": "算法_分类筛选",
+    "cardType": 1,
+    "markNamesConnectKey": ", ",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849345\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "5.4M",
+    "bookShelfTime": 1781164800000,
+    "shelfTime": "2026-06-11 16:00:00",
     "inLibrary": false
   },
   {
@@ -458,7 +458,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -470,7 +470,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484565\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849345\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "10.2M",
     "bookShelfTime": 1776225600000,
     "shelfTime": "2026-04-15 12:00:00",
@@ -527,7 +527,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -539,7 +539,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484565\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849345\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "9.9M",
     "bookShelfTime": 1778231184000,
     "shelfTime": "2026-05-08 17:06:24",
@@ -596,7 +596,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -608,7 +608,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484565\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849345\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "1.5M",
     "bookShelfTime": 1778637600000,
     "shelfTime": "2026-05-13 10:00:00",
@@ -665,7 +665,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -677,7 +677,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484565\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849346\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "16.2M",
     "bookShelfTime": 1775023200000,
     "shelfTime": "2026-04-01 14:00:00",
@@ -734,7 +734,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -746,7 +746,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484565\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849346\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "8.6M",
     "bookShelfTime": 1774504800000,
     "shelfTime": "2026-03-26 14:00:00",
@@ -803,7 +803,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -815,7 +815,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484566\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849346\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "5.6M",
     "bookShelfTime": 1765520368000,
     "shelfTime": "2025-12-12 14:19:28",
@@ -872,7 +872,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -884,7 +884,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484566\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849346\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "1.8M",
     "bookShelfTime": 1777544832000,
     "shelfTime": "2026-04-30 18:27:12",
@@ -941,7 +941,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -953,56 +953,56 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484566\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849346\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "48M",
     "bookShelfTime": 1765528013000,
     "shelfTime": "2025-12-12 16:26:53",
     "inLibrary": false
   },
   {
-    "bookId": "42000002888",
-    "bookName": "Dewa Judi (Sulih Suara)",
-    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000002888/42000002888.jpg?t=1766975617476",
-    "chapterCount": 74,
-    "introduction": "Selama liburan Tahun Baru Imlek, Yena dijebak oleh sahabatnya, Ceni, dan kalah judi 400 juta. Uang itu adalah biaya sekolah putrinya, biaya pengobatan ayahnya, dan biaya hidup keluarga mereka bertiga. Demi mendapatkan kembali uang tersebut, Sandi nekat masuk ke dalam lingkaran judi itu untuk melawan mereka dengan menggunakan teknik judi tingkat tinggi...",
+    "bookId": "42000008375",
+    "bookName": "Saat Bertemu Lagi (Sulih Suara)",
+    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000008375/42000008375.jpg?t=1774337175134",
+    "chapterCount": 72,
+    "introduction": "Luna Yarvi, agen internasional yang menyamar sebagai guru privat, mendidik Leo Tyaga, pewaris muda keras kepala. Ketegasannya menembus sikap liar Leo dan membuka luka lama. Mengetahui Leo putra penolongnya, Luna menjadi pelindung. Konflik menumbuhkan cinta hingga takdir memisahkan. Tiga tahun berlalu, Leo sukses, Luna hidup sederhana; reuni menyalakan cinta penyelamat jiwa.",
     "tags": [
-      "Balas Dendam",
-      "Judi",
+      "Pembalikan Identitas",
       "Serangan Balik",
-      "Kekuatan Khusus",
-      "Modern",
-      "Pria Dominan"
+      "Perbedaan Usia",
+      "Pemberontak",
+      "Wanita Mandiri",
+      "Takdir Cinta"
     ],
     "tagV3s": [
       {
-        "tagId": 1337,
-        "tagName": "Balas Dendam",
-        "tagEnName": "Revenge"
+        "tagId": 1395,
+        "tagName": "Pembalikan Identitas",
+        "tagEnName": "Hidden Identity"
       },
       {
-        "tagId": 1688,
-        "tagName": "Judi",
-        "tagEnName": "Gambling"
-      },
-      {
-        "tagId": 1340,
+        "tagId": 1399,
         "tagName": "Serangan Balik",
         "tagEnName": "Counterattack"
       },
       {
-        "tagId": 1334,
-        "tagName": "Kekuatan Khusus",
-        "tagEnName": "The Chosen One"
+        "tagId": 1383,
+        "tagName": "Perbedaan Usia",
+        "tagEnName": "Age-Gap Love"
       },
       {
-        "tagId": 1318,
-        "tagName": "Modern",
-        "tagEnName": "Modern"
+        "tagId": 1372,
+        "tagName": "Pemberontak",
+        "tagEnName": "Rebellious"
       },
       {
-        "tagId": 1323,
-        "tagName": "Pria Dominan",
-        "tagEnName": "Powerful Male Lead"
+        "tagId": 1452,
+        "tagName": "Wanita Mandiri",
+        "tagEnName": "Independent Woman"
+      },
+      {
+        "tagId": 1382,
+        "tagName": "Takdir Cinta",
+        "tagEnName": "Destined Love"
       }
     ],
     "bookSource": {
@@ -1010,7 +1010,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "b90c86d2cfbc43d306032ed90e74fae6"
+      "log_id": "589f599ba0247ab4e6e2c21ef82f4dc8"
     },
     "isEntry": 0,
     "index": 0,
@@ -1022,10 +1022,10 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"b90c86d2cfbc43d306032ed90e74fae6\",\"ret_time\":\"1783431484566\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "27.3M",
-    "bookShelfTime": 1766987470000,
-    "shelfTime": "2025-12-29 13:51:10",
+    "algorithmRecomDot": "{\"log_id\":\"589f599ba0247ab4e6e2c21ef82f4dc8\",\"ret_time\":\"1783431849346\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "13.2M",
+    "bookShelfTime": 1774584000000,
+    "shelfTime": "2026-03-27 12:00:00",
     "inLibrary": false
   }
 ]
