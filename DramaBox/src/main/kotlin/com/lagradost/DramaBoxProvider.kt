@@ -17,6 +17,11 @@ import org.json.JSONObject
 import org.json.JSONArray
 
 class DramaBoxProvider : MainAPI() {
+    companion object {
+        private val detailCache = java.util.concurrent.ConcurrentHashMap<String, LoadResponse>()
+        private val searchCache = java.util.concurrent.ConcurrentHashMap<String, List<SearchResponse>>()
+    }
+
     override var mainUrl = "https://www.dramabox.com"
     override var name = "DramaBox"
     override val supportedTypes = setOf(TvType.TvSeries)
@@ -325,9 +330,16 @@ class DramaBoxProvider : MainAPI() {
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
+        val cached = searchCache[query]
+        if (cached != null) return cached
+
         try {
             val resStr = getWithRetry("https://nax1.cc/api/dramabox/search", mapOf("query" to query))
-            return parseSekaiDramaList(resStr)
+            val results = parseSekaiDramaList(resStr)
+            if (results.isNotEmpty()) {
+                searchCache[query] = results
+            }
+            return results
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -340,6 +352,9 @@ class DramaBoxProvider : MainAPI() {
             else -> url.substringAfterLast("/").substringBefore("?")
         }
         if (bookId.isEmpty()) return null
+
+        val cached = detailCache[bookId]
+        if (cached != null) return cached
 
         try {
             // 1. Fetch metadata dari SekaiDrama API dengan retry
@@ -399,7 +414,7 @@ class DramaBoxProvider : MainAPI() {
                 )
             }
 
-            return newTvSeriesLoadResponse(
+            val response = newTvSeriesLoadResponse(
                 name = bookName,
                 url = url,
                 type = TvType.TvSeries,
@@ -408,6 +423,8 @@ class DramaBoxProvider : MainAPI() {
                 this.posterUrl = cover
                 this.plot = introduction
             }
+            detailCache[bookId] = response
+            return response
         } catch (e: Exception) {
             e.printStackTrace()
         }
