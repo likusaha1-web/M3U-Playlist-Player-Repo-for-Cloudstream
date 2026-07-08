@@ -58,10 +58,10 @@
     "name": "RBTVPlus"
   },
   {
-    "fileHash": "sha256-666fd14758bedeee81f7d0138e78a97c499738b80efa6977eb7b06034c66672d",
+    "fileHash": "sha256-eef7ec78cb936e0307adcce35d96fbc662fa031f400eda8a66e377af867a59c0",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 47240,
+    "fileSize": 47603,
     "status": 1,
     "language": "id",
     "authors": [
