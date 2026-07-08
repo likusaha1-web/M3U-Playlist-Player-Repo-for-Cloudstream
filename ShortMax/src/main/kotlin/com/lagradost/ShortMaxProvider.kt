@@ -146,6 +146,7 @@ class ShortMaxProvider : MainAPI() {
         val ctx = CommonActivity.activity
         val currentCookies = getCfCookies(ctx)
         val currentUA = getCfUserAgent(ctx)
+        System.out.println("ShortMax request: $url | cfCookies: $currentCookies | cfUA: $currentUA")
         val headersMap = mutableMapOf(
             "Referer" to "$mainUrl/",
             "User-Agent" to (currentUA ?: USER_AGENT)
@@ -157,6 +158,7 @@ class ShortMaxProvider : MainAPI() {
         } else {
             app.get(url, headers = headersMap).text
         }
+        System.out.println("ShortMax response: ${response.take(300)}")
 
         try {
             checkResponse(response)

@@ -89,7 +89,7 @@ class DramaBoxProvider : MainAPI() {
         }
     }
 
-    override var mainUrl = com.lagradost.DramaBox.BuildConfig.SHORTMAX_URL
+    override var mainUrl = "https://nax1.cc"
 
     private fun showToast(msg: String) {
         val act = CommonActivity.activity
@@ -147,6 +147,13 @@ class DramaBoxProvider : MainAPI() {
     }
 
     private suspend fun requestWithCf(url: String, params: Map<String, String>? = null): String {
+        if (mainUrl.contains("nax1.cc")) {
+            return if (params != null) {
+                app.get(url, params = params).text
+            } else {
+                app.get(url).text
+            }
+        }
         val ctx = CommonActivity.activity
         val currentCookies = getCfCookies(ctx)
         val currentUA = getCfUserAgent(ctx)
@@ -162,6 +169,7 @@ class DramaBoxProvider : MainAPI() {
         } else {
             app.get(url, headers = headersMap).text
         }
+        System.out.println("DramaBox response: ${response.take(300)}")
 
         try {
             checkResponse(response)
