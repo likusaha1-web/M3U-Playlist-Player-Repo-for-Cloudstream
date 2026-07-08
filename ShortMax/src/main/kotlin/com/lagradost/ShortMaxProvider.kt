@@ -21,10 +21,16 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.CookieManager
 import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.view.ViewGroup
 import android.view.Window
+import android.view.Gravity
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.TypedValue
+import java.util.Timer
+import java.util.TimerTask
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
@@ -91,6 +97,11 @@ class ShortMaxProvider : MainAPI() {
         }
     }
 
+    private fun dp(context: Context, dpVal: Int): Int {
+        val density = context.resources.displayMetrics.density
+        return (dpVal * density).toInt()
+    }
+
     private fun getResumedActivity(): Activity? {
         try {
             val activityThreadClass = Class.forName("android.app.ActivityThread")
@@ -124,7 +135,7 @@ class ShortMaxProvider : MainAPI() {
             val dialog = Dialog(activity)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.window?.let { window ->
-                window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                window.setBackgroundDrawable(ColorDrawable(Color.parseColor("#121216")))
                 window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             }
             dialog.setCancelable(true)
@@ -132,17 +143,79 @@ class ShortMaxProvider : MainAPI() {
                 if (continuation.isActive) continuation.resume(false)
             }
 
-            val container = LinearLayout(activity).apply {
+            val rootLayout = LinearLayout(activity).apply {
                 orientation = LinearLayout.VERTICAL
-                setBackgroundColor(Color.WHITE)
+                setBackgroundColor(Color.parseColor("#121216"))
                 layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                val pad = dp(activity, 16)
+                setPadding(pad, pad, pad, pad)
             }
 
+            // Title layout
+            val titleLayout = LinearLayout(activity).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = Gravity.CENTER_VERTICAL
+                layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+                    bottomMargin = dp(activity, 4)
+                }
+            }
+
+            val shieldEmoji = TextView(activity).apply {
+                text = "🛡️ "
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+            }
+            val titleTv = TextView(activity).apply {
+                text = "Cloudflare Bypass"
+                setTextColor(Color.WHITE)
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+                typeface = android.graphics.Typeface.DEFAULT_BOLD
+            }
+            titleLayout.addView(shieldEmoji)
+            titleLayout.addView(titleTv)
+            rootLayout.addView(titleLayout)
+
+            // Status Layout
+            val statusTv = TextView(activity).apply {
+                text = "⏳ Waiting for cookies... (0s)"
+                setTextColor(Color.parseColor("#DFE6E9"))
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
+                layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+                    bottomMargin = dp(activity, 4)
+                }
+            }
+            rootLayout.addView(statusTv)
+
+            // Subtitle
+            val subtitleTv = TextView(activity).apply {
+                text = "Solve any CAPTCHA shown below. The dialog will close automatically once done."
+                setTextColor(Color.parseColor("#B2BEC3"))
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 11f)
+                layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+                    bottomMargin = dp(activity, 12)
+                }
+            }
+            rootLayout.addView(subtitleTv)
+
+            // Progress Bar
+            val progressBar = ProgressBar(activity, null, android.R.attr.progressBarStyleHorizontal).apply {
+                isIndeterminate = true
+                layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(activity, 3)).apply {
+                    bottomMargin = dp(activity, 12)
+                }
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    progressTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#0984E3"))
+                    indeterminateTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#0984E3"))
+                }
+            }
+            rootLayout.addView(progressBar)
+
+            // WebView
             val webView = WebView(activity).apply {
                 layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
                 settings.javaScriptEnabled = true
                 settings.domStorageEnabled = true
                 settings.userAgentString = USER_AGENT
+                setBackgroundColor(Color.parseColor("#121216"))
                 
                 webViewClient = object : WebViewClient() {
                     override fun onPageFinished(view: WebView?, urlStr: String?) {
@@ -163,10 +236,27 @@ class ShortMaxProvider : MainAPI() {
                     }
                 }
             }
+            rootLayout.addView(webView)
 
-            container.addView(webView)
-            dialog.setContentView(container)
+            dialog.setContentView(rootLayout)
             dialog.show()
+
+            // Timer update
+            var elapsedSeconds = 0
+            val timer = Timer()
+            timer.scheduleAtFixedRate(object : TimerTask() {
+                override fun run() {
+                    activity.runOnUiThread {
+                        if (dialog.isShowing) {
+                            elapsedSeconds++
+                            statusTv.text = "⏳ Waiting for cookies... (${elapsedSeconds}s)"
+                        } else {
+                            timer.cancel()
+                        }
+                    }
+                }
+            }, 1000, 1000)
+
             webView.loadUrl(url)
         }
     }
