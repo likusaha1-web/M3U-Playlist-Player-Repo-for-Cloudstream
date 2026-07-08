@@ -58,10 +58,10 @@
     "name": "RBTVPlus"
   },
   {
-    "fileHash": "sha256-867065c078174dcb9dcd2c4dc65ea5e5831f11f981775e7273ae33a5d61974bb",
+    "fileHash": "sha256-666fd14758bedeee81f7d0138e78a97c499738b80efa6977eb7b06034c66672d",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 42269,
+    "fileSize": 47240,
     "status": 1,
     "language": "id",
     "authors": [
@@ -70,7 +70,7 @@
     "tvTypes": [
       "TvSeries"
     ],
-    "version": 1,
+    "version": 2,
     "internalName": "ShortMax",
     "description": "Ekstensi Cloudstream untuk menonton drama pendek ShortMax",
     "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/ShortMax.cs3",
