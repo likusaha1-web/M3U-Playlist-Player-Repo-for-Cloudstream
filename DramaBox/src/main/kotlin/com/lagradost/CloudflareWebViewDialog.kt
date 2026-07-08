@@ -79,6 +79,9 @@ class CloudflareWebViewDialog(
                             width: 100% !important; \
                             margin: 0 auto !important; \
                         } \
+                        #logo, .logo, #zone-name, .zone-name, img { \
+                            display: none !important; \
+                        } \
                     ';
                     document.head.appendChild(style);
                 }
@@ -188,6 +191,11 @@ class CloudflareWebViewDialog(
         handler.postDelayed(cookiePollRunnable, POLL_INTERVAL_MS)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NO_FRAME, android.R.style.Theme_DeviceDefault_Light_NoActionBar)
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -197,17 +205,8 @@ class CloudflareWebViewDialog(
     override fun onStart() {
         super.onStart()
         dialog?.window?.let { window ->
-            val displayMetrics = requireContext().resources.displayMetrics
-            val width = min(displayMetrics.widthPixels - dp(32), dp(360))
-            window.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
-            window.setGravity(Gravity.CENTER)
-            
-            val roundedBg = GradientDrawable().apply {
-                shape = GradientDrawable.RECTANGLE
-                cornerRadius = dp(28).toFloat()
-                setColor(Color.WHITE)
-            }
-            window.setBackgroundDrawable(roundedBg)
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            window.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(Color.WHITE))
         }
     }
 
@@ -218,11 +217,11 @@ class CloudflareWebViewDialog(
     ): View {
         val root = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(dp(12), dp(24), dp(12), dp(24))
-            setBackgroundColor(Color.TRANSPARENT)
+            setPadding(dp(16), dp(24), dp(16), dp(24))
+            setBackgroundColor(Color.WHITE)
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.MATCH_PARENT
             )
         }
 
@@ -263,7 +262,8 @@ class CloudflareWebViewDialog(
             
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                dp(200)
+                0,
+                1f
             ).also {
                 it.bottomMargin = dp(16)
                 it.leftMargin = dp(4)
