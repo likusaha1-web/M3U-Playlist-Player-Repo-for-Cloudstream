@@ -89,7 +89,24 @@ class DramaBoxProvider : MainAPI() {
         }
     }
 
-    override var mainUrl = "https://nax1.cc"
+    override var mainUrl = com.lagradost.DramaBox.BuildConfig.SHORTMAX_URL
+
+    private fun decryptIfEncrypted(response: String): String {
+        val trimmed = response.trim()
+        if (trimmed.startsWith("{") && trimmed.contains("\"data\"")) {
+            try {
+                val json = JSONObject(trimmed)
+                if (json.has("data")) {
+                    val dataStr = json.getString("data")
+                    if (dataStr == "{}" || dataStr.isEmpty()) return trimmed
+                    return decryptCryptoJS(dataStr)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        return trimmed
+    }
 
     private fun showToast(msg: String) {
         val act = CommonActivity.activity
@@ -172,7 +189,7 @@ class DramaBoxProvider : MainAPI() {
             return getWithRetry(jsdelivrUrl)
         } catch (e: Exception) {
             println("DramaBox: jsDelivr failed, fallback to direct API -> $fallbackUrl")
-            return getWithRetry(fallbackUrl, fallbackParams)
+            return requestWithCf(fallbackUrl, if (fallbackParams.isEmpty()) null else fallbackParams)
         }
     }
 
@@ -730,15 +747,13 @@ class DramaBoxProvider : MainAPI() {
                     val detailDeferred = async {
                         fetchWithFallback(
                             "detail/$bookId.json",
-                            "$mainUrl/api/dramabox/detail",
-                            mapOf("bookId" to bookId)
+                            "$mainUrl/api/dramabox/detail/$bookId"
                         )
                     }
                     val episodesDeferred = async {
                         fetchWithFallback(
                             "allepisode/$bookId.json",
-                            "$mainUrl/api/dramabox/allepisode",
-                            mapOf("bookId" to bookId)
+                            "$mainUrl/api/dramabox/allepisode/$bookId"
                         )
                     }
                     detailDeferred.await() to episodesDeferred.await()
@@ -751,11 +766,11 @@ class DramaBoxProvider : MainAPI() {
                 }
             }
 
-            val detailJson = JSONObject(detailRes)
+            val detailJson = JSONObject(decryptIfEncrypted(detailRes))
             val bookName = detailJson.optString("bookName").ifEmpty { "DramaBox" }
             val cover = detailJson.optString("coverWap").ifEmpty { detailJson.optString("cover") }
             val introduction = detailJson.optString("introduction").ifEmpty { "Saksikan drama pendek menarik di DramaBox." }
-            val chapterList = JSONArray(episodesRes)
+            val chapterList = JSONArray(decryptIfEncrypted(episodesRes))
 
             val episodes = ArrayList<Episode>()
             var firstEpisodeCover: String? = null
@@ -844,8 +859,8 @@ class DramaBoxProvider : MainAPI() {
         // 2. Ambil URL video segar dan daftar subtitle dari API
         try {
             println("DramaBox: calling mainUrl for fresh data & subtitles, bookId=$bookId, episodeIndex=$episodeIndex")
-            val episodesRes = requestWithCf("$mainUrl/api/dramabox/allepisode", mapOf("bookId" to bookId))
-            val chapterList = JSONArray(episodesRes)
+            val episodesRes = requestWithCf("$mainUrl/api/dramabox/allepisode/$bookId")
+            val chapterList = JSONArray(decryptIfEncrypted(episodesRes))
             
             // Temukan episode yang cocok berdasarkan index
             var targetCh: JSONObject? = null
@@ -900,6 +915,15 @@ class DramaBoxProvider : MainAPI() {
                     }
                 }
 
+                // Siapkan header pemutar video (Cookie + User-Agent)
+                val currentUA = getCfUserAgent(CommonActivity.activity) ?: USER_AGENT
+                val currentCookies = getCfCookies(CommonActivity.activity)
+                val headersMap = mutableMapOf(
+                    "Referer" to "$mainUrl/",
+                    "User-Agent" to currentUA
+                )
+                currentCookies?.let { headersMap["Cookie"] = it }
+
                 // Putar video
                 if (useCached && !cachedVideoPath.isNullOrEmpty()) {
                     val isM3u8 = cachedVideoPath.contains(".m3u8", ignoreCase = true)
@@ -913,10 +937,7 @@ class DramaBoxProvider : MainAPI() {
                             type = linkType
                         ) {
                             this.quality = Qualities.P720.value
-                            this.headers = mapOf(
-                                "Referer" to "$mainUrl/",
-                                "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-                            )
+                            this.headers = headersMap
                         }
                     )
                     return true
@@ -961,10 +982,7 @@ class DramaBoxProvider : MainAPI() {
                             type = linkType
                         ) {
                             this.quality = Qualities.P720.value
-                            this.headers = mapOf(
-                                "Referer" to "$mainUrl/",
-                                "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-                            )
+                            this.headers = headersMap
                         }
                     )
                     println("DramaBox: successfully extracted link")
