@@ -41,13 +41,13 @@ class DramaBoxProvider : MainAPI() {
         private var cfDeferred: CompletableDeferred<Boolean>? = null
 
         var cfCookies: String?
-            get() = context?.getKey("SHORTMAX_CF_COOKIES")
+            get() = context?.getKey<String>("SHORTMAX_CF_COOKIES")
             set(value) {
                 context?.setKey("SHORTMAX_CF_COOKIES", value)
             }
 
         var cfUserAgent: String?
-            get() = context?.getKey("SHORTMAX_CF_USER_AGENT")
+            get() = context?.getKey<String>("SHORTMAX_CF_USER_AGENT")
             set(value) {
                 context?.setKey("SHORTMAX_CF_USER_AGENT", value)
             }
@@ -147,6 +147,7 @@ class DramaBoxProvider : MainAPI() {
     }
 
     private suspend fun requestWithCf(url: String, params: Map<String, String>? = null): String {
+        System.out.println("DramaBox request: $url | cfCookies: $cfCookies | cfUA: $cfUserAgent")
         val headersMap = mutableMapOf(
             "Referer" to "$mainUrl/",
             "User-Agent" to (cfUserAgent ?: USER_AGENT)

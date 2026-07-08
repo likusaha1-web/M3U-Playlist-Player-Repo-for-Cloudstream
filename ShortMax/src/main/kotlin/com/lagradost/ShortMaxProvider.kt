@@ -31,13 +31,13 @@ class ShortMaxProvider : MainAPI() {
         private const val USER_AGENT = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
 
         var cfCookies: String?
-            get() = context?.getKey("SHORTMAX_CF_COOKIES")
+            get() = context?.getKey<String>("SHORTMAX_CF_COOKIES")
             set(value) {
                 context?.setKey("SHORTMAX_CF_COOKIES", value)
             }
 
         var cfUserAgent: String?
-            get() = context?.getKey("SHORTMAX_CF_USER_AGENT")
+            get() = context?.getKey<String>("SHORTMAX_CF_USER_AGENT")
             set(value) {
                 context?.setKey("SHORTMAX_CF_USER_AGENT", value)
             }
