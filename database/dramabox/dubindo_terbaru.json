@@ -1,5 +1,116 @@
 [
   {
+    "bookId": "42000020144",
+    "bookName": "Istri CEO Tak Bisa Disembunyikan (Sulih Suara) ",
+    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000020144/42000020144.jpg?t=1783322991127",
+    "chapterCount": 60,
+    "introduction": "Kang Ji‑won menyembunyikan identitasnya sebagai istri CEO dan desainer terkenal saat bekerja di perusahaan suaminya, Min Woo‑bin. Namun, Lee Yun‑ju mengaku sebagai istri Min Woo‑bin dan terus menindas Kang Ji‑won. Saat karya desainnya dicuri, Kang Ji‑won membongkar semua kebohongan dan mengungkap jati dirinya di depan semua orang.",
+    "tags": [
+      "Pembalikan Identitas",
+      "Serangan Balik",
+      "Wanita Mandiri",
+      "Modern",
+      "Wanita Kuat"
+    ],
+    "tagV3s": [
+      {
+        "tagId": 1395,
+        "tagName": "Pembalikan Identitas",
+        "tagEnName": "Hidden Identity"
+      },
+      {
+        "tagId": 1399,
+        "tagName": "Serangan Balik",
+        "tagEnName": "Counterattack"
+      },
+      {
+        "tagId": 1452,
+        "tagName": "Wanita Mandiri",
+        "tagEnName": "Independent Woman"
+      },
+      {
+        "tagId": 1352,
+        "tagName": "Modern",
+        "tagEnName": "Modern"
+      },
+      {
+        "tagId": 1361,
+        "tagName": "Wanita Kuat",
+        "tagEnName": "Strong Heroine"
+      }
+    ],
+    "bookSource": {
+      "sceneId": "ovs_vd_cat_video_rec",
+      "expId": "bigdata_rec",
+      "strategyId": "ghygip88",
+      "strategyName": "EXP_3",
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
+    },
+    "isEntry": 0,
+    "index": 0,
+    "corner": {
+      "cornerType": 2,
+      "name": "Terbaru",
+      "color": "#8773DF"
+    },
+    "dataFrom": "算法_分类筛选",
+    "cardType": 1,
+    "markNamesConnectKey": ", ",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366124\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "16.8K",
+    "bookShelfTime": 1783476000000,
+    "shelfTime": "2026-07-08 10:00:00",
+    "inLibrary": false
+  },
+  {
+    "bookId": "42000020101",
+    "bookName": "Terjebak Dalam Penyesalan (Sulih Suara)",
+    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000020101/42000020101.jpg?t=1783316171902",
+    "chapterCount": 60,
+    "introduction": "Jelita menggunakan segala cara, akhirnya berhasil jadi istri Fiero. Namun suatu hari tanpa sengaja, Jelita menemukan bahwa suaminya menyimpan obsesi yang menyimpang terhadap Talia, adik dari suaminya yang nggak ada hubungan darah. Fiero membela Talia yang membuat Jelita benaran mati rasa. Jelita tanda tangan perjanjian cerai. Dia memulai hidup barunya dengan Malin yang sudah suka padanya. Setelah itu, Fiero baru mendadak merasa bahwa Jelita adalah orang yang dia cintai.",
+    "tags": [
+      "Cinta Pahit",
+      "Cinta Segitiga",
+      "Realitas"
+    ],
+    "tagV3s": [
+      {
+        "tagId": 809,
+        "tagName": "Cinta Pahit"
+      },
+      {
+        "tagId": 821,
+        "tagName": "Cinta Segitiga"
+      },
+      {
+        "tagId": 827,
+        "tagName": "Realitas"
+      }
+    ],
+    "bookSource": {
+      "sceneId": "ovs_vd_cat_video_rec",
+      "expId": "bigdata_rec",
+      "strategyId": "ghygip88",
+      "strategyName": "EXP_3",
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
+    },
+    "isEntry": 0,
+    "index": 0,
+    "corner": {
+      "cornerType": 2,
+      "name": "Terbaru",
+      "color": "#8773DF"
+    },
+    "dataFrom": "算法_分类筛选",
+    "cardType": 1,
+    "markNamesConnectKey": ", ",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366124\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "13.8K",
+    "bookShelfTime": 1783483200000,
+    "shelfTime": "2026-07-08 12:00:00",
+    "inLibrary": false
+  },
+  {
     "bookId": "42000018935",
     "bookName": "Bukan Aku yang Kamu Pilih (Sulih Suara)",
     "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000018935/42000018935.jpg?t=1782698035729",
@@ -50,7 +161,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
@@ -62,8 +173,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952134\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "67.4K",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366124\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "68.7K",
     "bookShelfTime": 1783051200000,
     "shelfTime": "2026-07-03 12:00:00",
     "inLibrary": false
@@ -119,7 +230,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
@@ -131,8 +242,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952134\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "83.6K",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366124\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "84.5K",
     "bookShelfTime": 1782957600000,
     "shelfTime": "2026-07-02 10:00:00",
     "inLibrary": false
@@ -188,20 +299,20 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
     "corner": {
-      "cornerType": 2,
-      "name": "Terbaru",
+      "cornerType": 3,
+      "name": "Sulih Suara",
       "color": "#8773DF"
     },
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952134\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "255K",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366124\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "259K",
     "bookShelfTime": 1782871200000,
     "shelfTime": "2026-07-01 10:00:00",
     "inLibrary": false
@@ -256,7 +367,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
@@ -268,8 +379,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952134\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "338K",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366125\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "340K",
     "bookShelfTime": 1782439200000,
     "shelfTime": "2026-06-26 10:00:00",
     "inLibrary": false
@@ -325,7 +436,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
@@ -337,8 +448,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952134\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "1.1M",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366125\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "1.2M",
     "bookShelfTime": 1782360000000,
     "shelfTime": "2026-06-25 12:00:00",
     "inLibrary": false
@@ -394,7 +505,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
@@ -406,8 +517,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952134\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "273K",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366125\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "274K",
     "bookShelfTime": 1782273600000,
     "shelfTime": "2026-06-24 12:00:00",
     "inLibrary": false
@@ -457,7 +568,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
@@ -469,8 +580,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952134\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "3.4M",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366125\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "3.5M",
     "bookShelfTime": 1781798400000,
     "shelfTime": "2026-06-19 00:00:00",
     "inLibrary": false
@@ -526,7 +637,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
@@ -538,7 +649,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952134\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366125\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "1.3M",
     "bookShelfTime": 1781755200000,
     "shelfTime": "2026-06-18 12:00:00",
@@ -595,7 +706,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
@@ -607,7 +718,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952135\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366125\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "208K",
     "bookShelfTime": 1781668800000,
     "shelfTime": "2026-06-17 12:00:00",
@@ -658,7 +769,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
@@ -670,8 +781,8 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952135\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "339K",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366125\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "340K",
     "bookShelfTime": 1781575200000,
     "shelfTime": "2026-06-16 10:00:00",
     "inLibrary": false
@@ -727,7 +838,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
@@ -739,7 +850,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952135\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366125\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "1.3M",
     "bookShelfTime": 1781247015000,
     "shelfTime": "2026-06-12 14:50:15",
@@ -796,7 +907,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
@@ -808,7 +919,7 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952135\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366125\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
     "playCount": "5.4M",
     "bookShelfTime": 1781164800000,
     "shelfTime": "2026-06-11 16:00:00",
@@ -865,7 +976,7 @@
       "expId": "bigdata_rec",
       "strategyId": "ghygip88",
       "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
+      "log_id": "8b1323410dec26f0abd85fd4a0e97b0b"
     },
     "isEntry": 0,
     "index": 0,
@@ -877,148 +988,10 @@
     "dataFrom": "算法_分类筛选",
     "cardType": 1,
     "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952135\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "907K",
+    "algorithmRecomDot": "{\"log_id\":\"8b1323410dec26f0abd85fd4a0e97b0b\",\"ret_time\":\"1783498366125\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
+    "playCount": "908K",
     "bookShelfTime": 1781084703000,
     "shelfTime": "2026-06-10 17:45:03",
-    "inLibrary": false
-  },
-  {
-    "bookId": "42000015425",
-    "bookName": "Terbuang Jadi Penguasa (Sulih Suara)",
-    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000015425/42000015425.jpg?t=1780650596424",
-    "chapterCount": 51,
-    "introduction": "Demi Ratna, Arka rela melepas kesempatan masuk Akademi Lamuna hingga dihukum tiga tahun di Gua Omor. Saat kembali, dia sudah menjadi sosok tak tertandingi, namun Ratna justru dijodohkan dengan pria lain. Di tengah patah hati dan ayahnya yang sakit parah, Arka bangkit menghadapi takdir. Kekuatannya mengguncang Kota Tanara dan membawanya naik menjadi Penguasa Kota.",
-    "tags": [
-      "Balas Dendam",
-      "Serangan Balik",
-      "Kembali Bangkit",
-      "Kekuatan Khusus",
-      "Sejarah",
-      "Pria Dominan"
-    ],
-    "tagV3s": [
-      {
-        "tagId": 1337,
-        "tagName": "Balas Dendam",
-        "tagEnName": "Revenge"
-      },
-      {
-        "tagId": 1340,
-        "tagName": "Serangan Balik",
-        "tagEnName": "Counterattack"
-      },
-      {
-        "tagId": 10001,
-        "tagName": "Kembali Bangkit",
-        "tagEnName": "Comeback Story"
-      },
-      {
-        "tagId": 1334,
-        "tagName": "Kekuatan Khusus",
-        "tagEnName": "The Chosen One"
-      },
-      {
-        "tagId": 1319,
-        "tagName": "Sejarah",
-        "tagEnName": "Historical"
-      },
-      {
-        "tagId": 1323,
-        "tagName": "Pria Dominan",
-        "tagEnName": "Powerful Male Lead"
-      }
-    ],
-    "bookSource": {
-      "sceneId": "ovs_vd_cat_video_rec",
-      "expId": "bigdata_rec",
-      "strategyId": "ghygip88",
-      "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
-    },
-    "isEntry": 0,
-    "index": 0,
-    "corner": {
-      "cornerType": 3,
-      "name": "Sulih Suara",
-      "color": "#8773DF"
-    },
-    "dataFrom": "算法_分类筛选",
-    "cardType": 1,
-    "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952135\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "428K",
-    "bookShelfTime": 1780977600000,
-    "shelfTime": "2026-06-09 12:00:00",
-    "inLibrary": false
-  },
-  {
-    "bookId": "42000015226",
-    "bookName": "Setelah Bercerai, Aku Kaya Raya (Sulih Suara) ",
-    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000015226/42000015226.jpg?t=1780569341867",
-    "chapterCount": 70,
-    "introduction": "Marco Candra, menantu keluarga Suwandi, diremehkan tiga tahun. Menjelang perceraian, dia baru tahu dirinya adalah pewaris Grup Angkasa. Bersama Selly Gunawan, dia bangkit mendirikan Paragon Kapital. Sementara keluarga Suwandi terjerat tipu daya hingga nyaris bangkrut. Saat identitas Marco terbongkar, Wanda Suwandi menyesal, mantan suami kini tak lagi terjangkau.",
-    "tags": [
-      "Pembalikan Identitas",
-      "Serangan Balik",
-      "Menantu Pria",
-      "Tokoh Legendaris",
-      "Modern",
-      "Pria Dominan"
-    ],
-    "tagV3s": [
-      {
-        "tagId": 1338,
-        "tagName": "Pembalikan Identitas",
-        "tagEnName": "Hidden Identity"
-      },
-      {
-        "tagId": 1340,
-        "tagName": "Serangan Balik",
-        "tagEnName": "Counterattack"
-      },
-      {
-        "tagId": 1329,
-        "tagName": "Menantu Pria",
-        "tagEnName": "Son-in-Law"
-      },
-      {
-        "tagId": 1332,
-        "tagName": "Tokoh Legendaris",
-        "tagEnName": "Divine Tycoon"
-      },
-      {
-        "tagId": 1318,
-        "tagName": "Modern",
-        "tagEnName": "Modern"
-      },
-      {
-        "tagId": 1323,
-        "tagName": "Pria Dominan",
-        "tagEnName": "Powerful Male Lead"
-      }
-    ],
-    "bookSource": {
-      "sceneId": "ovs_vd_cat_video_rec",
-      "expId": "bigdata_rec",
-      "strategyId": "ghygip88",
-      "strategyName": "EXP_3",
-      "log_id": "95ea3880363d264a3bb32ff1df1c521e"
-    },
-    "isEntry": 0,
-    "index": 0,
-    "corner": {
-      "cornerType": 3,
-      "name": "Sulih Suara",
-      "color": "#8773DF"
-    },
-    "dataFrom": "算法_分类筛选",
-    "cardType": 1,
-    "markNamesConnectKey": ", ",
-    "algorithmRecomDot": "{\"log_id\":\"95ea3880363d264a3bb32ff1df1c521e\",\"ret_time\":\"1783475952135\",\"scene_id\":\"ovs_vd_cat_video_rec\",\"rec_id\":\"bigdata_rec\"}",
-    "playCount": "1.6M",
-    "bookShelfTime": 1780643942000,
-    "shelfTime": "2026-06-05 15:19:02",
     "inLibrary": false
   }
 ]

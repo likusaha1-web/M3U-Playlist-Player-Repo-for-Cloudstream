@@ -52,7 +52,7 @@
     "cardType": 1,
     "rankVo": {
       "rankType": 3,
-      "hotCode": "28K",
+      "hotCode": "79.4K",
       "sort": 1
     },
     "markNamesConnectKey": ", ",
@@ -113,7 +113,7 @@
     "cardType": 1,
     "rankVo": {
       "rankType": 3,
-      "hotCode": "25.7K",
+      "hotCode": "27.2K",
       "sort": 2
     },
     "markNamesConnectKey": ", ",
@@ -174,7 +174,7 @@
     "cardType": 1,
     "rankVo": {
       "rankType": 3,
-      "hotCode": "19.5K",
+      "hotCode": "20.4K",
       "sort": 3
     },
     "markNamesConnectKey": ", ",
@@ -235,7 +235,7 @@
     "cardType": 1,
     "rankVo": {
       "rankType": 3,
-      "hotCode": "13.2K",
+      "hotCode": "13.9K",
       "sort": 4
     },
     "markNamesConnectKey": ", ",
@@ -296,7 +296,7 @@
     "cardType": 1,
     "rankVo": {
       "rankType": 3,
-      "hotCode": "6.4K",
+      "hotCode": "6.6K",
       "sort": 5
     },
     "markNamesConnectKey": ", ",
@@ -305,29 +305,78 @@
     "inLibrary": false
   },
   {
-    "bookId": "42000019281",
-    "bookName": "Pasangan yang Ditolak",
-    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000019281/42000019281.jpg?t=1782877112957",
-    "chapterCount": 58,
-    "introduction": "Seorang kembar yang tidak dicintai, dikhianati oleh keluarga dan orang tercintanya. Dia yang diburu dan ditinggalkan melarikan diri ke Raja Alpha yang kejam. Kekuatan tersembunyi, rahasia mematikan, dan kegelapan terlarang menantinya. Serigala betina yang terbuang itu menjadi ratu kegelapan.",
+    "bookId": "42000018065",
+    "bookName": "Menantu Naga Tak Terkalahkan",
+    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000018065/42000018065.jpg?t=1782196194297",
+    "chapterCount": 74,
+    "introduction": "Arga, murid terakhir Guru Zanar dari Pegunungan Ulmar, turun gunung setelah tiga tahun kultivasi dan mencapai Tingkat Tapak Dewa. Atas perintah gurunya, ia datang untuk menikahi Laila dari Keluarga Sanjaya. Meski memiliki kemampuan medis dan bela diri luar biasa, Arga terus diremehkan karena berasal dari desa. Bahkan setelah menyelamatkan banyak orang dan mengalahkan para ahli, ia tetap dianggap pembual. Hingga identitas aslinya terungkap dan semua orang menyadari kesalahan m",
     "tags": [
-      "Pembalikan Identitas",
-      "Manusia Serigala",
-      "Wanita Kuat",
-      "Balas Dendam",
-      "Fantasi",
-      "Romansa"
+      "Serangan Balik",
+      "Kekuatan Khusus",
+      "Keadilan",
+      "Pria Dominan",
+      "Modern"
     ],
     "tagV3s": [
       {
-        "tagId": 1395,
-        "tagName": "Pembalikan Identitas",
-        "tagEnName": "Hidden Identity"
+        "tagId": 1340,
+        "tagName": "Serangan Balik",
+        "tagEnName": "Counterattack"
       },
       {
-        "tagId": 1363,
-        "tagName": "Manusia Serigala",
-        "tagEnName": "Werewolf"
+        "tagId": 1334,
+        "tagName": "Kekuatan Khusus",
+        "tagEnName": "The Chosen One"
+      },
+      {
+        "tagId": 10037,
+        "tagName": "Keadilan",
+        "tagEnName": "Justice Served"
+      },
+      {
+        "tagId": 1323,
+        "tagName": "Pria Dominan",
+        "tagEnName": "Powerful Male Lead"
+      },
+      {
+        "tagId": 1318,
+        "tagName": "Modern",
+        "tagEnName": "Modern"
+      }
+    ],
+    "isEntry": 0,
+    "index": 0,
+    "protagonist": "Arga Maudi,  Laila Baskara",
+    "dataFrom": "大数据",
+    "cardType": 1,
+    "rankVo": {
+      "rankType": 3,
+      "hotCode": "4.9K",
+      "sort": 6
+    },
+    "markNamesConnectKey": ", ",
+    "bookShelfTime": 1783310400000,
+    "shelfTime": "2026-07-06 12:00:00",
+    "inLibrary": false
+  },
+  {
+    "bookId": "42000018257",
+    "bookName": "Saat Mereka Kehilanganku",
+    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000018257/42000018257.jpg?t=1782210199409",
+    "chapterCount": 58,
+    "introduction": "Difitnah dan dibunuh, Sara mendapat kesempatan untuk mengulang hidupnya. Kali ini, dia memilih meninggalkan tim basket dan bergabung dengan tim hoki es, di mana dia akhirnya dihargai. Saat tim basket menyadari betapa pentingnya Sara bagi mereka, semuanya sudah terlambat.",
+    "tags": [
+      "Terlahir Kembali",
+      "Wanita Kuat",
+      "Penyesalan",
+      "Kembali Bangkit",
+      "Modern"
+    ],
+    "tagV3s": [
+      {
+        "tagId": 1405,
+        "tagName": "Terlahir Kembali",
+        "tagEnName": "Rebirth"
       },
       {
         "tagId": 1361,
@@ -335,34 +384,34 @@
         "tagEnName": "Strong Heroine"
       },
       {
-        "tagId": 1394,
-        "tagName": "Balas Dendam",
-        "tagEnName": "Revenge"
+        "tagId": 1654,
+        "tagName": "Penyesalan",
+        "tagEnName": "All-Too-Late"
       },
       {
-        "tagId": 1355,
-        "tagName": "Fantasi",
-        "tagEnName": "Fantasy"
+        "tagId": 10000,
+        "tagName": "Kembali Bangkit",
+        "tagEnName": "Comeback Story"
       },
       {
-        "tagId": 1357,
-        "tagName": "Romansa",
-        "tagEnName": "Romance"
+        "tagId": 1352,
+        "tagName": "Modern",
+        "tagEnName": "Modern"
       }
     ],
     "isEntry": 0,
     "index": 0,
-    "protagonist": "Kaden,  Amelia",
+    "protagonist": "Andi Basri,  Sara Rusli",
     "dataFrom": "大数据",
     "cardType": 1,
     "rankVo": {
       "rankType": 3,
-      "hotCode": "4.5K",
-      "sort": 6
+      "hotCode": "4.1K",
+      "sort": 7
     },
     "markNamesConnectKey": ", ",
-    "bookShelfTime": 1783130400000,
-    "shelfTime": "2026-07-04 10:00:00",
+    "bookShelfTime": 1783391952000,
+    "shelfTime": "2026-07-07 10:39:12",
     "inLibrary": false
   },
   {
@@ -418,8 +467,8 @@
     "cardType": 1,
     "rankVo": {
       "rankType": 3,
-      "hotCode": "4.5K",
-      "sort": 7
+      "hotCode": "3.4K",
+      "sort": 8
     },
     "markNamesConnectKey": ", ",
     "bookShelfTime": 1782895539000,
@@ -427,79 +476,29 @@
     "inLibrary": false
   },
   {
-    "bookId": "42000018065",
-    "bookName": "Menantu Naga Tak Terkalahkan",
-    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000018065/42000018065.jpg?t=1782196194297",
-    "chapterCount": 74,
-    "introduction": "Arga, murid terakhir Guru Zanar dari Pegunungan Ulmar, turun gunung setelah tiga tahun kultivasi dan mencapai Tingkat Tapak Dewa. Atas perintah gurunya, ia datang untuk menikahi Laila dari Keluarga Sanjaya. Meski memiliki kemampuan medis dan bela diri luar biasa, Arga terus diremehkan karena berasal dari desa. Bahkan setelah menyelamatkan banyak orang dan mengalahkan para ahli, ia tetap dianggap pembual. Hingga identitas aslinya terungkap dan semua orang menyadari kesalahan m",
+    "bookId": "42000019281",
+    "bookName": "Pasangan yang Ditolak",
+    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000019281/42000019281.jpg?t=1782877112957",
+    "chapterCount": 58,
+    "introduction": "Seorang kembar yang tidak dicintai, dikhianati oleh keluarga dan orang tercintanya. Dia yang diburu dan ditinggalkan melarikan diri ke Raja Alpha yang kejam. Kekuatan tersembunyi, rahasia mematikan, dan kegelapan terlarang menantinya. Serigala betina yang terbuang itu menjadi ratu kegelapan.",
     "tags": [
-      "Serangan Balik",
-      "Kekuatan Khusus",
-      "Keadilan",
-      "Pria Dominan",
-      "Modern"
-    ],
-    "tagV3s": [
-      {
-        "tagId": 1340,
-        "tagName": "Serangan Balik",
-        "tagEnName": "Counterattack"
-      },
-      {
-        "tagId": 1334,
-        "tagName": "Kekuatan Khusus",
-        "tagEnName": "The Chosen One"
-      },
-      {
-        "tagId": 10037,
-        "tagName": "Keadilan",
-        "tagEnName": "Justice Served"
-      },
-      {
-        "tagId": 1323,
-        "tagName": "Pria Dominan",
-        "tagEnName": "Powerful Male Lead"
-      },
-      {
-        "tagId": 1318,
-        "tagName": "Modern",
-        "tagEnName": "Modern"
-      }
-    ],
-    "isEntry": 0,
-    "index": 0,
-    "protagonist": "Arga Maudi,  Laila Baskara",
-    "dataFrom": "大数据",
-    "cardType": 1,
-    "rankVo": {
-      "rankType": 3,
-      "hotCode": "4.2K",
-      "sort": 8
-    },
-    "markNamesConnectKey": ", ",
-    "bookShelfTime": 1783310400000,
-    "shelfTime": "2026-07-06 12:00:00",
-    "inLibrary": false
-  },
-  {
-    "bookId": "42000018274",
-    "bookName": "Nak, Ibulah Bosmu (Sulih Suara)",
-    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000018274/42000018274.jpg?t=1782264774806",
-    "chapterCount": 54,
-    "introduction": "Susi Narendra, lulusan terbaik universitas ternama, menjadi ibu tunggal setelah suaminya meninggal. Demi putranya, Sandi Ferdian, ia menyelamatkan Grup Ferdian dari kebangkrutan dan membesarkannya hingga sukses. Namun Sandi yang manja mengklaim semua keberhasilan itu sebagai jasanya, meremehkan Susi, dan membiarkan kekasihnya, Eni Kasnadi, mempermalukannya. Kecewa atas kedurhakaan putranya, Susi meninggalkan perusahaan dan memutuskan hubungan dengannya.",
-    "tags": [
-      "Balas Dendam",
-      "Wanita Kuat",
       "Pembalikan Identitas",
-      "Bangkitnya Orang Biasa",
-      "Serangan Balik",
-      "Penyesalan"
+      "Manusia Serigala",
+      "Wanita Kuat",
+      "Balas Dendam",
+      "Fantasi",
+      "Romansa"
     ],
     "tagV3s": [
       {
-        "tagId": 1394,
-        "tagName": "Balas Dendam",
-        "tagEnName": "Revenge"
+        "tagId": 1395,
+        "tagName": "Pembalikan Identitas",
+        "tagEnName": "Hidden Identity"
+      },
+      {
+        "tagId": 1363,
+        "tagName": "Manusia Serigala",
+        "tagEnName": "Werewolf"
       },
       {
         "tagId": 1361,
@@ -507,54 +506,49 @@
         "tagEnName": "Strong Heroine"
       },
       {
-        "tagId": 1395,
-        "tagName": "Pembalikan Identitas",
-        "tagEnName": "Hidden Identity"
+        "tagId": 1394,
+        "tagName": "Balas Dendam",
+        "tagEnName": "Revenge"
       },
       {
-        "tagId": 1398,
-        "tagName": "Bangkitnya Orang Biasa",
-        "tagEnName": "Underdog Story"
+        "tagId": 1355,
+        "tagName": "Fantasi",
+        "tagEnName": "Fantasy"
       },
       {
-        "tagId": 1399,
-        "tagName": "Serangan Balik",
-        "tagEnName": "Counterattack"
-      },
-      {
-        "tagId": 1654,
-        "tagName": "Penyesalan",
-        "tagEnName": "All-Too-Late"
+        "tagId": 1357,
+        "tagName": "Romansa",
+        "tagEnName": "Romance"
       }
     ],
     "isEntry": 0,
     "index": 0,
-    "protagonist": "Sandi Ferdian,  Susi Narendra",
+    "protagonist": "Kaden,  Amelia",
     "dataFrom": "大数据",
     "cardType": 1,
     "rankVo": {
       "rankType": 3,
-      "hotCode": "3.4K",
+      "hotCode": "2.8K",
       "sort": 9
     },
     "markNamesConnectKey": ", ",
-    "bookShelfTime": 1782871200000,
-    "shelfTime": "2026-07-01 10:00:00",
+    "bookShelfTime": 1783130400000,
+    "shelfTime": "2026-07-04 10:00:00",
     "inLibrary": false
   },
   {
-    "bookId": "42000018260",
-    "bookName": "Bos Besar Menyamar",
-    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000018260/42000018260.jpg?t=1782210586649",
-    "chapterCount": 81,
-    "introduction": "Diremehkan sebagai sopir miskin, Etan terus menerima hinaan tanpa membalas. Namun saat Risa berada dalam bahaya akibat perebutan formula obat kanker revolusioner, identitas aslinya akhirnya terungkap. Ternyata pria yang selama ini dianggap remeh adalah penguasa organisasi paling ditakuti di dunia. Sejak hari itu, para konglomerat, mafia, dan master bela diri hanya punya dua pilihan, tunduk atau hancur.",
+    "bookId": "42000019699",
+    "bookName": "Salah Memilih, Kehilangan Segalanya",
+    "coverWap": "https://hwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000019699/42000019699.jpg?t=1783043090757",
+    "chapterCount": 60,
+    "introduction": "Jax, penguasa tersembunyi dunia militer, politik, dan bisnis Negara Kora, menikahi Eva tiga tahun lalu demi memenuhi wasiat mendiang tetuanya. Menyembunyikan identitasnya, dia menyelamatkan perusahaan keluarga Eva yang nyaris bangkrut dan membantunya mendapatkan kontrak besar. Namun, Eva justru mengira semua itu berkat Will, pria yang mengejarnya. Dia meremehkan Jax yang dianggap pengangguran dan ingin menceraikannya. Saat Jax mengungkap jati dirinya dan menghukum semua yang ",
     "tags": [
       "Pembalikan Identitas",
       "Serangan Balik",
-      "Keadilan",
       "Kekuatan Khusus",
       "Modern",
-      "Pria Dominan"
+      "Pria Dominan",
+      "Balas Dendam"
     ],
     "tagV3s": [
       {
@@ -568,11 +562,6 @@
         "tagEnName": "Counterattack"
       },
       {
-        "tagId": 10037,
-        "tagName": "Keadilan",
-        "tagEnName": "Justice Served"
-      },
-      {
         "tagId": 1334,
         "tagName": "Kekuatan Khusus",
         "tagEnName": "The Chosen One"
@@ -586,21 +575,26 @@
         "tagId": 1323,
         "tagName": "Pria Dominan",
         "tagEnName": "Powerful Male Lead"
+      },
+      {
+        "tagId": 1337,
+        "tagName": "Balas Dendam",
+        "tagEnName": "Revenge"
       }
     ],
     "isEntry": 0,
     "index": 0,
-    "protagonist": "Etan Wijaya,  Risa Lastri",
+    "protagonist": "Jax Candra,  Eva Halim",
     "dataFrom": "大数据",
     "cardType": 1,
     "rankVo": {
       "rankType": 3,
-      "hotCode": "2.9K",
+      "hotCode": "2.8K",
       "sort": 10
     },
     "markNamesConnectKey": ", ",
-    "bookShelfTime": 1783396800000,
-    "shelfTime": "2026-07-07 12:00:00",
+    "bookShelfTime": 1783048678000,
+    "shelfTime": "2026-07-03 11:17:58",
     "inLibrary": false
   }
 ]
