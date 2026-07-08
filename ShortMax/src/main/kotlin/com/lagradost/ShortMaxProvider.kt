@@ -75,7 +75,7 @@ class ShortMaxProvider : MainAPI() {
             "/api/shortmax/rekomendasi"
         }
 
-        val rawHome = app.get("$mainUrl$path").text
+        val rawHome = app.get("$mainUrl$path", headers = mapOf("Referer" to "$mainUrl/")).text
         val decrypted = decryptCryptoJS(JSONObject(rawHome).getString("data"))
 
         val results = if (request.data == "foryou") {
@@ -124,7 +124,7 @@ class ShortMaxProvider : MainAPI() {
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
-        val rawSearch = app.get("$mainUrl/api/shortmax/search", params = mapOf("query" to query)).text
+        val rawSearch = app.get("$mainUrl/api/shortmax/search", params = mapOf("query" to query), headers = mapOf("Referer" to "$mainUrl/")).text
         val decrypted = decryptCryptoJS(JSONObject(rawSearch).getString("data"))
         val json = JSONObject(decrypted)
         val results = json.optJSONArray("results") ?: return emptyList()
@@ -157,7 +157,7 @@ class ShortMaxProvider : MainAPI() {
 
     override suspend fun load(url: String): LoadResponse? {
         val shortPlayId = url
-        val rawDetail = app.get("$mainUrl/api/shortmax/detail?shortPlayId=$shortPlayId").text
+        val rawDetail = app.get("$mainUrl/api/shortmax/detail?shortPlayId=$shortPlayId", headers = mapOf("Referer" to "$mainUrl/")).text
         val decryptedDetail = decryptCryptoJS(JSONObject(rawDetail).getString("data"))
         val json = JSONObject(decryptedDetail)
 
@@ -200,7 +200,7 @@ class ShortMaxProvider : MainAPI() {
         val shortPlayId = parts[0]
         val episodeNum = parts[1]
 
-        val rawEpisode = app.get("$mainUrl/api/shortmax/episode?shortPlayId=$shortPlayId&episodeNumber=$episodeNum").text
+        val rawEpisode = app.get("$mainUrl/api/shortmax/episode?shortPlayId=$shortPlayId&episodeNumber=$episodeNum", headers = mapOf("Referer" to "$mainUrl/")).text
         val decryptedEpisode = decryptCryptoJS(JSONObject(rawEpisode).getString("data"))
         val json = JSONObject(decryptedEpisode)
 
