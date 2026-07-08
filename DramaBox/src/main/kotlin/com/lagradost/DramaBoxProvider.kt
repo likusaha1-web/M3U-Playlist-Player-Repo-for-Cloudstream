@@ -186,9 +186,15 @@ class DramaBoxProvider : MainAPI() {
         val jsdelivrUrl = "https://cdn.jsdelivr.net/gh/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream@main/database/dramabox/$relativePath"
         try {
             println("DramaBox: Fetching from jsDelivr -> $jsdelivrUrl")
-            return getWithRetry(jsdelivrUrl)
+            val res = getWithRetry(jsdelivrUrl)
+            val decrypted = decryptIfEncrypted(res).trim()
+            if (decrypted.startsWith("{") || decrypted.startsWith("[")) {
+                return res
+            } else {
+                throw Exception("jsDelivr payload is not a valid JSON")
+            }
         } catch (e: Exception) {
-            println("DramaBox: jsDelivr failed, fallback to direct API -> $fallbackUrl")
+            println("DramaBox: jsDelivr failed (${e.message}), fallback to direct API -> $fallbackUrl")
             return requestWithCf(fallbackUrl, if (fallbackParams.isEmpty()) null else fallbackParams)
         }
     }
