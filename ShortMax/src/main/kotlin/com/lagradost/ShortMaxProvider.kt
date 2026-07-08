@@ -186,8 +186,6 @@ class ShortMaxProvider : MainAPI() {
     }
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse? {
-        cfCookies = null
-        cfUserAgent = null
         val path = if (request.data == "foryou") {
             "/api/shortmax/foryou?page=$page"
         } else {
