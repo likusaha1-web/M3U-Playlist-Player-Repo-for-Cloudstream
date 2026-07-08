@@ -1,9 +1,9 @@
 [
   {
-    "fileHash": "sha256-efd887f1982bd038e08476126c4446bec2d16d765e86a3fe733807b861b54a91",
+    "fileHash": "sha256-9e24264d1153c666dbced178381fb84e607dc8f12a79e45373c4bfe6d5f6f883",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 53830,
+    "fileSize": 53873,
     "status": 1,
     "language": "id",
     "authors": [
@@ -20,10 +20,10 @@
   },
   {
     "iconUrl": "https://play-lh.googleusercontent.com/V4t4JeQV2Cu9u72hKuqOW5c0IfwcZuuVS1d9PF2uJsW3rlIq-aOMTrT5bABVGaAFTcM=w480-h960-rw",
-    "fileHash": "sha256-426283ed8fbe0e098d30f0be94a4126acf800b5f4980cf055fc755b731078c8e",
+    "fileHash": "sha256-5dea1b304f99649fb319da00d88b84bd013d20ab2048a686beead2b70158f829",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 84336,
+    "fileSize": 84333,
     "status": 1,
     "language": "en",
     "authors": [
@@ -39,10 +39,10 @@
     "name": "M3UPlaylistPlayer"
   },
   {
-    "fileHash": "sha256-90a589345461c8fbb662a0ae68b1216c4dae08e2622bb12e4161e879aae590a3",
+    "fileHash": "sha256-28e2d6e7070a11cdb457193cc7108da04d69d1369daeae0e1ac1c3701f9fbb41",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 55175,
+    "fileSize": 55192,
     "status": 1,
     "language": "id",
     "authors": [
@@ -58,10 +58,10 @@
     "name": "RBTVPlus"
   },
   {
-    "fileHash": "sha256-7530291c4c7599eeed5ba23fd96c0f648733528481c7223816d9bd37eaa27398",
+    "fileHash": "sha256-87d6b18be3038e275ff0b0a3c817ce7705b0e0539810cb62d76133e61fe67a8a",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 29290,
+    "fileSize": 29303,
     "status": 1,
     "language": "id",
     "authors": [
@@ -78,10 +78,10 @@
   },
   {
     "iconUrl": "https://raw.githubusercontent.com/xr3ed/Auto-IPTV/main/logo/fifa.png",
-    "fileHash": "sha256-4d0056733427c943e64dde281ae819032aa3b4407d45bdf0144b3ff43e218e4e",
+    "fileHash": "sha256-b43c54b34ea0cf8d72607d5b68e12517ce5a1620bbed5a3759c4d76569aeb1a2",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 90901,
+    "fileSize": 90940,
     "status": 1,
     "language": "id",
     "authors": [
