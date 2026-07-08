@@ -68,6 +68,13 @@ class ShortMaxProvider : MainAPI() {
         MainPageData("ShortMax - Rekomendasi", "rekomendasi")
     )
 
+    private fun checkResponse(response: String) {
+        val trimmed = response.trim()
+        if (trimmed.startsWith("<!DOCTYPE", ignoreCase = true) || trimmed.startsWith("<html", ignoreCase = true)) {
+            throw Exception("Harap selesaikan tantangan Cloudflare (Klik Buka di Peramban / Ikon Bumi di kanan atas)!")
+        }
+    }
+
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse? {
         val path = if (request.data == "foryou") {
             "/api/shortmax/foryou?page=$page"
@@ -76,6 +83,7 @@ class ShortMaxProvider : MainAPI() {
         }
 
         val rawHome = app.get("$mainUrl$path", headers = mapOf("Referer" to "$mainUrl/")).text
+        checkResponse(rawHome)
         val decrypted = decryptCryptoJS(JSONObject(rawHome).getString("data"))
 
         val results = if (request.data == "foryou") {
@@ -125,6 +133,7 @@ class ShortMaxProvider : MainAPI() {
 
     override suspend fun search(query: String): List<SearchResponse> {
         val rawSearch = app.get("$mainUrl/api/shortmax/search", params = mapOf("query" to query), headers = mapOf("Referer" to "$mainUrl/")).text
+        checkResponse(rawSearch)
         val decrypted = decryptCryptoJS(JSONObject(rawSearch).getString("data"))
         val json = JSONObject(decrypted)
         val results = json.optJSONArray("results") ?: return emptyList()
@@ -158,6 +167,7 @@ class ShortMaxProvider : MainAPI() {
     override suspend fun load(url: String): LoadResponse? {
         val shortPlayId = url
         val rawDetail = app.get("$mainUrl/api/shortmax/detail?shortPlayId=$shortPlayId", headers = mapOf("Referer" to "$mainUrl/")).text
+        checkResponse(rawDetail)
         val decryptedDetail = decryptCryptoJS(JSONObject(rawDetail).getString("data"))
         val json = JSONObject(decryptedDetail)
 
@@ -201,6 +211,7 @@ class ShortMaxProvider : MainAPI() {
         val episodeNum = parts[1]
 
         val rawEpisode = app.get("$mainUrl/api/shortmax/episode?shortPlayId=$shortPlayId&episodeNumber=$episodeNum", headers = mapOf("Referer" to "$mainUrl/")).text
+        checkResponse(rawEpisode)
         val decryptedEpisode = decryptCryptoJS(JSONObject(rawEpisode).getString("data"))
         val json = JSONObject(decryptedEpisode)
 
