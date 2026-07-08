@@ -5,6 +5,8 @@ import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.newExtractorLink
 import com.lagradost.cloudstream3.utils.Qualities
 import com.lagradost.cloudstream3.utils.ExtractorLinkType
+import com.lagradost.cloudstream3.utils.DataStore.getKey
+import com.lagradost.cloudstream3.utils.DataStore.setKey
 import org.json.JSONObject
 import org.json.JSONArray
 import android.util.Base64
@@ -40,7 +42,12 @@ class ShortMaxProvider : MainAPI() {
         private val PASSWORD = com.lagradost.ShortMax.BuildConfig.SHORTMAX_KEY
 
         private const val USER_AGENT = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
-        private var cfCookies: String? = null
+
+        var cfCookies: String?
+            get() = context?.getKey("SHORTMAX_CF_COOKIES")
+            set(value) {
+                context?.setKey("SHORTMAX_CF_COOKIES", value)
+            }
 
         fun decryptCryptoJS(encryptedText: String): String {
             val ciphertextBytes = Base64.decode(encryptedText, Base64.DEFAULT)
