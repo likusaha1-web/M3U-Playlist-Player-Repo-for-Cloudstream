@@ -146,6 +146,56 @@ class DramaBoxProvider : MainAPI() {
         return result
     }
 
+    private fun getLocalCache(key: String, durationMs: Long): String? {
+        val ctx = CommonActivity.activity ?: return null
+        val cacheTime = ctx.getKey<Long>("dramabox_cache_time_$key") ?: return null
+        if (System.currentTimeMillis() - cacheTime > durationMs) {
+            return null
+        }
+        return ctx.getKey<String>("dramabox_cache_$key")
+    }
+
+    private fun setLocalCache(key: String, data: String) {
+        val ctx = CommonActivity.activity ?: return
+        ctx.setKey("dramabox_cache_$key", data)
+        ctx.setKey("dramabox_cache_time_$key", System.currentTimeMillis())
+    }
+
+    private suspend fun fetchWithFallback(
+        relativePath: String,
+        fallbackUrl: String,
+        fallbackParams: Map<String, String> = emptyMap()
+    ): String {
+        val jsdelivrUrl = "https://cdn.jsdelivr.net/gh/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream@main/database/dramabox/$relativePath"
+        try {
+            println("DramaBox: Fetching from jsDelivr -> $jsdelivrUrl")
+            return getWithRetry(jsdelivrUrl)
+        } catch (e: Exception) {
+            println("DramaBox: jsDelivr failed, fallback to direct API -> $fallbackUrl")
+            return getWithRetry(fallbackUrl, fallbackParams)
+        }
+    }
+
+    private suspend fun fetchPageData(
+        cacheKey: String,
+        relativePath: String,
+        fallbackUrl: String,
+        fallbackParams: Map<String, String> = emptyMap(),
+        durationMs: Long = 30 * 60 * 1000L // 30 menit
+    ): String {
+        val cached = getLocalCache(cacheKey, durationMs)
+        if (cached != null) {
+            println("DramaBox: Using local cache for $cacheKey")
+            return cached
+        }
+        val data = fetchWithFallback(relativePath, fallbackUrl, fallbackParams)
+        if (data.isNotEmpty()) {
+            setLocalCache(cacheKey, data)
+        }
+        return data
+    }
+
+
     private suspend fun requestWithCf(url: String, params: Map<String, String>? = null): String {
         if (mainUrl.contains("nax1.cc")) {
             return if (params != null) {
@@ -420,7 +470,12 @@ class DramaBoxProvider : MainAPI() {
         if (page > 1) {
             val homePages = ArrayList<HomePageList>()
             try {
-                val forYouRes = requestWithCf("$mainUrl/api/dramabox/foryou", mapOf("page" to page.toString()))
+                val forYouRes = fetchPageData(
+                    "foryou_$page",
+                    "foryou_$page.json",
+                    "$mainUrl/api/dramabox/foryou",
+                    mapOf("page" to page.toString())
+                )
                 val forYouList = parseSekaiDramaList(forYouRes, filterDuplicates = true)
                 if (forYouList.isNotEmpty()) {
                     homePages.add(HomePageList("Lainnya", forYouList))
@@ -476,49 +531,64 @@ class DramaBoxProvider : MainAPI() {
         println("DramaBox: Fetching page 1 from network (deduplicated)")
         try {
             // 1. Pilihan VIP
-            val vipRes = requestWithCf("$mainUrl/api/dramabox/vip")
+            val vipRes = fetchPageData("vip", "vip.json", "$mainUrl/api/dramabox/vip")
             val vipList = parseVipDramaList(vipRes, filterDuplicates = false)
             if (vipList.isNotEmpty()) {
                 homePages.add(HomePageList("Pilihan VIP", vipList))
             }
 
             // 2. Trending
-            val trendingRes = requestWithCf("$mainUrl/api/dramabox/trending")
+            val trendingRes = fetchPageData("trending", "trending.json", "$mainUrl/api/dramabox/trending")
             val trendingList = parseSekaiDramaList(trendingRes, filterDuplicates = false)
             if (trendingList.isNotEmpty()) {
                 homePages.add(HomePageList("Trending", trendingList))
             }
 
             // 3. Terbaru
-            val latestRes = requestWithCf("$mainUrl/api/dramabox/latest")
+            val latestRes = fetchPageData("latest", "latest.json", "$mainUrl/api/dramabox/latest")
             val latestList = parseSekaiDramaList(latestRes, filterDuplicates = false)
             if (latestList.isNotEmpty()) {
                 homePages.add(HomePageList("Terbaru", latestList))
             }
 
             // 4. Pencarian Populer
-            val popSearchRes = requestWithCf("$mainUrl/api/dramabox/populersearch")
+            val popSearchRes = fetchPageData("populersearch", "populersearch.json", "$mainUrl/api/dramabox/populersearch")
             val popSearchList = parseSekaiDramaList(popSearchRes, filterDuplicates = false)
             if (popSearchList.isNotEmpty()) {
                 homePages.add(HomePageList("Pencarian Populer", popSearchList))
             }
 
             // 5. Sulih Suara Populer
-            val voicePopRes = requestWithCf("$mainUrl/api/dramabox/dubindo", mapOf("classify" to "terpopuler"))
+            val voicePopRes = fetchPageData(
+                "dubindo_terpopuler",
+                "dubindo_terpopuler.json",
+                "$mainUrl/api/dramabox/dubindo",
+                mapOf("classify" to "terpopuler")
+            )
             val voicePopList = parseSekaiDramaList(voicePopRes, filterDuplicates = false)
             if (voicePopList.isNotEmpty()) {
                 homePages.add(HomePageList("Sulih Suara Populer", voicePopList))
             }
 
             // 6. Sulih Suara Terbaru
-            val voiceNewRes = requestWithCf("$mainUrl/api/dramabox/dubindo", mapOf("classify" to "terbaru"))
+            val voiceNewRes = fetchPageData(
+                "dubindo_terbaru",
+                "dubindo_terbaru.json",
+                "$mainUrl/api/dramabox/dubindo",
+                mapOf("classify" to "terbaru")
+            )
             val voiceNewList = parseSekaiDramaList(voiceNewRes, filterDuplicates = false)
             if (voiceNewList.isNotEmpty()) {
                 homePages.add(HomePageList("Sulih Suara Terbaru", voiceNewList))
             }
 
             // 7. Lainnya (Halaman 1)
-            val forYouRes = requestWithCf("$mainUrl/api/dramabox/foryou", mapOf("page" to "1"))
+            val forYouRes = fetchPageData(
+                "foryou_1",
+                "foryou_1.json",
+                "$mainUrl/api/dramabox/foryou",
+                mapOf("page" to "1")
+            )
             val forYouList = parseSekaiDramaList(forYouRes, filterDuplicates = true)
             if (forYouList.isNotEmpty()) {
                 homePages.add(HomePageList("Lainnya", forYouList))
@@ -640,15 +710,45 @@ class DramaBoxProvider : MainAPI() {
         val cached = detailCache[bookId]
         if (cached != null) return cached
 
+        val cacheKeyDetail = "detail_$bookId"
+        val cacheKeyEpisodes = "episodes_$bookId"
+        val cacheDuration = 2 * 60 * 60 * 1000L // 2 jam
+
+        val detailRes: String
+        val episodesRes: String
+
+        val cachedDetail = getLocalCache(cacheKeyDetail, cacheDuration)
+        val cachedEpisodes = getLocalCache(cacheKeyEpisodes, cacheDuration)
+
         try {
-            val (detailRes, episodesRes) = coroutineScope {
-                val detailDeferred = async {
-                    requestWithCf("$mainUrl/api/dramabox/detail", mapOf("bookId" to bookId))
+            if (cachedDetail != null && cachedEpisodes != null) {
+                println("DramaBox: Using local disk cache for detail/episodes of $bookId")
+                detailRes = cachedDetail
+                episodesRes = cachedEpisodes
+            } else {
+                val (dRes, eRes) = coroutineScope {
+                    val detailDeferred = async {
+                        fetchWithFallback(
+                            "detail/$bookId.json",
+                            "$mainUrl/api/dramabox/detail",
+                            mapOf("bookId" to bookId)
+                        )
+                    }
+                    val episodesDeferred = async {
+                        fetchWithFallback(
+                            "allepisode/$bookId.json",
+                            "$mainUrl/api/dramabox/allepisode",
+                            mapOf("bookId" to bookId)
+                        )
+                    }
+                    detailDeferred.await() to episodesDeferred.await()
                 }
-                val episodesDeferred = async {
-                    requestWithCf("$mainUrl/api/dramabox/allepisode", mapOf("bookId" to bookId))
+                detailRes = dRes
+                episodesRes = eRes
+                if (detailRes.isNotEmpty() && episodesRes.isNotEmpty()) {
+                    setLocalCache(cacheKeyDetail, detailRes)
+                    setLocalCache(cacheKeyEpisodes, episodesRes)
                 }
-                detailDeferred.await() to episodesDeferred.await()
             }
 
             val detailJson = JSONObject(detailRes)
