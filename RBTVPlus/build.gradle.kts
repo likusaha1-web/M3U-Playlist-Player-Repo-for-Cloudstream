@@ -19,6 +19,7 @@ cloudstream {
     authors = listOf("xr3ed")
     status = 1
     tvTypes = listOf("Live")
+    iconUrl = "https://cdn.jsdelivr.net/gh/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream@main/live_icon.png"
 }
 
 dependencies {

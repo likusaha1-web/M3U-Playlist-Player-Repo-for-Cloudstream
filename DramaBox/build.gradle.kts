@@ -13,6 +13,7 @@ cloudstream {
     authors = listOf("xr3ed")
     status = 1
     tvTypes = listOf("TvSeries")
+    iconUrl = "https://play-lh.googleusercontent.com/GGi0g65ySR86svFuxny2J2FgfkTZuFlJcftmeAZ_bZ7sM86XfwUNL1h9omSyoRKha1c1-_BoFkUbyJz2VSXI=w240-h240-rw"
 }
 
 dependencies {
