@@ -143,7 +143,7 @@ class CloudflareWebViewDialog(
         val root = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(32, 24, 32, 24)
-            setBackgroundColor(Color.BLACK)
+            setBackgroundColor(Color.parseColor("#151624"))
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -218,7 +218,7 @@ class CloudflareWebViewDialog(
     @SuppressLint("SetJavaScriptEnabled")
     private fun buildWebView(): WebView {
         val wv = WebView(requireContext())
-        wv.setBackgroundColor(Color.BLACK)
+        wv.setBackgroundColor(Color.parseColor("#151624"))
 
         wv.settings.apply {
             javaScriptEnabled = true
@@ -253,8 +253,8 @@ class CloudflareWebViewDialog(
                         style = document.createElement('style');
                         style.id = 'cf-custom-style';
                         style.innerHTML = ' \
-                            html, body { background-color: #000000 !important; color: #000000 !important; } \
-                            h1, h2, h3, p, div, span, a { color: #000000 !important; text-shadow: none !important; } \
+                            html, body { background-color: #151624 !important; color: #151624 !important; } \
+                            h1, h2, h3, p, div, span, a { color: #151624 !important; text-shadow: none !important; } \
                             #logo, .logo, #zone-name, .zone-name, img { display: none !important; } \
                         ';
                         document.head.appendChild(style);
