@@ -23,11 +23,10 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.lagradost.api.Log
-import kotlin.math.min
 
 /**
- * Minimalist DialogFragment that loads [targetUrl] in a small WebView and crops it
- * to show only the Turnstile CAPTCHA widget dynamically for both portrait & landscape.
+ * Ultra-compact DialogFragment that loads [targetUrl] in a small WebView and crops it
+ * to show only the Turnstile CAPTCHA widget. Fits perfectly on all screens with no scroll.
  */
 class CloudflareWebViewDialog(
     private val targetUrl: String,
@@ -55,7 +54,6 @@ class CloudflareWebViewDialog(
     private var statusText: TextView? = null
     private var progressBar: ProgressBar? = null
     private var successOverlay: TextView? = null
-    private var btnCancel: TextView? = null
 
     private val handler = Handler(Looper.getMainLooper())
     private var cookiesSaved = false
@@ -114,6 +112,7 @@ class CloudflareWebViewDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_FRAME, android.R.style.Theme_DeviceDefault_Light_NoActionBar)
+        isCancelable = true
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -125,22 +124,8 @@ class CloudflareWebViewDialog(
     override fun onStart() {
         super.onStart()
         dialog?.window?.let { window ->
-            val displayMetrics = requireContext().resources.displayMetrics
-            val isLandscape = resources.configuration.screenWidthDp > resources.configuration.screenHeightDp
-            
-            val width = if (isLandscape) {
-                min(displayMetrics.widthPixels - dp(48), dp(580))
-            } else {
-                min(displayMetrics.widthPixels - dp(32), dp(360))
-            }
-            
-            val height = if (isLandscape) {
-                min(displayMetrics.heightPixels - dp(48), dp(320))
-            } else {
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            }
-            
-            window.setLayout(width, height)
+            val width = dp(332)
+            window.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
             window.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(Color.TRANSPARENT))
             window.addFlags(android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND)
             window.setDimAmount(0.6f)
@@ -152,15 +137,14 @@ class CloudflareWebViewDialog(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val isLandscape = resources.configuration.screenWidthDp > resources.configuration.screenHeightDp
-        
         val root = LinearLayout(requireContext()).apply {
-            orientation = if (isLandscape) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER_HORIZONTAL
             setPadding(dp(16), dp(16), dp(16), dp(16))
             
             val roundedCardBg = GradientDrawable().apply {
                 shape = GradientDrawable.RECTANGLE
-                cornerRadius = dp(24).toFloat()
+                cornerRadius = dp(20).toFloat()
                 setColor(Color.parseColor("#1A1A2E"))
                 setStroke(dp(1), Color.parseColor("#2C2C2E"))
             }
@@ -168,51 +152,28 @@ class CloudflareWebViewDialog(
             
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
+                ViewGroup.LayoutParams.WRAP_CONTENT
             )
         }
 
-        val controlParent = if (isLandscape) {
-            LinearLayout(requireContext()).apply {
-                orientation = LinearLayout.VERTICAL
-                gravity = Gravity.CENTER_VERTICAL
-                layoutParams = LinearLayout.LayoutParams(
-                    0,
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    1f
-                ).apply {
-                    rightMargin = dp(16)
-                }
-            }
-        } else {
-            root
-        }
-
-        val headerLayout = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER_VERTICAL
-            setPadding(0, 0, 0, dp(8))
-        }
-        headerLayout.addView(TextView(requireContext()).apply {
-            text = "🛡️"
-            textSize = 20f
-            setPadding(0, 0, dp(8), 0)
-        })
-        headerLayout.addView(TextView(requireContext()).apply {
-            text = "Cloudflare Bypass"
-            textSize = 16f
+        val titleTv = TextView(requireContext()).apply {
+            text = "🛡️ Cloudflare Bypass"
+            textSize = 15f
             setTextColor(Color.WHITE)
             typeface = android.graphics.Typeface.DEFAULT_BOLD
-        })
-        controlParent.addView(headerLayout)
+            gravity = Gravity.CENTER
+            setPadding(0, 0, 0, dp(4))
+        }
+        root.addView(titleTv)
 
         statusText = TextView(requireContext()).apply {
             text = "Loading challenge page…"
-            textSize = 12f
+            textSize = 11f
             setTextColor(Color.parseColor("#A0A0B0"))
-            setPadding(0, 0, 0, dp(6))
+            gravity = Gravity.CENTER
+            setPadding(0, 0, 0, dp(8))
         }
-        controlParent.addView(statusText)
+        root.addView(statusText)
 
         progressBar = ProgressBar(
             requireContext(), null, android.R.attr.progressBarStyleHorizontal
@@ -220,39 +181,33 @@ class CloudflareWebViewDialog(
             isIndeterminate = true
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            ).also { it.bottomMargin = dp(12) }
+                dp(2)
+            ).also { it.bottomMargin = dp(8) }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                progressTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#0984E3"))
+                indeterminateTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#0984E3"))
+            }
         }
-        controlParent.addView(progressBar)
+        root.addView(progressBar)
 
         val wvFrame = FrameLayout(requireContext()).apply {
             val border = GradientDrawable().apply {
                 shape = GradientDrawable.RECTANGLE
-                cornerRadius = dp(12).toFloat()
+                cornerRadius = dp(10).toFloat()
                 setColor(Color.parseColor("#1A1A2E"))
                 setStroke(dp(1), Color.parseColor("#3A3A3C"))
             }
             background = border
             setPadding(dp(2), dp(2), dp(2), dp(2))
             
-            layoutParams = if (isLandscape) {
-                LinearLayout.LayoutParams(
-                    dp(300),
-                    dp(80)
-                ).apply {
-                    gravity = Gravity.CENTER_VERTICAL
-                }
-            } else {
-                LinearLayout.LayoutParams(
-                    dp(300),
-                    dp(80)
-                ).apply {
-                    gravity = Gravity.CENTER_HORIZONTAL
-                    bottomMargin = dp(12)
-                    topMargin = dp(4)
-                }
+            layoutParams = LinearLayout.LayoutParams(
+                dp(300),
+                dp(80)
+            ).apply {
+                gravity = Gravity.CENTER_HORIZONTAL
             }
         }
+
         webView = buildWebView()
         wvFrame.addView(
             webView,
@@ -266,7 +221,7 @@ class CloudflareWebViewDialog(
         
         successOverlay = TextView(requireContext()).apply {
             text = "✅ Berhasil"
-            textSize = 14f
+            textSize = 13f
             gravity = Gravity.CENTER
             visibility = View.GONE
             setBackgroundColor(Color.parseColor("#1A1A2E"))
@@ -281,52 +236,7 @@ class CloudflareWebViewDialog(
             )
         )
 
-        val normalBtnBg = GradientDrawable().apply {
-            shape = GradientDrawable.RECTANGLE
-            cornerRadius = dp(12).toFloat()
-            setColor(Color.parseColor("#2D2D30"))
-            setStroke(dp(1), Color.parseColor("#48484A"))
-        }
-        val focusedBtnBg = GradientDrawable().apply {
-            shape = GradientDrawable.RECTANGLE
-            cornerRadius = dp(12).toFloat()
-            setColor(Color.parseColor("#3A3A3C"))
-            setStroke(dp(2), Color.parseColor("#0984E3"))
-        }
-
-        btnCancel = TextView(requireContext()).apply {
-            text = "Batal"
-            textSize = 14f
-            setTextColor(Color.WHITE)
-            typeface = android.graphics.Typeface.DEFAULT_BOLD
-            gravity = Gravity.CENTER
-            background = normalBtnBg
-            isFocusable = true
-            isFocusableInTouchMode = true
-            setPadding(dp(16), dp(10), dp(16), dp(10))
-            
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-
-            setOnFocusChangeListener { _, hasFocus ->
-                background = if (hasFocus) focusedBtnBg else normalBtnBg
-            }
-
-            setOnClickListener {
-                dismissAllowingStateLoss()
-            }
-        }
-        controlParent.addView(btnCancel)
-
-        if (isLandscape) {
-            root.addView(controlParent)
-            root.addView(wvFrame)
-        } else {
-            root.addView(wvFrame)
-        }
-
+        root.addView(wvFrame)
         return root
     }
 
@@ -341,10 +251,6 @@ class CloudflareWebViewDialog(
 
         webView?.loadUrl(targetUrl)
         handler.postDelayed(cookiePollRunnable, POLL_INTERVAL_MS)
-
-        btnCancel?.post {
-            btnCancel?.requestFocus()
-        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
