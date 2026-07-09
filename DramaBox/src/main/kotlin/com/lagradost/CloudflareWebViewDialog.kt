@@ -50,6 +50,44 @@ class CloudflareWebViewDialog(
             ).any { title.lowercase().contains(it) }
     }
 
+    private val CLEAN_CF_JS = """
+        (function() {
+            var style = document.getElementById('cf-clean-style');
+            if (!style) {
+                style = document.createElement('style');
+                style.id = 'cf-clean-style';
+                style.innerHTML = ' \
+                    html, body { \
+                        background-color: #1A1A2E !important; \
+                        color: transparent !important; \
+                        margin: 0 !important; \
+                        padding: 0 !important; \
+                        overflow: hidden !important; \
+                    } \
+                    #challenge-container, #challenge-stage, .challenge-form { \
+                        position: absolute !important; \
+                        top: 0 !important; \
+                        left: 0 !important; \
+                        width: 100% !important; \
+                        height: 100% !important; \
+                        display: flex !important; \
+                        justify-content: center !important; \
+                        align-items: center !important; \
+                        margin: 0 !important; \
+                        padding: 0 !important; \
+                        z-index: 999999 !important; \
+                    } \
+                    #logo, .logo, #zone-name, .zone-name, h1, h2, h3, p, #cf-spinner, .cf-spinner { \
+                        display: none !important; \
+                        visibility: hidden !important; \
+                        opacity: 0 !important; \
+                    } \
+                ';
+                document.head.appendChild(style);
+            }
+        })()
+    """.trimIndent()
+
     private var webView: WebView? = null
     private var statusText: TextView? = null
     private var progressBar: ProgressBar? = null
@@ -213,10 +251,8 @@ class CloudflareWebViewDialog(
             webView,
             FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
-                dp(500)
-            ).apply {
-                topMargin = -dp(78)
-            }
+                FrameLayout.LayoutParams.MATCH_PARENT
+            )
         )
         
         successOverlay = TextView(requireContext()).apply {
@@ -277,6 +313,9 @@ class CloudflareWebViewDialog(
                 if (!cookiesSaved) {
                     updateStatus("Loading… $newProgress%")
                 }
+                if (newProgress >= 40) {
+                    view?.evaluateJavascript(CLEAN_CF_JS, null)
+                }
             }
         }
 
@@ -288,6 +327,8 @@ class CloudflareWebViewDialog(
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 if (cookiesSaved) return
+
+                view?.evaluateJavascript(CLEAN_CF_JS, null)
 
                 val title = view?.title ?: ""
                 Log.d(TAG, "onPageFinished  title='$title'  url=$url")
