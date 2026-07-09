@@ -3,15 +3,12 @@ package com.lagradost
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.webkit.CookieManager
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
@@ -21,35 +18,23 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.fragment.app.DialogFragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.lagradost.api.Log
 
 /**
- * Ultra-compact DialogFragment that loads [targetUrl] in a small WebView and crops it
- * to show only the Turnstile CAPTCHA widget. Fits perfectly on all screens with no scroll.
+ * Full-screen BottomSheet that loads [targetUrl] in a real WebView so Cloudflare's
+ * JS challenge / Turnstile CAPTCHA can run in a genuine browser environment.
  */
 class CloudflareWebViewDialog(
     private val targetUrl: String,
     /** Called with true when cf_clearance was saved, false if the user dismissed without solving. */
     private val onFinished: ((Boolean) -> Unit)? = null
-) : DialogFragment() {
+) : BottomSheetDialogFragment() {
 
     companion object {
         private const val TAG = "CFWebViewDialog"
         private const val POLL_INTERVAL_MS = 2_000L   // check cookies every 2 s
         private const val POLL_TIMEOUT_MS  = 120_000L // give up after 2 minutes
-
-        private const val COMPACT_CF_JS = """
-            javascript:(function() {
-                var style = document.getElementById('cf-compact-style');
-                if (!style) {
-                    style = document.createElement('style');
-                    style.id = 'cf-compact-style';
-                    style.innerHTML = 'html, body { background: #1A1A2E !important; margin: 0 !important; padding: 0 !important; width: 100% !important; height: 100% !important; overflow: hidden !important; } #challenge-stage, .cf-turnstile, #turnstile-wrapper { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; display: flex !important; justify-content: center !important; align-items: center !important; z-index: 999999 !important; background: #1A1A2E !important; } body > *:not(#challenge-stage):not(.cf-turnstile):not(#turnstile-wrapper) { display: none !important; }';
-                    document.head.appendChild(style);
-                }
-            })();
-        """
 
         fun isChallengeTitle(title: String): Boolean =
             listOf(
@@ -65,7 +50,6 @@ class CloudflareWebViewDialog(
     private var webView: WebView? = null
     private var statusText: TextView? = null
     private var progressBar: ProgressBar? = null
-    private var successOverlay: TextView? = null
 
     private val handler = Handler(Looper.getMainLooper())
     private var cookiesSaved = false
@@ -80,11 +64,6 @@ class CloudflareWebViewDialog(
         }
     }
 
-    private fun dp(value: Int): Int {
-        val density = requireContext().resources.displayMetrics.density
-        return (value * density).toInt()
-    }
-
     private val cookiePollRunnable = object : Runnable {
         override fun run() {
             if (cookiesSaved || !isAdded) return
@@ -93,8 +72,6 @@ class CloudflareWebViewDialog(
 
             val cookieStr = CookieManager.getInstance().getCookie(targetHost) ?: ""
             Log.d(TAG, "Poll [$pollElapsedMs ms] cookies for $targetHost → $cookieStr")
-
-            webView?.evaluateJavascript(COMPACT_CF_JS, null)
 
             when {
                 cookieStr.contains("cf_clearance") -> {
@@ -120,30 +97,39 @@ class CloudflareWebViewDialog(
     private fun scheduleNextPoll() {
         pollElapsedMs += POLL_INTERVAL_MS
         updateStatus("⏳ Waiting for cookies… (${pollElapsedMs / 1000}s)")
-        handler.postDelayed(cookiePollRunnable, POLL_INTERVAL_MS)
-    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_FRAME, android.R.style.Theme_DeviceDefault_Light_NoActionBar)
-        isCancelable = true
+        if (pollElapsedMs >= POLL_INTERVAL_MS) {
+            (dialog as? com.google.android.material.bottomsheet.BottomSheetDialog)?.behavior?.apply {
+                skipCollapsed = true
+                peekHeight = android.view.WindowManager.LayoutParams.MATCH_PARENT
+                state = com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+            }
+        }
+
+        handler.postDelayed(cookiePollRunnable, POLL_INTERVAL_MS)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        (dialog as? com.google.android.material.bottomsheet.BottomSheetDialog)?.behavior?.apply {
+            state = com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
+            skipCollapsed = false
+            peekHeight = 0
+        }
         return dialog
     }
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.let { window ->
-            val width = dp(332)
-            window.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
-            window.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(Color.TRANSPARENT))
-            window.addFlags(android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-            window.setDimAmount(0.6f)
-        }
+        dialog?.window?.setLayout(
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT
+        )
+        val bottomSheet = dialog?.findViewById<android.view.View>(
+            com.google.android.material.R.id.design_bottom_sheet
+        )
+        bottomSheet?.layoutParams?.height = android.view.ViewGroup.LayoutParams.MATCH_PARENT
+        bottomSheet?.requestLayout()
     }
 
     override fun onCreateView(
@@ -151,43 +137,40 @@ class CloudflareWebViewDialog(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val screenH = requireContext().resources.displayMetrics.heightPixels
+        val webViewHeight = (screenH * 0.70).toInt()
+
         val root = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.VERTICAL
-            gravity = Gravity.CENTER_HORIZONTAL
-            setPadding(dp(16), dp(16), dp(16), dp(16))
-            
-            val roundedCardBg = GradientDrawable().apply {
-                shape = GradientDrawable.RECTANGLE
-                cornerRadius = dp(20).toFloat()
-                setColor(Color.parseColor("#1A1A2E"))
-                setStroke(dp(1), Color.parseColor("#2C2C2E"))
-            }
-            background = roundedCardBg
-            
+            setPadding(32, 24, 32, 24)
+            setBackgroundColor(Color.BLACK)
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
         }
 
-        val titleTv = TextView(requireContext()).apply {
+        root.addView(TextView(requireContext()).apply {
             text = "🛡️ Cloudflare Bypass"
-            textSize = 15f
+            textSize = 18f
             setTextColor(Color.WHITE)
-            typeface = android.graphics.Typeface.DEFAULT_BOLD
-            gravity = Gravity.CENTER
-            setPadding(0, 0, 0, dp(4))
-        }
-        root.addView(titleTv)
+            setPadding(0, 0, 0, 8)
+        })
 
         statusText = TextView(requireContext()).apply {
             text = "Loading challenge page…"
-            textSize = 11f
+            textSize = 13f
             setTextColor(Color.parseColor("#A0A0B0"))
-            gravity = Gravity.CENTER
-            setPadding(0, 0, 0, dp(8))
+            setPadding(0, 0, 0, 4)
         }
         root.addView(statusText)
+
+        root.addView(TextView(requireContext()).apply {
+            text = "Solve any CAPTCHA shown below. The dialog will close automatically once done."
+            textSize = 11f
+            setTextColor(Color.parseColor("#707080"))
+            setPadding(0, 0, 0, 12)
+        })
 
         progressBar = ProgressBar(
             requireContext(), null, android.R.attr.progressBarStyleHorizontal
@@ -195,60 +178,27 @@ class CloudflareWebViewDialog(
             isIndeterminate = true
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                dp(2)
-            ).also { it.bottomMargin = dp(8) }
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                progressTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#0984E3"))
-                indeterminateTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#0984E3"))
-            }
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).also { it.bottomMargin = 12 }
         }
         root.addView(progressBar)
 
-        val wvFrame = FrameLayout(requireContext()).apply {
-            val border = GradientDrawable().apply {
-                shape = GradientDrawable.RECTANGLE
-                cornerRadius = dp(10).toFloat()
-                setColor(Color.parseColor("#1A1A2E"))
-                setStroke(dp(1), Color.parseColor("#3A3A3C"))
-            }
-            background = border
-            setPadding(dp(2), dp(2), dp(2), dp(2))
-            
+        val wvContainer = FrameLayout(requireContext()).apply {
             layoutParams = LinearLayout.LayoutParams(
-                dp(300),
-                dp(80)
-            ).apply {
-                gravity = Gravity.CENTER_HORIZONTAL
-            }
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                webViewHeight
+            )
         }
-
         webView = buildWebView()
-        wvFrame.addView(
+        wvContainer.addView(
             webView,
             FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT
             )
         )
-        
-        successOverlay = TextView(requireContext()).apply {
-            text = "✅ Berhasil"
-            textSize = 13f
-            gravity = Gravity.CENTER
-            visibility = View.GONE
-            setBackgroundColor(Color.parseColor("#1A1A2E"))
-            setTextColor(Color.parseColor("#4CAF50"))
-            typeface = android.graphics.Typeface.DEFAULT_BOLD
-        }
-        wvFrame.addView(
-            successOverlay,
-            FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT
-            )
-        )
+        root.addView(wvContainer)
 
-        root.addView(wvFrame)
         return root
     }
 
@@ -268,10 +218,7 @@ class CloudflareWebViewDialog(
     @SuppressLint("SetJavaScriptEnabled")
     private fun buildWebView(): WebView {
         val wv = WebView(requireContext())
-
-        wv.setBackgroundColor(Color.parseColor("#1A1A2E"))
-        wv.isFocusable = true
-        wv.isFocusableInTouchMode = true
+        wv.setBackgroundColor(Color.BLACK)
 
         wv.settings.apply {
             javaScriptEnabled = true
@@ -289,7 +236,6 @@ class CloudflareWebViewDialog(
                 if (!cookiesSaved) {
                     updateStatus("Loading… $newProgress%")
                 }
-                view?.evaluateJavascript(COMPACT_CF_JS, null)
             }
         }
 
@@ -300,7 +246,22 @@ class CloudflareWebViewDialog(
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                view?.evaluateJavascript(COMPACT_CF_JS, null)
+                
+                val css = """
+                    var style = document.getElementById('cf-custom-style');
+                    if (!style) {
+                        style = document.createElement('style');
+                        style.id = 'cf-custom-style';
+                        style.innerHTML = ' \
+                            html, body { background-color: #000000 !important; color: #000000 !important; } \
+                            h1, h2, h3, p, div, span, a { color: #000000 !important; text-shadow: none !important; } \
+                            #logo, .logo, #zone-name, .zone-name, img { display: none !important; } \
+                        ';
+                        document.head.appendChild(style);
+                    }
+                """.trimIndent()
+                view?.evaluateJavascript(css, null)
+
                 if (cookiesSaved) return
 
                 val title = view?.title ?: ""
@@ -342,9 +303,6 @@ class CloudflareWebViewDialog(
         cookiesSaved = true
 
         handler.removeCallbacks(cookiePollRunnable)
-
-        webView?.visibility = View.GONE
-        successOverlay?.visibility = View.VISIBLE
 
         val ctx = context ?: activity
         ShortMaxProvider.setCfCookies(ctx, cookieStr)
