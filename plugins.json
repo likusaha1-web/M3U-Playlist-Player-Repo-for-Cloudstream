@@ -16,7 +16,7 @@
     "version": 28,
     "internalName": "DramaBox",
     "description": "Ekstensi Cloudstream untuk menonton drama pendek DramaBox",
-    "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/DramaBox.cs3",
+    "url": "https://cdn.jsdelivr.net/gh/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream@builds/DramaBox.cs3",
     "name": "DramaBox"
   },
   {
@@ -36,15 +36,15 @@
     "version": 37,
     "internalName": "M3UPlaylistPlayer",
     "description": "Add your own m3u playlists",
-    "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/M3UPlaylistPlayer.cs3",
+    "url": "https://cdn.jsdelivr.net/gh/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream@builds/M3UPlaylistPlayer.cs3",
     "name": "M3UPlaylistPlayer"
   },
   {
     "iconUrl": "https://www.cutad.web.id/favicon.svg",
-    "fileHash": "sha256-a2046ad30633f8327b20a9192b17e691e18687fee2321826ae5d35683b2373ca",
+    "fileHash": "sha256-764d9a2635163d4038069e7f98ce22eada9573bf3fee8a4ca6f8e2cab374a6ff",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 16812,
+    "fileSize": 16864,
     "status": 1,
     "language": "id",
     "authors": [
@@ -56,7 +56,7 @@
     "version": 1,
     "internalName": "Melolo",
     "description": "Ekstensi Cloudstream untuk menonton drama pendek Melolo",
-    "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/Melolo.cs3",
+    "url": "https://cdn.jsdelivr.net/gh/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream@builds/Melolo.cs3",
     "name": "Melolo"
   },
   {
@@ -76,7 +76,7 @@
     "version": 41,
     "internalName": "RBTVPlus",
     "description": "Ekstensi Cloudstream untuk streaming olahraga langsung dari RBTV+",
-    "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/RBTVPlus.cs3",
+    "url": "https://cdn.jsdelivr.net/gh/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream@builds/RBTVPlus.cs3",
     "name": "RBTVPlus"
   },
   {
@@ -96,7 +96,7 @@
     "version": 18,
     "internalName": "ShortMax",
     "description": "Ekstensi Cloudstream untuk menonton drama pendek ShortMax",
-    "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/ShortMax.cs3",
+    "url": "https://cdn.jsdelivr.net/gh/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream@builds/ShortMax.cs3",
     "name": "ShortMax"
   },
   {
@@ -116,7 +116,7 @@
     "version": 147,
     "internalName": "Xr3edEvent",
     "description": "Plugin untuk live stream Event Piala Dunia 2026",
-    "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/Xr3edEvent.cs3",
+    "url": "https://cdn.jsdelivr.net/gh/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream@builds/Xr3edEvent.cs3",
     "name": "Xr3edEvent"
   }
 ]
