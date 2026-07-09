@@ -141,10 +141,11 @@ class CloudflareWebViewDialog(
     ): View {
         val screenH = requireContext().resources.displayMetrics.heightPixels
         val webViewHeight = (screenH * 0.70).toInt()
+        val topPadding = (screenH * 0.15).toInt()
 
         val root = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(dp(24), dp(56), dp(24), dp(24))
+            setPadding(dp(24), topPadding, dp(24), dp(24))
             setBackgroundColor(Color.parseColor("#151624"))
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -172,6 +173,17 @@ class CloudflareWebViewDialog(
             textSize = 11f
             setTextColor(Color.parseColor("#707080"))
             setPadding(0, 0, 0, dp(12))
+        })
+
+        root.addView(View(requireContext()).apply {
+            setBackgroundColor(Color.parseColor("#2C2C3E"))
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                dp(1)
+            ).apply {
+                topMargin = dp(8)
+                bottomMargin = dp(16)
+            }
         })
 
         progressBar = ProgressBar(
