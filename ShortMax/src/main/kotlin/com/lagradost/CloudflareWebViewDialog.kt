@@ -85,7 +85,7 @@ class CloudflareWebViewDialog(
                     }
                 }
                 pollElapsedMs >= POLL_TIMEOUT_MS -> {
-                    updateStatus("⏱️ Timed out. Try solving the CAPTCHA then tap Bypass again.")
+                    updateStatus("⏱️ Waktu verifikasi habis. Silakan ketuk ulang kotak verifikasi di atas, atau tutup dan coba lagi.")
                 }
                 else -> {
                     scheduleNextPoll()
@@ -96,7 +96,7 @@ class CloudflareWebViewDialog(
 
     private fun scheduleNextPoll() {
         pollElapsedMs += POLL_INTERVAL_MS
-        updateStatus("⏳ Waiting for cookies… (${pollElapsedMs / 1000}s)")
+        updateStatus("⏳ Menunggu konfirmasi keamanan dari server... (${pollElapsedMs / 1000}s)")
 
         if (pollElapsedMs >= POLL_INTERVAL_MS) {
             (dialog as? com.google.android.material.bottomsheet.BottomSheetDialog)?.behavior?.apply {
@@ -132,6 +132,8 @@ class CloudflareWebViewDialog(
         bottomSheet?.requestLayout()
     }
 
+    private fun dp(px: Int): Int = (px * requireContext().resources.displayMetrics.density).toInt()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -142,7 +144,7 @@ class CloudflareWebViewDialog(
 
         val root = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(32, 24, 32, 24)
+            setPadding(dp(24), dp(56), dp(24), dp(24))
             setBackgroundColor(Color.parseColor("#151624"))
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -151,25 +153,25 @@ class CloudflareWebViewDialog(
         }
 
         root.addView(TextView(requireContext()).apply {
-            text = "🛡️ Cloudflare Bypass"
+            text = "🛡️ Verifikasi Akses Pemutar Video"
             textSize = 18f
             setTextColor(Color.WHITE)
-            setPadding(0, 0, 0, 8)
+            setPadding(0, 0, 0, dp(8))
         })
 
         statusText = TextView(requireContext()).apply {
-            text = "Loading challenge page…"
+            text = "⏳ Sedang menyiapkan jalur pemutaran video aman..."
             textSize = 13f
             setTextColor(Color.parseColor("#A0A0B0"))
-            setPadding(0, 0, 0, 4)
+            setPadding(0, 0, 0, dp(4))
         }
         root.addView(statusText)
 
         root.addView(TextView(requireContext()).apply {
-            text = "Solve any CAPTCHA shown below. The dialog will close automatically once done."
+            text = "Untuk menjaga keamanan koneksi streaming, silakan ketuk kotak centang verifikasi di bawah ini jika muncul. Jendela ini akan menutup secara otomatis setelah sistem mendeteksi koneksi aman."
             textSize = 11f
             setTextColor(Color.parseColor("#707080"))
-            setPadding(0, 0, 0, 12)
+            setPadding(0, 0, 0, dp(12))
         })
 
         progressBar = ProgressBar(
@@ -179,7 +181,7 @@ class CloudflareWebViewDialog(
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
-            ).also { it.bottomMargin = 12 }
+            ).also { it.bottomMargin = dp(12) }
         }
         root.addView(progressBar)
 
@@ -234,7 +236,7 @@ class CloudflareWebViewDialog(
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 super.onProgressChanged(view, newProgress)
                 if (!cookiesSaved) {
-                    updateStatus("Loading… $newProgress%")
+                    updateStatus("⏳ Sedang menyiapkan jalur pemutaran video aman... $newProgress%")
                 }
             }
         }
@@ -268,9 +270,9 @@ class CloudflareWebViewDialog(
                 Log.d(TAG, "onPageFinished  title='$title'  url=$url")
 
                 if (isChallengeTitle(title)) {
-                    updateStatus("🔄 Challenge active – solve the CAPTCHA above")
+                    updateStatus("👉 Silakan ketuk kotak \"Verifikasi bahwa Anda adalah manusia\" di bawah.")
                 } else {
-                    updateStatus("✏️ Page loaded – checking cookies…")
+                    updateStatus("⏳ Menunggu konfirmasi keamanan dari server...")
                     CookieManager.getInstance().flush()
 
                     val cookiesFromTarget = CookieManager.getInstance().getCookie(targetHost) ?: ""
