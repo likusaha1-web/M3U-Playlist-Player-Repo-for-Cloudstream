@@ -40,6 +40,26 @@
     "name": "M3UPlaylistPlayer"
   },
   {
+    "iconUrl": "https://www.cutad.web.id/favicon.svg",
+    "fileHash": "sha256-a2046ad30633f8327b20a9192b17e691e18687fee2321826ae5d35683b2373ca",
+    "apiVersion": 1,
+    "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
+    "fileSize": 16812,
+    "status": 1,
+    "language": "id",
+    "authors": [
+      "xr3ed"
+    ],
+    "tvTypes": [
+      "TvSeries"
+    ],
+    "version": 1,
+    "internalName": "Melolo",
+    "description": "Ekstensi Cloudstream untuk menonton drama pendek Melolo",
+    "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/Melolo.cs3",
+    "name": "Melolo"
+  },
+  {
     "iconUrl": "https://cdn.jsdelivr.net/gh/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream@main/live_icon.png",
     "fileHash": "sha256-28e2d6e7070a11cdb457193cc7108da04d69d1369daeae0e1ac1c3701f9fbb41",
     "apiVersion": 1,
