@@ -141,7 +141,7 @@ class CloudflareWebViewDialog(
     ): View {
         val screenH = requireContext().resources.displayMetrics.heightPixels
         val webViewHeight = (screenH * 0.70).toInt()
-        val topPadding = (screenH * 0.15).toInt()
+        val topPadding = (screenH * 0.10).toInt()
 
         val root = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.VERTICAL
