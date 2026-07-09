@@ -1,10 +1,10 @@
 [
   {
     "iconUrl": "https://play-lh.googleusercontent.com/GGi0g65ySR86svFuxny2J2FgfkTZuFlJcftmeAZ_bZ7sM86XfwUNL1h9omSyoRKha1c1-_BoFkUbyJz2VSXI=w240-h240-rw",
-    "fileHash": "sha256-10e4379cfec814e4fbbf18b53df8c593525b22f8f482c629fa7f71f94485f45c",
+    "fileHash": "sha256-9e7590192dfad4cf9d6d708d7d2c958744f205cfac975383d6aefd305074371d",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 69740,
+    "fileSize": 69977,
     "status": 1,
     "language": "id",
     "authors": [
@@ -13,7 +13,7 @@
     "tvTypes": [
       "TvSeries"
     ],
-    "version": 24,
+    "version": 25,
     "internalName": "DramaBox",
     "description": "Ekstensi Cloudstream untuk menonton drama pendek DramaBox",
     "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/DramaBox.cs3",
@@ -61,10 +61,10 @@
   },
   {
     "iconUrl": "https://play-lh.googleusercontent.com/NOT1CZ461en8dArwro-Nz0UCyD6aJ3tLm3WkPArTDTh-8ApKbBlTSi8mpObdK48SKw7Ve2RgVNOIU1U4nTEAw8U=w240-h240-rw",
-    "fileHash": "sha256-73df5078590118899e2b7f2cd0398bc01662bb4aaceee3e3ac888a8f142faf90",
+    "fileHash": "sha256-5bf43de2128d766c14c1bf49b3aa45f13065aa6cc00795f7f28888730a7196cf",
     "apiVersion": 1,
     "repositoryUrl": "https://github.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream",
-    "fileSize": 45274,
+    "fileSize": 45479,
     "status": 1,
     "language": "id",
     "authors": [
@@ -73,7 +73,7 @@
     "tvTypes": [
       "TvSeries"
     ],
-    "version": 14,
+    "version": 15,
     "internalName": "ShortMax",
     "description": "Ekstensi Cloudstream untuk menonton drama pendek ShortMax",
     "url": "https://raw.githubusercontent.com/xr3ed/M3U-Playlist-Player-Repo-for-Cloudstream/builds/ShortMax.cs3",
