@@ -208,8 +208,10 @@ class CloudflareWebViewDialog(
             webView,
             FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT
-            )
+                webViewHeight + dp(120)
+            ).apply {
+                topMargin = -dp(90)
+            }
         )
         root.addView(wvContainer)
 
