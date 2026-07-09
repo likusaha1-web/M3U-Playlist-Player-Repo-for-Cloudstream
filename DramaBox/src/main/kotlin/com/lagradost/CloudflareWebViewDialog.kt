@@ -39,6 +39,50 @@ class CloudflareWebViewDialog(
         private const val POLL_INTERVAL_MS = 2_000L   // check cookies every 2 s
         private const val POLL_TIMEOUT_MS  = 120_000L // give up after 2 minutes
 
+        private const val CLEAN_CF_JS = """
+            (function() {
+                var style = document.getElementById('cf-clean-style');
+                if (!style) {
+                    style = document.createElement('style');
+                    style.id = 'cf-clean-style';
+                    style.innerHTML = ' \
+                        html, body { background-color: #1A1A2E !important; margin: 0 !important; padding: 0 !important; } \
+                        h1, h2, h3, p, div, span, a { color: #1A1A2E !important; text-shadow: none !important; } \
+                        #challenge-stage { \
+                            display: flex !important; \
+                            justify-content: center !important; \
+                            align-items: center !important; \
+                            width: 100% !important; \
+                            margin: 0 auto !important; \
+                        } \
+                        #logo, .logo, #zone-name, .zone-name, img { \
+                            display: none !important; \
+                        } \
+                    ';
+                    document.head.appendChild(style);
+                }
+                
+                var count = 0;
+                var interval = setInterval(function() {
+                    var captcha = document.getElementById('challenge-stage') || 
+                                  document.querySelector('iframe[src*="challenges.cloudflare.com"]') ||
+                                  document.querySelector('iframe[src*="turnstile"]');
+                    if (captcha) {
+                        var rect = captcha.getBoundingClientRect();
+                        if (rect.width > 0 && rect.height > 0) {
+                            var x = rect.left + window.pageXOffset - (window.innerWidth / 2) + (rect.width / 2);
+                            var y = rect.top + window.pageYOffset - (window.innerHeight / 2) + (rect.height / 2);
+                            window.scrollTo(x, y);
+                        }
+                    }
+                    count++;
+                    if (count > 50) {
+                        clearInterval(interval);
+                    }
+                }, 100);
+            })();
+        """
+
         fun isChallengeTitle(title: String): Boolean =
             listOf(
                 "just a moment",
@@ -49,35 +93,6 @@ class CloudflareWebViewDialog(
                 "one more step"
             ).any { title.lowercase().contains(it) }
     }
-
-    private val CLEAN_CF_JS = """
-        (function() {
-            var style = document.getElementById('cf-scroll-style');
-            if (!style) {
-                style = document.createElement('style');
-                style.id = 'cf-scroll-style';
-                style.innerHTML = ' \
-                    html, body { background-color: #1A1A2E !important; } \
-                    #logo, .logo, #zone-name, .zone-name, h1, h2, h3, p, #cf-spinner, .cf-spinner { \
-                        display: none !important; \
-                        visibility: hidden !important; \
-                        opacity: 0 !important; \
-                    } \
-                ';
-                document.head.appendChild(style);
-            }
-
-            var stage = document.getElementById('challenge-stage');
-            if (!stage) {
-                stage = document.querySelector('iframe');
-            }
-            if (stage) {
-                var rect = stage.getBoundingClientRect();
-                var y = rect.top + window.pageYOffset;
-                window.scrollTo(0, Math.max(0, y - 8));
-            }
-        })()
-    """.trimIndent()
 
     private var webView: WebView? = null
     private var statusText: TextView? = null
@@ -129,14 +144,6 @@ class CloudflareWebViewDialog(
                     scheduleNextPoll()
                 }
             }
-        }
-    }
-
-    private val scrollRunnable = object : Runnable {
-        override fun run() {
-            if (cookiesSaved || !isAdded) return
-            webView?.evaluateJavascript(CLEAN_CF_JS, null)
-            handler.postDelayed(this, 1000L)
         }
     }
 
@@ -250,7 +257,7 @@ class CloudflareWebViewDialog(
             webView,
             FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
-                dp(500)
+                FrameLayout.LayoutParams.MATCH_PARENT
             )
         )
         
@@ -286,7 +293,6 @@ class CloudflareWebViewDialog(
 
         webView?.loadUrl(targetUrl)
         handler.postDelayed(cookiePollRunnable, POLL_INTERVAL_MS)
-        handler.post(scrollRunnable)
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -296,6 +302,8 @@ class CloudflareWebViewDialog(
         wv.setBackgroundColor(Color.parseColor("#1A1A2E"))
         wv.isFocusable = true
         wv.isFocusableInTouchMode = true
+        wv.isVerticalScrollBarEnabled = false
+        wv.isHorizontalScrollBarEnabled = false
 
         wv.settings.apply {
             javaScriptEnabled = true
@@ -312,9 +320,6 @@ class CloudflareWebViewDialog(
                 super.onProgressChanged(view, newProgress)
                 if (!cookiesSaved) {
                     updateStatus("Loading… $newProgress%")
-                }
-                if (newProgress >= 40) {
-                    view?.evaluateJavascript(CLEAN_CF_JS, null)
                 }
             }
         }
@@ -369,7 +374,6 @@ class CloudflareWebViewDialog(
         cookiesSaved = true
 
         handler.removeCallbacks(cookiePollRunnable)
-        handler.removeCallbacks(scrollRunnable)
 
         webView?.visibility = View.GONE
         successOverlay?.visibility = View.VISIBLE
@@ -395,7 +399,6 @@ class CloudflareWebViewDialog(
         super.onDismiss(dialog)
         if (!cookiesSaved) {
             handler.removeCallbacks(cookiePollRunnable)
-            handler.removeCallbacks(scrollRunnable)
             onFinished?.invoke(false)
         }
     }
@@ -415,7 +418,6 @@ class CloudflareWebViewDialog(
 
     override fun onDestroyView() {
         handler.removeCallbacks(cookiePollRunnable)
-        handler.removeCallbacks(scrollRunnable)
         webView?.apply {
             stopLoading()
             destroy()
